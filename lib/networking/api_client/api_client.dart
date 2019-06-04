@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:flipperkit_dio_interceptor/flipperkit_dio_interceptor.dart';
 import '../../utilities/constants.dart';
 import './_account.dart';
-import './_categories.dart';
+import './_stores.dart';
 import './_users.dart';
 
 class ApiClient {
@@ -11,8 +10,10 @@ class ApiClient {
 
   Dio _http;
 
+  var _defaultStoreId;
+
   AccountService    _accountService;
-  CategoriesService _categoriesService;
+  StoresService     _storesService;
   UsersService      _usersService;
 
   ApiClient() {
@@ -62,20 +63,29 @@ class ApiClient {
     ));
 
     this._accountService    = new AccountService(_http);
-    this._categoriesService = new CategoriesService(_http);
+    this._storesService     = new StoresService(_http);
     this._usersService      = new UsersService(_http);
+  }
+
+  void setDefaultStoreId(id) {
+    this._defaultStoreId = id;
+  }
+
+  StoresService get defaultStore {
+    _storesService.setStoreId(_defaultStoreId);
+    return _storesService;
   }
 
   AccountService get account => _accountService;
 
-  CategoriesService get categories => _categoriesService;
+  UsersService get users => _usersService;
 
-  CategoriesService category(id) {
-    _categoriesService.setCategoryId(id);
-    return _categoriesService;
+  StoresService store(id) {
+    _storesService.setStoreId(id);
+    return _storesService;
   }
 
-  UsersService get users => _usersService;
+  StoresService get stores => _storesService;
 
   UsersService user(id) {
     _usersService.setUserId(id);

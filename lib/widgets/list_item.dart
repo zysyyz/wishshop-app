@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 
 class ListItem extends StatelessWidget {
   final String title;
@@ -54,7 +53,7 @@ class ListItem extends StatelessWidget {
               detailText,
               style: detailTextStyle != null ? detailTextStyle : _defaultDetailTextStyle,
             ),
-            accessoryType == 'none' ? SizedBox() : Icon(FeatherIcons.chevronRight, size: 18),
+            accessoryType == 'none' ? SizedBox() : Icon(Icons.chevron_right, size: 18),
           ],
         ),
         isThreeLine: false,

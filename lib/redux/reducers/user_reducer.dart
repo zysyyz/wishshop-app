@@ -1,10 +1,10 @@
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as redux;
 import '../actions/user_actions.dart';
 import '../states/user_state.dart';
 
-final userReducer = combineReducers<UserState>([
-  TypedReducer<UserState, GetUserSuccessAction>(_getUserSuccess),
-  TypedReducer<UserState, GetUserFailureAction>(_getUserFailure),
+final userReducer = redux.combineReducers<UserState>([
+  redux.TypedReducer<UserState, GetUserSuccessAction>(_getUserSuccess),
+  redux.TypedReducer<UserState, GetUserFailureAction>(_getUserFailure),
 ]);
 
 UserState _getUserSuccess(UserState state, GetUserSuccessAction action) {

@@ -1,19 +1,19 @@
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as Redux;
 import '../../models/models.dart';
 import '../../networking/networking.dart';
-import '../../redux/actions/auth_actions.dart';
+import '../../redux/actions/app_actions.dart';
 import '../../redux/states/app_state.dart';
 
-List<Middleware<AppState>> createAuthMiddleware() {
+List<Redux.Middleware<AppState>> createAuthMiddleware() {
   return [
-    new TypedMiddleware<AppState, RegisterAction>(_createRegisterMiddleware()),
-    new TypedMiddleware<AppState, LoginAction>(_createLogInMiddleware()),
-    new TypedMiddleware<AppState, LogoutAction>(_createLogOutMiddleware()),
+    new Redux.TypedMiddleware<AppState, RegisterAction>(_createRegisterMiddleware()),
+    new Redux.TypedMiddleware<AppState, LoginAction>(_createLogInMiddleware()),
+    new Redux.TypedMiddleware<AppState, LogoutAction>(_createLogOutMiddleware()),
   ];
 }
 
-Middleware<AppState> _createRegisterMiddleware() {
-  return (Store store, action, NextDispatcher next) async {
+Redux.Middleware<AppState> _createRegisterMiddleware() {
+  return (Redux.Store store, action, Redux.NextDispatcher next) async {
     if (!(action is RegisterAction)) return;
 
     try {
@@ -31,8 +31,8 @@ Middleware<AppState> _createRegisterMiddleware() {
   };
 }
 
-Middleware<AppState> _createLogInMiddleware() {
-  return (Store store, action, NextDispatcher next) async {
+Redux.Middleware<AppState> _createLogInMiddleware() {
+  return (Redux.Store store, action, Redux.NextDispatcher next) async {
     if (!(action is LoginAction)) return;
 
     try {
@@ -49,8 +49,8 @@ Middleware<AppState> _createLogInMiddleware() {
   };
 }
 
-Middleware<AppState> _createLogOutMiddleware() {
-  return (Store store, action, NextDispatcher next) async {
+Redux.Middleware<AppState> _createLogOutMiddleware() {
+  return (Redux.Store store, action, Redux.NextDispatcher next) async {
     if (!(action is LogoutAction)) return;
 
     try {

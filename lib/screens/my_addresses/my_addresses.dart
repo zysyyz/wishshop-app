@@ -8,15 +8,7 @@ class MyAddressesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefaultAppBar(
-        title: Text('我的地址'),
-        actions: <Widget>[
-          IconButton(
-            icon: Text('取消'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          )
-        ],
+        title: Text('我的地址簿'),
       ),
       body: Center(),
     );

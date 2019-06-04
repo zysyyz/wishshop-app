@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget leading;

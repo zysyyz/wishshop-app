@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
 
 enum ProgressHUDType {
   NORMAL, INFO, SUCCESS, ERROR, PROGRESS
@@ -113,13 +112,13 @@ class ProgressHUD extends PopupRoute {
 
     switch (type) {
       case ProgressHUDType.INFO:
-        iconView = Icon(FeatherIcons.info, color: Colors.white, size: 36);
+        iconView = Icon(Icons.info, color: Colors.white, size: 36);
         break;
       case ProgressHUDType.SUCCESS:
-        iconView = Icon(FeatherIcons.check, color: Colors.white, size: 36);
+        iconView = Icon(Icons.check, color: Colors.white, size: 36);
         break;
       case ProgressHUDType.ERROR:
-        iconView = Icon(FeatherIcons.x, color: Colors.white, size: 36);
+        iconView = Icon(Icons.close, color: Colors.white, size: 36);
         break;
       default:
         iconView = _getCircularProgress();

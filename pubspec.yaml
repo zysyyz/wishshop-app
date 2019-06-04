@@ -19,32 +19,29 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^2.0.14
-  feather_icons_flutter: ^4.7.4
+  dio: ^2.0.16
+  dots_indicator: ^0.0.5+1
   flipperkit_redux_middleware: ^0.0.3
-  flutter_flipperkit: ^0.0.10
-  flutter_redux: ^0.5.2
+  flutter_flipperkit: ^0.0.12
+  flutter_redux: ^0.5.3
   flutter_spinkit: ^3.1.0
-  flutter_staggered_grid_view: ^0.2.7
-  launch_review: ^1.0.1
-  package_info: ^0.3.2
-  redux_persist: ^0.8.0
-  redux_persist_flutter: ^0.8.0
-  redux_thunk: ^0.2.1
-  shared_preferences: ^0.4.3
-  url_launcher: ^4.0.3
-  uuid: ^2.0.0
-  webview_flutter: ^0.1.2
+  flutter_staggered_grid_view: ^0.3.0
+  launch_review: ^2.0.0
+  package_info: ^0.4.0+3
+  redux_persist: ^0.8.2
+  redux_persist_flutter: ^0.8.1
+  shared_preferences: ^0.5.2+2
+  url_launcher: ^5.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-dependency_overrides:
-  flutter_flipperkit:
-    path: ../../blankapp/flutter_flipperkit
-  flipperkit_redux_middleware:
-    path: ../../blankapp/flutter_flipperkit_plugins/packages/flipperkit_redux_middleware
+# dependency_overrides:
+#   flutter_flipperkit:
+#     path: ../../blankapp/flutter_flipperkit
+#   flipperkit_redux_middleware:
+#     path: ../../blankapp/flutter_flipperkit_plugins/packages/flipperkit_redux_middleware
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

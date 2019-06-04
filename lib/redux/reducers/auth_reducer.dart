@@ -1,14 +1,14 @@
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as redux;
 import '../actions/auth_actions.dart';
 import '../states/auth_state.dart';
 
-final authReducer = combineReducers<AuthState>([
-  TypedReducer<AuthState, RegisterSuccessAction>(_registerSuccess),
-  TypedReducer<AuthState, RegisterFailureAction>(_registerFailure),
-  TypedReducer<AuthState, LoginSuccessAction>(_loginSuccess),
-  TypedReducer<AuthState, LoginFailureAction>(_loginFailure),
-  TypedReducer<AuthState, LogoutSuccessAction>(_logoutSuccess),
-  TypedReducer<AuthState, LogoutFailureAction>(_logoutFailure),
+final authReducer = redux.combineReducers<AuthState>([
+  redux.TypedReducer<AuthState, RegisterSuccessAction>(_registerSuccess),
+  redux.TypedReducer<AuthState, RegisterFailureAction>(_registerFailure),
+  redux.TypedReducer<AuthState, LoginSuccessAction>(_loginSuccess),
+  redux.TypedReducer<AuthState, LoginFailureAction>(_loginFailure),
+  redux.TypedReducer<AuthState, LogoutSuccessAction>(_logoutSuccess),
+  redux.TypedReducer<AuthState, LogoutFailureAction>(_logoutFailure),
 ]);
 
 AuthState _registerSuccess(AuthState state, RegisterSuccessAction action) {

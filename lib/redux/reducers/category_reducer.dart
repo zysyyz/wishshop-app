@@ -1,16 +1,14 @@
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as redux;
 import '../../models/models.dart';
 import '../actions/category_actions.dart';
 import '../states/category_state.dart';
 
-final categoryReducer = combineReducers<CategoryState>([
-  TypedReducer<CategoryState, GetCategoryListSuccessAction>(_getCategoryListSuccess),
-  TypedReducer<CategoryState, GetCategoryListFailureAction>(_getCategoryListFailure),
-  TypedReducer<CategoryState, GetCategorySuccessAction>(_getCategorySuccess),
-  TypedReducer<CategoryState, GetCategoryFailureAction>(_getCategoryFailure),
+final categoryReducer = redux.combineReducers<CategoryState>([
+  redux.TypedReducer<CategoryState, ReceiveCategoryListAction>(_receiveCategoryList),
+  redux.TypedReducer<CategoryState, ReceiveCategoryAction>(_receiveCategory),
 ]);
 
-CategoryState _getCategoryListSuccess(CategoryState state, GetCategoryListSuccessAction action) {
+CategoryState _receiveCategoryList(CategoryState state, ReceiveCategoryListAction action) {
   List<Category> listByFilterZeroParentId = action.categories.where((c) => c.parentId == 0).toList();
   
   state.listByFilter = new Map();
@@ -19,21 +17,19 @@ CategoryState _getCategoryListSuccess(CategoryState state, GetCategoryListSucces
 
   for (var i = 0; i < listByFilterZeroParentId.length; i++) {
     int id = listByFilterZeroParentId[i].id;
-    var list = action.categories.where((c) => c.parentId == id).toList();
-    state.listByFilter.putIfAbsent("parentId=$id", () => list);
+    List<Category> listByFilterLevel2ParentId = action.categories.where((c) => c.parentId == id).toList();
+    state.listByFilter.putIfAbsent("parentId=$id", () => listByFilterLevel2ParentId);
+
+    for (var j = 0; j < listByFilterLevel2ParentId.length; j++) {
+      int id = listByFilterLevel2ParentId[j].id;
+      var listByFilterLevel3ParentId = action.categories.where((c) => c.parentId == id).toList();
+      state.listByFilter.putIfAbsent("parentId=$id", () => listByFilterLevel3ParentId);
+    }
   }
   return state;
 }
 
-CategoryState _getCategoryListFailure(CategoryState state, GetCategoryListFailureAction action) {
-  return state;
-}
-
-CategoryState _getCategorySuccess(CategoryState state, GetCategorySuccessAction action) {
-  return state;
-}
-
-CategoryState _getCategoryFailure(CategoryState state, GetCategoryFailureAction action) {
+CategoryState _receiveCategory(CategoryState state, ReceiveCategoryAction action) {
   return state;
 }
 

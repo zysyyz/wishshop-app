@@ -4,12 +4,11 @@ import '../../models/models.dart';
 class GetCategoryListAction {
   final Completer completer = new Completer();
 }
-class GetCategoryListSuccessAction {
+class ReceiveCategoryListAction {
   final List<Category> categories;
 
-  GetCategoryListSuccessAction(this.categories);
+  ReceiveCategoryListAction(this.categories);
 }
-class GetCategoryListFailureAction {}
 
 class GetCategoryAction {
   final Completer completer = new Completer();
@@ -17,9 +16,9 @@ class GetCategoryAction {
 
   GetCategoryAction(this.categoryId);
 }
-class GetCategorySuccessAction {
+class ReceiveCategoryAction {
+  final Completer completer = new Completer();
   final Category category;
 
-  GetCategorySuccessAction(this.category);
+  ReceiveCategoryAction(this.category);
 }
-class GetCategoryFailureAction {}

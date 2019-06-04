@@ -1,6 +1,8 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:redux/redux.dart' as redux;
+import 'package:flutter_redux/flutter_redux.dart';
 import '../../models/models.dart';
+import '../../redux/redux.dart';
 import '../../views/views.dart';
 import '../../widgets/widgets.dart';
 
@@ -13,7 +15,7 @@ class CategoryDetailScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _CategoryDetailScreenState(category);
 }
 
-class _CategoryDetailScreenState extends State<CategoryDetailScreen> 
+class _CategoryDetailScreenState extends State<CategoryDetailScreen>
   with SingleTickerProviderStateMixin {
 
   ScrollController _scrollViewController;
@@ -37,50 +39,77 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen>
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _build(BuildContext context, _ViewModel vm) {
     ThemeData theme = Theme.of(context);
 
+    List<Category> categories = [];
+
+    categories.add(category);
+    categories.addAll(vm.listByFilter['parentId=${category.id}'] ?? []);
+
     return DefaultTabController(
-      length: 6,
+      length: categories.length,
       child: Scaffold(
         appBar: DefaultAppBar(
-          backgroundColor: Colors.white,
           title: Text(category.name),
           elevation: 0,
           bottom: PreferredSize(
-            child: TabBar(
-              labelPadding: EdgeInsets.only(left: 6, right: 6),
-              isScrollable: true,
-              tabs: [
-                Tab(icon: Text('全部')),
-                Tab(icon: Text('沙发1')),
-                Tab(icon: Text('沙发2')),
-                Tab(icon: Text('沙发3')),
-                Tab(icon: Text('沙发4')),
-                Tab(icon: Text('沙发5')),
-              ],
-              indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(color: theme.primaryColor, width: 3.0),
-                insets: EdgeInsets.fromLTRB(40.0, 0, 40.0, 4.0),
+            child: Container(
+              padding: EdgeInsets.only(left: 4),
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                  bottom: BorderSide(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    width: 1.0,
+                  )
+                )
+              ),
+              child: TabBar(
+                labelPadding: EdgeInsets.only(left: 16, right: 16),
+                isScrollable: true,
+                tabs: categories.map((item) => Tab(icon: Text(item.id == category.id ? '全部' : item.name))).toList(),
+                indicatorSize: TabBarIndicatorSize.label,
+                indicator: UnderlineTabIndicator(
+                  borderSide: BorderSide(color: theme.primaryColor, width: 3.0),
+                  // insets: EdgeInsets.fromLTRB(40.0, 0, 40.0, 4.0),
+                ),
               ),
             ),
-            preferredSize: Size.fromHeight(60),
+            preferredSize: Size.fromHeight(36),
           ),
         ),
         body: TabBarView(
-          children: <Widget>[
-            Container(),
-            Container(),
-            Container(),
-            Container(),
-            Container(),
-            Container(),
-          ],
+          children: categories.map((item) => ProductGridView(category: item)).toList(),
           // controller: _tabController,
         ),
       ),
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return StoreConnector<AppState, _ViewModel>(
+      converter: _ViewModel.fromStore,
+      builder: (BuildContext context, _ViewModel vm) {
+        return _build(context, vm);
+      },
+    );
+  }
+}
+
+class _ViewModel {
+  final Map<String, List<Category>> listByFilter;
+
+  _ViewModel({
+    this.listByFilter,
+  });
+
+  static _ViewModel fromStore(redux.Store<AppState> store) {
+    final categoryState = store.state.category;
+    return _ViewModel(
+      listByFilter:categoryState.listByFilter,
+    );
+  }
 }

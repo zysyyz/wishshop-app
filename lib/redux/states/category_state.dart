@@ -19,9 +19,9 @@ class CategoryState {
       Map<String, dynamic> map = json['listByFilter'] as Map;
       for (var key in map.keys) {
         Iterable l = json['listByFilter'][key] as List;
-        List<Category> courses = l.map((item) => Category.fromJson(item)).toList();
+        List<Category> categories = l.map((item) => Category.fromJson(item)).toList();
 
-        listByFilter.putIfAbsent(key, () => courses);
+        listByFilter.putIfAbsent(key, () => categories);
       }
     }
 

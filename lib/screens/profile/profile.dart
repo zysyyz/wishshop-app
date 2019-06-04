@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import '../../enums/enums.dart';
 import '../../models/models.dart';
@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
         {
           'title': '姓名',
-          'detailText': name ?? '',
+          'detailText': name,
           'onTap': () {
             Navigator
               .of(context)
@@ -166,7 +166,7 @@ class _ViewModel {
     this.user,
   });
 
-  static _ViewModel fromStore(Store<AppState> store) {
+  static _ViewModel fromStore(redux.Store<AppState> store) {
     final auth = store.state.auth;
     return _ViewModel(
       user: auth.user,

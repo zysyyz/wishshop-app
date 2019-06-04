@@ -1,16 +1,13 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import '../../models/models.dart';
 import '../../plugins/plugins.dart';
 import '../../redux/redux.dart';
 import '../../routes/routes.dart';
 import '../../widgets/widgets.dart';
-import '../home/home.dart';
 import '../register/register.dart';
-import '../reset_password/reset_password.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -190,7 +187,7 @@ class _ViewModel {
     this.doLogin
   });
 
-  static _ViewModel fromStore(Store<AppState> store) {
+  static _ViewModel fromStore(redux.Store<AppState> store) {
     final auth = store.state.auth;
     return _ViewModel(
       user: auth.user,

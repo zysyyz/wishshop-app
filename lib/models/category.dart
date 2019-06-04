@@ -1,8 +1,10 @@
 class Category {
   final int id;
+  int storeId;
   int parentId;
-  String slug;
+  int level;
   int position;
+  String slug;
   String name;
   String imageUrl;
   String description;
@@ -11,9 +13,11 @@ class Category {
 
   Category({
     this.id,
+    this.storeId,
     this.parentId,
-    this.slug,
+    this.level,
     this.position,
+    this.slug,
     this.name,
     this.imageUrl,
     this.description,
@@ -24,9 +28,11 @@ class Category {
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
       id              : json['id'],
+      storeId         : json['store_id'],
       parentId        : json['parent_id'],
-      slug            : json['slug'],
+      level           : json['level'],
       position        : json['position'],
+      slug            : json['slug'],
       name            : json['name'],
       imageUrl        : json['image_url'] ?? 'https://via.placeholder.com/500',
       createdAt       : json['created_at'],
@@ -37,9 +43,11 @@ class Category {
   Map<String, dynamic> toJson() =>
     {
       'id'            : id,
+      'store_id'      : storeId,
       'parent_id'     : parentId,
-      'slug'          : slug,
+      'level'         : level,
       'position'      : position,
+      'slug'          : slug,
       'name'          : name,
       'image_url'     : imageUrl,
       'created_at'    : createdAt,

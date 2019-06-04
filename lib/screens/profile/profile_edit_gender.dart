@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feather_icons_flutter/feather_icons_flutter.dart';
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import '../../models/models.dart';
 import '../../plugins/plugins.dart';
@@ -97,7 +96,7 @@ class _ProfileEditGenderScreenState extends State<ProfileEditGenderScreen> {
               });
             },
             detailTextView: key != _newGender ? null : Icon(
-              FeatherIcons.check,
+              Icons.check,
               size: 18,
               color: theme.primaryColor,
             ),
@@ -128,7 +127,7 @@ class _ViewModel {
     this.doUpdateGender
   });
 
-  static _ViewModel fromStore(Store<AppState> store) {
+  static _ViewModel fromStore(redux.Store<AppState> store) {
     final auth = store.state.auth;
     return _ViewModel(
       user: auth.user,

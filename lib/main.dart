@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux_persist/redux_persist.dart';
 import 'package:redux_persist_flutter/redux_persist_flutter.dart';
@@ -11,7 +11,7 @@ import './screens/screens.dart';
 void main() async {
   FlipperClient flipperClient = FlipperClient.getDefault();
 
-  // flipperClient.addPlugin(new FlipperNetworkPlugin());
+  flipperClient.addPlugin(new FlipperNetworkPlugin());
   flipperClient.addPlugin(new FlipperReduxInspectorPlugin());
   flipperClient.addPlugin(new FlipperSharedPreferencesPlugin());
   flipperClient.start();
@@ -25,7 +25,7 @@ void main() async {
   // Load initial state
   final initialState = await persistor.load();
 
-  final store = Store<AppState>(
+  final store = redux.Store<AppState>(
     appReducer,
     initialState: initialState ?? AppState(),
     middleware: []
@@ -40,7 +40,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final Store<AppState> store;
+  final redux.Store<AppState> store;
 
   MyApp({Key key, this.store}) : super(key: key);
 
@@ -54,13 +54,13 @@ class MyApp extends StatelessWidget {
           primaryColorBrightness: Brightness.light,
           accentColor: Colors.black,
           primaryTextTheme: TextTheme(title: TextStyle(fontSize: 17)),
-          scaffoldBackgroundColor: Color(0xFFF7F7F7),
+          scaffoldBackgroundColor: Color(0xfff5f6f7),
           // hintColor: Colors.black,
           buttonTheme: ButtonThemeData(
             height: 48,
             buttonColor: Colors.black,
-            highlightColor: Color(0xffffff).withOpacity(0.2),
-            splashColor: Colors.black,
+            // highlightColor: Color(0xffffff).withOpacity(0.2),
+            // splashColor: Colors.black,
             // colorScheme: ColorScheme.light(
             //   primary: Colors.black87,
             // ),
@@ -70,6 +70,7 @@ class MyApp extends StatelessWidget {
             labelStyle: TextStyle(fontSize: 14),
             enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color(0xffeaedf3)))
           ),
+          // dividerColor: const Color(0x2F000000)
         ),
         home: BootstrapScreen(),
       ),

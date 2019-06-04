@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import '../../models/models.dart';
+import '../../networking/networking.dart';
 import '../../redux/redux.dart';
 import '../../routes/routes.dart';
 import '../login/login.dart';
@@ -30,6 +31,7 @@ class BootstrapScreen extends StatelessWidget {
       },
       converter: (store) => 0,
       onInit: (store) {
+        sharedApiClient.setDefaultStoreId(1);
         var auth = store.state.auth;
         checkIfAuthenticated(auth.user)
           .then((isLoggedIn) {

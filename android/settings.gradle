@@ -18,5 +18,3 @@ plugins.each { name, path ->
         project(':flipper-no-op').projectDir = new File(pluginDirectory, 'flipper-no-op')
     }
 }
-
-

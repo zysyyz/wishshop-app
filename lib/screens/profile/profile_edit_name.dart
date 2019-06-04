@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import '../../models/models.dart';
 import '../../plugins/plugins.dart';
@@ -108,7 +108,7 @@ class _ViewModel {
     this.doUpdateName
   });
 
-  static _ViewModel fromStore(Store<AppState> store) {
+  static _ViewModel fromStore(redux.Store<AppState> store) {
     final auth = store.state.auth;
     return _ViewModel(
       user: auth.user,

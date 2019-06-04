@@ -1,41 +1,39 @@
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as Redux;
 import '../../models/models.dart';
 import '../../networking/networking.dart';
 import '../actions/app_actions.dart';
 import '../states/app_state.dart';
 
-List<Middleware<AppState>> createCategoryMiddleware() {
+List<Redux.Middleware<AppState>> createCategoryMiddleware() {
   return [
-    new TypedMiddleware<AppState, GetCategoryListAction>(_createGetCategoryListMiddleware()),
-    new TypedMiddleware<AppState, GetCategoryAction>(_createGetCategoryMiddleware()),
+    new Redux.TypedMiddleware<AppState, GetCategoryListAction>(_createGetCategoryListMiddleware()),
+    new Redux.TypedMiddleware<AppState, GetCategoryAction>(_createGetCategoryMiddleware()),
   ];
 }
 
-Middleware<AppState> _createGetCategoryListMiddleware() {
-  return (Store store, action, NextDispatcher next) async {
+Redux.Middleware<AppState> _createGetCategoryListMiddleware() {
+  return (Redux.Store store, action, Redux.NextDispatcher next) async {
     if (!(action is GetCategoryListAction)) return;
 
     try {
-      List<Category> categories = await sharedApiClient.categories.list(perPage: 999);
-      store.dispatch(new GetCategoryListSuccessAction(categories));
+      List<Category> categories = await sharedApiClient.defaultStore.categories.list(perPage: 999);
+      store.dispatch(new ReceiveCategoryListAction(categories));
       action.completer.complete();
     } catch (error) {
-      print(error.toString());
-      store.dispatch(new GetCategoryListFailureAction());
       action.completer.completeError(error);
     }
   };
 }
 
-Middleware<AppState> _createGetCategoryMiddleware() {
-  return (Store store, action, NextDispatcher next) async {
+Redux.Middleware<AppState> _createGetCategoryMiddleware() {
+  return (Redux.Store store, action, Redux.NextDispatcher next) async {
     if (!(action is GetCategoryAction)) return;
 
     try {
-      Category category = await sharedApiClient.category(action.categoryId).get();
-      store.dispatch(new GetCategorySuccessAction(category));
+      Category category = await sharedApiClient.defaultStore.category(action.categoryId).get();
+      store.dispatch(new ReceiveCategoryAction(category));
     } catch (error) {
-      store.dispatch(new GetCategoryFailureAction());
+      action.completer.completeError(error);
     }
   };
 }

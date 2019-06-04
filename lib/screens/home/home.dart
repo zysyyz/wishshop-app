@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart';
+import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import '../../models/models.dart';
-import '../../plugins/plugins.dart';
 import '../../redux/redux.dart';
 import '../../screens/screens.dart';
-import './home_homepage.dart';
-import './home_category.dart';
-import './home_shopping_cart.dart';
-import './home_mine.dart';
+import './tab_homepage.dart';
+import './tab_category.dart';
+import './tab_cart.dart';
+import './tab_mine.dart';
 
 class _IconWithBadge extends StatelessWidget {
   final String icon;
@@ -69,25 +68,25 @@ class _HomeScreenState extends State<HomeScreen> {
       'title': '首页',
       'icon': 'assets/images/ic_tab_homepage.png',
       'badgeNumber': 0,
-      'screen': HomeHomepageScreen(),
+      'screen': TabHomepageScreen(),
     },
     {
       'title': '分类',
       'icon': 'assets/images/ic_tab_category.png',
       'badgeNumber': 0,
-      'screen': HomeCategoryScreen(),
+      'screen': TabCategoryScreen(),
     },
     {
       'title': '购物车',
       'icon': 'assets/images/ic_tab_shopping_cart.png',
       'badgeNumber': 8,
-      'screen': HomeShoppingCartScreen(),
+      'screen': TabCartScreen(),
     },
     {
       'title': '我的',
       'badgeNumber': 0,
       'icon': 'assets/images/ic_tab_mine.png',
-      'screen': HomeMineScreen(),
+      'screen': TabMineScreen(),
     }
   ];
   int _selectedIndex = 0;
@@ -137,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
         inactiveColor: Colors.grey,
         activeColor: Colors.black,
         onTap: (int index) {
-          if (index == 3 && vm.user == null) {
+          if (index == 3 && vm.currentUser == null) {
             Navigator
               .of(context)
               .push(MaterialPageRoute(builder: (_) => LoginScreen(), fullscreenDialog: true));
@@ -158,21 +157,28 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (BuildContext context, _ViewModel vm) {
         return _build(context, vm);
       },
+      onWillChange: (_ViewModel vm) {
+        if (vm.currentUser == null && _selectedIndex == 3) {
+          setState(() {
+            _selectedIndex = 0;
+          });
+        }
+      },
     );
   }
 }
 
 class _ViewModel {
-  final User user;
+  final User currentUser;
 
   _ViewModel({
-    this.user,
+    this.currentUser,
   });
 
-  static _ViewModel fromStore(Store<AppState> store) {
-    final auth = store.state.auth;
+  static _ViewModel fromStore(redux.Store<AppState> store) {
+    final authState = store.state.auth;
     return _ViewModel(
-      user: auth.user,
+      currentUser: authState.user,
     );
   }
 }
