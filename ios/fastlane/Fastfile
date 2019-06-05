@@ -21,13 +21,10 @@ platform :ios do
   lane :certificates do
     match(app_identifier: [
       "org.wishshop.mobileapp",
-    ], readonly: false, type: 'appstore')
+    ], readonly: true, type: 'adhoc')
     match(app_identifier: [
       "org.wishshop.mobileapp",
-    ], readonly: false, type: 'adhoc')
-    match(app_identifier: [
-      "org.wishshop.mobileapp",
-    ], readonly: false, type: 'development')
+    ], readonly: true, type: 'development')
   end
 
   desc "Push a new beta build to TestFlight"
