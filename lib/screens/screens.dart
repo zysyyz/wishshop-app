@@ -12,3 +12,4 @@ export './profile/profile.dart';
 export './register/register.dart';
 export './search/search.dart';
 export './settings/settings.dart';
+export './edit_addresses/edit_addresses.dart';
