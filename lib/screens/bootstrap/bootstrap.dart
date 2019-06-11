@@ -1,12 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../models/models.dart';
-import '../../networking/networking.dart';
-import '../../redux/redux.dart';
-import '../../routes/routes.dart';
-import '../login/login.dart';
-import '../home/home.dart';
+import '../../exports.dart';
 
 checkIfAuthenticated(User user) async {
   await Future.delayed(Duration(microseconds: 0));

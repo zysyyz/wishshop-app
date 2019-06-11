@@ -1,15 +1,23 @@
 import '../../models/models.dart';
 
 class ProductState {
+  Map<String, Product> map = Map();
   Map<String, List<Product>> listByFilter = Map();
-  Map<String, Product> mapById = Map();
 
   ProductState({
+    this.map,
     this.listByFilter,
-    this.mapById,
   }) {
+    if (map == null) map = new Map();
     if (listByFilter == null) listByFilter = new Map();
-    if (mapById == null) mapById = new Map();
+  }
+
+  Product get(String id) {
+    return map[id];
+  }
+
+  List<Product> list(String filter) {
+    return listByFilter[filter] ?? [];
   }
 
   static ProductState fromJson(dynamic json) {
@@ -28,18 +36,18 @@ class ProductState {
       }
     }
 
-    Map<String, Product> mapById = new Map();
+    Map<String, Product> map = new Map();
 
     return ProductState(
-      listByFilter  : listByFilter,
-      mapById  : mapById,
+      map: map,
+      listByFilter: listByFilter,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'listByFilter' : listByFilter,
-      'mapById': mapById,
+      'map': map,
+      'listByFilter': listByFilter,
     };
   }
 }

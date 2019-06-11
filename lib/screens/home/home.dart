@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../models/models.dart';
-import '../../redux/redux.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 import './tab_homepage.dart';
 import './tab_category.dart';
 import './tab_cart.dart';
@@ -68,25 +66,25 @@ class _HomeScreenState extends State<HomeScreen> {
       'title': '首页',
       'icon': 'assets/images/ic_tab_homepage.png',
       'badgeNumber': 0,
-      'screen': TabHomepageScreen(),
+      'screen': TabHomepage(),
     },
     {
       'title': '分类',
       'icon': 'assets/images/ic_tab_category.png',
       'badgeNumber': 0,
-      'screen': TabCategoryScreen(),
+      'screen': TabCategory(),
     },
     {
       'title': '购物车',
       'icon': 'assets/images/ic_tab_shopping_cart.png',
       'badgeNumber': 8,
-      'screen': TabCartScreen(),
+      'screen': TabCart(),
     },
     {
       'title': '我的',
       'badgeNumber': 0,
       'icon': 'assets/images/ic_tab_mine.png',
-      'screen': TabMineScreen(),
+      'screen': TabMine(),
     }
   ];
   int _selectedIndex = 0;

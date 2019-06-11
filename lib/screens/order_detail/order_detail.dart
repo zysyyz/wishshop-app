@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../views/views.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 
 class OrderDetailScreen extends StatelessWidget {
   @override

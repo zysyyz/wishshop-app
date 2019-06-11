@@ -17,10 +17,10 @@ ProductState _receiveProductList(ProductState state, ReceiveProductListAction ac
 }
 
 ProductState _receiveProduct(ProductState state, ReceiveProductAction action) {
-  if (state.mapById == null) {
-    state.mapById = new Map();
+  if (state.map == null) {
+    state.map = new Map();
   }
-  state.mapById.putIfAbsent("${action.product.id}", () => action.product);
+  state.map.update("${action.product.id}", (v) => action.product, ifAbsent: () => action.product);
   return state;
 }
 

@@ -2,10 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../enums/enums.dart';
-import '../../models/models.dart';
-import '../../redux/redux.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 import './profile_edit_gender.dart';
 import './profile_edit_name.dart';
 

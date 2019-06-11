@@ -1,16 +1,15 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../exports.dart';
 
-class TabSpecification extends StatefulWidget {
+class TabReviews extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TabSpecificationState();
+  State<StatefulWidget> createState() => _TabReviewsState();
 }
 
-class _TabSpecificationState extends State<TabSpecification> {
+class _TabReviewsState extends State<TabReviews> {
   bool _loading = false;
 
   @override

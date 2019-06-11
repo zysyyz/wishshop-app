@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import '../../models/models.dart';
-import '../../redux/redux.dart';
-import '../../screens/screens.dart';
-import '../../views/views.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 
 class _SearchBar extends StatelessWidget {
   @override
@@ -46,12 +42,12 @@ class _SearchBar extends StatelessWidget {
   }
 }
 
-class TabCategoryScreen extends StatefulWidget {
+class TabCategory extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TabCategoryScreen();
+  State<StatefulWidget> createState() => _TabCategoryState();
 }
 
-class _TabCategoryScreen extends State<TabCategoryScreen> {
+class _TabCategoryState extends State<TabCategory> {
   PageController _pageController;
   ScrollController _scrollController;
 
@@ -115,7 +111,7 @@ class _TabCategoryScreen extends State<TabCategoryScreen> {
                   });
 
                   // _pageController.animateToPage(
-                  //   index, 
+                  //   index,
                   //   duration: Duration(milliseconds: 1),
                   //   curve: Curves.linear
                   // );
@@ -147,7 +143,7 @@ class _TabCategoryScreen extends State<TabCategoryScreen> {
         VerticalDivider(width: 1),
         Expanded(
           child: PageView.builder(
-            controller: _pageController,  
+            controller: _pageController,
             scrollDirection: Axis.vertical,
             onPageChanged: (index) {
               setState(() {
@@ -172,17 +168,17 @@ class _TabCategoryScreen extends State<TabCategoryScreen> {
                     switch (category.level) {
                       case 0:
                         return CategoryListItem(
-                          category: category, 
+                          category: category,
                           parentCategory: parentCategory,
                         );
                       case 1:
                         return CategoryListSection(
-                          category: category, 
+                          category: category,
                           parentCategory: parentCategory,
                         );
                       case 2:
                         return CategoryGridItem(
-                          category: category, 
+                          category: category,
                           parentCategory: parentCategory,
                         );
                     }

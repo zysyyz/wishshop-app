@@ -63,7 +63,7 @@ class ProductShareActionSheet extends StatelessWidget {
     ];
 
     var children = items.map((item) => _Item(
-      icon: item['icon'], 
+      icon: item['icon'],
       title: item['title'],
     )).toList();
     return Container(

@@ -1,11 +1,8 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
-import '../../views/views.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 import './tab_info.dart';
 import './tab_products.dart';
+import './tab_reviews.dart';
 import './tab_specification.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -28,7 +25,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 3);
+    _tabController = TabController(vsync: this, length: 4);
     _tabController.addListener(() {
       print(_tabController.index);
       setState(() {
@@ -97,8 +94,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   child: TabSpecification(),
                 ),
                 Container(
+                  child: TabReviews(),
+                ),
+                Container(
                   margin: EdgeInsets.only(top: kToolbarHeight + MediaQuery.of(context).padding.top + 36),
-                  child: TabProductsView(category: new Category(id: 2),),
+                  child: TabProducts(category: new Category(id: 2),),
                 ),
               ],
             ),
@@ -166,6 +166,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                           ),
                           Tab(
                             child: Text("参数"),
+                          ),
+                          Tab(
+                            child: Text("评价"),
                           ),
                           Tab(
                             child: Text("推荐"),

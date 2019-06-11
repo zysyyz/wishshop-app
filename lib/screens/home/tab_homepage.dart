@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/rendering.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../models/models.dart';
-import '../../redux/redux.dart';
-import '../../screens/screens.dart';
-import '../../views/views.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 
-class TabHomepageScreen extends StatefulWidget {
+class TabHomepage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TabHomepageScreenState();
+  State<StatefulWidget> createState() => _TabHomepageState();
 }
 
-class _TabHomepageScreenState extends State<TabHomepageScreen> {
+class _TabHomepageState extends State<TabHomepage> {
   Widget _buildBody(BuildContext context, _ViewModel vm) {
     List<Collection> collections = vm.listByFilter['all'] ?? [];
 

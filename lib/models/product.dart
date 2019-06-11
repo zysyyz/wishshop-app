@@ -15,6 +15,7 @@ class Product {
   num price;
   num originalPrice;
   List<Content> contents;
+  String favoritedAt;
   String createdAt;
   String updatedAt;
 
@@ -32,6 +33,7 @@ class Product {
     this.price,
     this.originalPrice,
     this.contents,
+    this.favoritedAt,
     this.createdAt,
     this.updatedAt,
   });
@@ -57,6 +59,7 @@ class Product {
       price             : json['price'],
       originalPrice     : json['original_price'],
       contents          : contents,
+      favoritedAt       : json['favorited_at'],
       createdAt         : json['created_at'],
       updatedAt         : json['updated_at'],
     );
@@ -77,6 +80,7 @@ class Product {
       'price'           : price,
       'original_price'  : originalPrice,
       'contents'        : contents,
+      'favorited_at'    : favoritedAt,
       'created_at'      : createdAt,
       'updated_at'      : updatedAt,
     };

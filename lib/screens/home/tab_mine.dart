@@ -3,18 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../models/models.dart';
-import '../../redux/redux.dart';
-import '../../screens/screens.dart';
-import '../../routes/routes.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 
-class TabMineScreen extends StatefulWidget {
+class TabMine extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TabMineScreenState();
+  State<StatefulWidget> createState() => _TabMineState();
 }
 
-class _TabMineScreenState extends State<TabMineScreen> {
+class _TabMineState extends State<TabMine> {
   Widget _build(BuildContext context, _ViewModel vm) {
     if (vm.user == null) return Container();
 
@@ -32,7 +28,7 @@ class _TabMineScreenState extends State<TabMineScreen> {
         'type': 'section',
       },
       {
-        'title': '我的心愿单',
+        'title': '我的收藏夹',
         'onTap': () {
           Navigator
             .of(context)

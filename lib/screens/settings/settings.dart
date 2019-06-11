@@ -3,10 +3,7 @@ import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../models/models.dart';
-import '../../redux/redux.dart';
-import '../../widgets/widgets.dart';
-import '../about_us/about_us.dart';
+import '../../exports.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
