@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../utilities/constants.dart';
-import './_account.dart';
+import './_accounts.dart';
 import './_stores.dart';
 import './_users.dart';
 
@@ -12,7 +12,7 @@ class ApiClient {
 
   var _defaultStoreId;
 
-  AccountService    _accountService;
+  AccountsService    _accountsService;
   StoresService     _storesService;
   UsersService      _usersService;
 
@@ -62,7 +62,7 @@ class ApiClient {
       }
     ));
 
-    this._accountService    = new AccountService(_http);
+    this._accountsService    = new AccountsService(_http);
     this._storesService     = new StoresService(_http);
     this._usersService      = new UsersService(_http);
   }
@@ -76,7 +76,7 @@ class ApiClient {
     return _storesService;
   }
 
-  AccountService get account => _accountService;
+  AccountsService get account => _accountsService;
 
   UsersService get users => _usersService;
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 
 class CartListItem extends StatelessWidget {
   final Product product;

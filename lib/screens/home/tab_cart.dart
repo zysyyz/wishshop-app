@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 
-class TabCartScreen extends StatelessWidget {
+class TabCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CartScreen();

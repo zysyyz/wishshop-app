@@ -5,7 +5,7 @@ class Content {
   int position;
   String type;
   String content;
-  Map<String, String> meta;
+  Map<String, dynamic> meta;
   String createdAt;
   String updatedAt;
 

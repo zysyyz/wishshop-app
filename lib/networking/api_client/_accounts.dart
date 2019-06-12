@@ -2,14 +2,14 @@ import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/models.dart';
 
-class AccountService {
+class AccountsService {
   final _http;
 
-  AccountService(this._http);
+  AccountsService(this._http);
 
   Future<User> register(String name, String email, String password) async {
     final response = await _http.post(
-      '/account/register',
+      '/accounts/register',
       data: {
         "name": name,
         "email": email,
@@ -27,7 +27,7 @@ class AccountService {
 
   Future<User> login(String email, String password) async {
     final response = await _http.post(
-      '/account/login',
+      '/accounts/login',
       data: {
         "email": email,
         "password": password
@@ -58,7 +58,7 @@ class AccountService {
     }
 
     final response = await _http.patch(
-      '/account/profile',
+      '/accounts/profile',
       data: data,
     );
 

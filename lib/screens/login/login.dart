@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../models/models.dart';
-import '../../plugins/plugins.dart';
-import '../../redux/redux.dart';
-import '../../routes/routes.dart';
-import '../../widgets/widgets.dart';
-import '../register/register.dart';
+import '../../exports.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

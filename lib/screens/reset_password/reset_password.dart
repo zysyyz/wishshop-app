@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/models.dart';
-import '../../plugins/plugins.dart';
-import '../../redux/redux.dart';
-import '../../routes/routes.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   @override

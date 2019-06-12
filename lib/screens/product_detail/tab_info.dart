@@ -2,13 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
-import '../../redux/redux.dart';
-import '../../views/views.dart';
-import '../../widgets/widgets.dart';
-
+import '../../exports.dart';
 
 class _BadgeContainer extends StatelessWidget {
   final Widget child;
@@ -63,7 +57,6 @@ class TabInfo extends StatefulWidget {
 }
 
 class _TabInfoState extends State<TabInfo> {
-  bool _favorited = false;
   bool _loading = false;
 
   void _handlePressAddToCart(BuildContext context) {
@@ -188,6 +181,8 @@ class _TabInfoState extends State<TabInfo> {
     ThemeData themeData = Theme.of(context);
     Product product = vm.product;
 
+    bool _favorited = product.favoritedAt != null;
+
     if (_loading) {
       return ListLoadIndicator();
     }
@@ -260,9 +255,7 @@ class _TabInfoState extends State<TabInfo> {
                         ),
                         iconSize: 38,
                         onPressed: () {
-                          setState(() {
-                            _favorited = !_favorited;
-                          });
+
                         },
                       )
                     ],
@@ -357,7 +350,7 @@ class _ViewModel {
   }) {
     final productState = store.state.productState;
     return _ViewModel(
-      product: productState.mapById['${product.id}'] ?? product,
+      product: productState.get('${product.id}') ?? product,
     );
   }
 }

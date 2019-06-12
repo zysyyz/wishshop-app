@@ -8,24 +8,20 @@ import '../../redux/redux.dart';
 import '../../views/views.dart';
 import '../../widgets/widgets.dart';
 
-class TabProductsView extends StatefulWidget {
+class TabProducts extends StatefulWidget {
   final Category category;
 
-  const TabProductsView({Key key, this.category}) : super(key: key);
+  const TabProducts({Key key, this.category}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _TabProductsView(this.category);
+  State<StatefulWidget> createState() => _TabProductsState();
 }
 
-class _TabProductsView extends State<TabProductsView> {
-  final Category category;
-
+class _TabProductsState extends State<TabProducts> {
   bool _loading = true;
 
-  _TabProductsView(this.category);
-
   Widget _build(BuildContext context, _ViewModel vm) {
-    List<Product> products = vm.listByFilter['categoryId=${category.id}'] ?? [];
+    List<Product> products = vm.listByFilter['categoryId=${widget.category.id}'] ?? [];
 
     if (_loading) {
       return ListLoadIndicator();
@@ -63,7 +59,7 @@ class _TabProductsView extends State<TabProductsView> {
         return _build(context, vm);
       },
       onInit: (store) async {
-        var action = new GetProductListAction(categoryId: category.id);
+        var action = new GetProductListAction(categoryId: widget.category.id);
         action.completer.future.then((_){
           setState(() {
             _loading = false;

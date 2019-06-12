@@ -3,13 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../models/models.dart';
-import '../../plugins/plugins.dart';
-import '../../redux/redux.dart';
-import '../../routes/routes.dart';
-import '../../widgets/widgets.dart';
-import '../home/home.dart';
-import '../register/register.dart';
+import '../../exports.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -118,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       onTap: () async {
-                        const url = 'https://wishshop.thecode.me/legal/terms/';
+                        const url = 'https://wishshop.org/legal/terms/';
                         if (await canLaunch(url)) {
                           await launch(url);
                         }
@@ -133,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       onTap: () async {
-                        const url = 'https://wishshop.thecode.me/legal/privacy/';
+                        const url = 'https://wishshop.org/legal/privacy/';
                         if (await canLaunch(url)) {
                           await launch(url);
                         }

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../models/models.dart';
-import '../../plugins/plugins.dart';
-import '../../redux/redux.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 
 class ProfileEditNameScreen extends StatefulWidget {
   @override

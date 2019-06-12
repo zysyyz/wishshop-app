@@ -1,8 +1,5 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../models/models.dart';
-import '../../views/views.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 
 class _SearchBar extends StatelessWidget {
   @override
