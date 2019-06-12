@@ -3,12 +3,14 @@ import '../../models/models.dart';
 import './_categories.dart';
 import './_collections.dart';
 import './_products.dart';
+import './_addresses.dart';
 
 class StoresService {
   final _http;
 
   var _storeId;
 
+  AddressesService  _addressesService;
   CategoriesService   _categoriesService;
   CollectionsService  _collectionsService;
   ProductsService     _productsService;
@@ -17,6 +19,7 @@ class StoresService {
     this._categoriesService = new CategoriesService(_http);
     this._collectionsService = new CollectionsService(_http);
     this._productsService = new ProductsService(_http);
+    this._addressesService  = new AddressesService(_http);
   }
 
   void setStoreId(id) {
@@ -27,7 +30,7 @@ class StoresService {
     final response = await _http.get(
       '/stores',
       queryParameters: {
-        'page': page, 
+        'page': page,
         'per_page': perPage,
       },
     );
@@ -44,7 +47,19 @@ class StoresService {
     return d;
   }
 
-  CategoriesService get categories { 
+  AddressesService get addresses {
+    _addressesService.setStoreId(_storeId);
+    _addressesService.setAddressId(0);
+    return _addressesService;
+  }
+
+  AddressesService address(id) {
+    _addressesService.setStoreId(_storeId);
+    _addressesService.setAddressId(id);
+    return _addressesService;
+  }
+
+  CategoriesService get categories {
     _categoriesService.setStoreId(_storeId);
     _categoriesService.setCategoryId(0);
     return _categoriesService;

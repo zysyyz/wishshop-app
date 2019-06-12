@@ -1,4 +1,5 @@
 export './about_us/about_us.dart';
+export './address_edit/address_edit.dart';
 export './bootstrap/bootstrap.dart';
 export './cart/cart.dart';
 export './category_detail/category_detail.dart';
@@ -12,4 +13,3 @@ export './profile/profile.dart';
 export './register/register.dart';
 export './search/search.dart';
 export './settings/settings.dart';
-export './edit_addresses/edit_addresses.dart';

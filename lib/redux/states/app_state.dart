@@ -1,3 +1,4 @@
+import './address_state.dart';
 import './auth_state.dart';
 import './category_state.dart';
 import './collection_state.dart';
@@ -5,6 +6,7 @@ import './product_state.dart';
 // import './user_state.dart';
 
 class AppState {
+  final AddressState address;
   final AuthState auth;
   final CategoryState category;
   final CollectionState collection;
@@ -12,6 +14,7 @@ class AppState {
   // final UserState user;
 
   AppState({
+    this.address,
     this.auth,
     this.category,
     this.collection,
@@ -22,6 +25,7 @@ class AppState {
   static AppState fromJson(dynamic json) {
     if (json == null) {
       return AppState(
+        address: AddressState(),
         auth: AuthState(),
         category: CategoryState(),
         collection: CollectionState(),
@@ -30,6 +34,7 @@ class AppState {
       );
     }
     return AppState(
+      address: AddressState.fromJson(json['addressState']),
       auth: AuthState.fromJson(json['auth']),
       category: CategoryState.fromJson(json['category']),
       collection: CollectionState.fromJson(json['collection']),
@@ -44,6 +49,7 @@ class AppState {
       'category': category.toJson(),
       'collection': collection.toJson(),
       'productState': productState.toJson(),
+      'address': address.toJson(),
       // 'user': user.toJson(),
     };
   }

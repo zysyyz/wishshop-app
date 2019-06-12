@@ -2,19 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class CupertinoCityPicker extends StatefulWidget {
+class CityPicker extends StatefulWidget {
   List _pcaData;
 
   @override
-  State<StatefulWidget> createState() => _CupertinoCityPicker(this._pcaData);
+  State<StatefulWidget> createState() => _CityPickerState(this._pcaData);
 
-  CupertinoCityPicker(this._pcaData);
+  CityPicker(this._pcaData);
 }
 
 const double _kPickerSheetHeight = 288;
 const double _kPickerItemHeight = 50.0;
 
-class _CupertinoCityPicker extends State<CupertinoCityPicker> {
+class _CityPickerState extends State<CityPicker> {
   final _pcaData;
   String _province = '';
   String _city = '';
@@ -23,7 +23,7 @@ class _CupertinoCityPicker extends State<CupertinoCityPicker> {
   int _cityIndex = 0;
   int _districtIndex = 0;
 
-  _CupertinoCityPicker(this._pcaData);
+  _CityPickerState(this._pcaData);
 
   Widget _buildBottomPicker(Widget picker) {
     return Container(
@@ -87,7 +87,6 @@ class _CupertinoCityPicker extends State<CupertinoCityPicker> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _buildBottomPicker(Row(
       children: <Widget>[
         Expanded(

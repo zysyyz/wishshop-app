@@ -7,3 +7,5 @@ export './order.dart';
 export './product.dart';
 export './store.dart';
 export './user.dart';
+export './address.dart';
+

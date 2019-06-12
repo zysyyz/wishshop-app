@@ -1,3 +1,4 @@
+export './address_actions.dart';
 export './auth_actions.dart';
 export './category_actions.dart';
 export './collection_actions.dart';

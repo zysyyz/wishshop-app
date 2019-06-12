@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import './_addresses.dart';
 import '../../utilities/constants.dart';
 import './_accounts.dart';
 import './_stores.dart';
