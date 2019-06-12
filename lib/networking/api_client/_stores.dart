@@ -1,12 +1,13 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import '../../models/models.dart';
+import './_addresses.dart';
 import './_categories.dart';
 import './_collections.dart';
 import './_products.dart';
-import './_addresses.dart';
 
 class StoresService {
-  final _http;
+  final Dio _http;
 
   var _storeId;
 

@@ -1,8 +1,9 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import '../../models/models.dart';
 
 class CategoriesService {
-  final _http;
+  final Dio _http;
 
   var _storeId;
   var _categoryId;

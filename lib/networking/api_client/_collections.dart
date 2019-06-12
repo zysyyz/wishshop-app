@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:wishshop_app/models/collection.dart';
 
 import '../../models/models.dart';
 
 class CollectionsService {
-  final _http;
+  final Dio _http;
 
   var _storeId;
   var _categoryId;
@@ -23,20 +24,22 @@ class CollectionsService {
     final response = await _http.get(
       '/stores/$_storeId/collections',
       queryParameters: {
-        'page': page, 
+        'page': page,
         'per_page': perPage,
         'include': ['items']
       },
     );
-    Iterable l = response.data['items'] as List;
 
-    var _items = l.map((item) => Collection.fromJson(item)).toList();
-    return _items;
+    Result<Collection> result = Result<Collection>.fromJson(
+      response.data,
+      (json) => Collection.fromJson(json)
+    );
+    return result.items;
   }
 
   Future<Collection> get() async {
     final response = await _http.get(
-      '/stores/$_storeId/collections/$_categoryId', 
+      '/stores/$_storeId/collections/$_categoryId',
       queryParameters: {
         'include': ['items']
       },
