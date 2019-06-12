@@ -1,6 +1,5 @@
-import 'package:wishshop_app/redux/reducers/address_reducer.dart';
-
 import '../states/app_state.dart';
+import './address_reducer.dart';
 import './auth_reducer.dart';
 import './category_reducer.dart';
 import './collection_reducer.dart';

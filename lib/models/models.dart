@@ -1,4 +1,5 @@
 // 请按文件名排序放置
+export './address.dart';
 export './brand.dart';
 export './category.dart';
 export './collection.dart';
@@ -10,5 +11,4 @@ export './product.dart';
 export './result.dart';
 export './store.dart';
 export './user.dart';
-export './address.dart';
 

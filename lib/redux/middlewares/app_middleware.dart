@@ -1,6 +1,6 @@
 import 'package:redux/redux.dart' as redux;
-import 'package:wishshop_app/redux/middlewares/address_middleware.dart';
 import '../states/app_state.dart';
+import './address_middleware.dart';
 import './auth_middleware.dart';
 import './category_middleware.dart';
 import './collection_middleware.dart';
