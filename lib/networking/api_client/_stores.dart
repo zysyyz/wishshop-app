@@ -1,11 +1,12 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import '../../models/models.dart';
 import './_categories.dart';
 import './_collections.dart';
 import './_products.dart';
 
 class StoresService {
-  final _http;
+  final Dio _http;
 
   var _storeId;
 
@@ -27,7 +28,7 @@ class StoresService {
     final response = await _http.get(
       '/stores',
       queryParameters: {
-        'page': page, 
+        'page': page,
         'per_page': perPage,
       },
     );
@@ -44,7 +45,7 @@ class StoresService {
     return d;
   }
 
-  CategoriesService get categories { 
+  CategoriesService get categories {
     _categoriesService.setStoreId(_storeId);
     _categoriesService.setCategoryId(0);
     return _categoriesService;

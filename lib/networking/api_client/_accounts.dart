@@ -1,9 +1,10 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/models.dart';
 
 class AccountsService {
-  final _http;
+  final Dio _http;
 
   AccountsService(this._http);
 
