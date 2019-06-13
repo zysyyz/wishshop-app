@@ -111,6 +111,7 @@ class _MyAddressesScreenState extends State<MyAddressesScreen> {
       body: _buildBody(context, vm),
       bottomNavigationBar: Container(
         margin: EdgeInsets.all(16),
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         child: RaisedButton(
           elevation: 0,
           highlightElevation: 0,

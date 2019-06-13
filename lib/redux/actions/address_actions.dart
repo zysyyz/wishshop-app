@@ -8,9 +8,9 @@ class GetAddressListAction {
   GetAddressListAction({this.page});
 }
 class ReceiveAddressListAction {
-  final List<Address> addresses;
+  Result<Address> result;
 
-  ReceiveAddressListAction(this.addresses);
+  ReceiveAddressListAction(this.result);
 }
 
 class GetAddressAction {
@@ -24,4 +24,26 @@ class ReceiveAddressAction {
   final Address address;
 
   ReceiveAddressAction(this.address);
+}
+
+class UpdateAddressAction {
+  final Address address;
+
+  UpdateAddressAction(this.address);
+}
+class UpdateAddressSuccessAction {
+  final Address address;
+
+  UpdateAddressSuccessAction(this.address);
+}
+
+class DeleteAddressAction {
+  final Address address;
+
+  DeleteAddressAction(this.address);
+}
+class DeleteAddressSuccessAction {
+  final int addressId;
+
+  DeleteAddressSuccessAction(this.addressId);
 }

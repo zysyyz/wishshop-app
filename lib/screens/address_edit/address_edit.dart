@@ -397,6 +397,8 @@ class _AddressEditScreenState extends State<AddressEditScreen> {
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: RaisedButton(
+                      elevation: 0,
+                      highlightElevation: 0,
                       onPressed: () {
                         this.saveAddress(vm);
                       },
@@ -430,25 +432,12 @@ class _ViewModel {
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final addressState = store.state.address;
     return _ViewModel(
       updateAddress: (Address address) {
-        var newAddresses = addressState.list;
-        bool existing =
-            newAddresses.any((addressObj) => addressObj.id == address.id);
-        if (existing) {
-          newAddresses = addressState.list.map((addressObj) {
-            return addressObj.id == address.id ? address : addressObj;
-          }).toList();
-        } else {
-          newAddresses.insert(0, address);
-        }
-        store.dispatch(ReceiveAddressListAction(newAddresses));
+        store.dispatch(UpdateAddressSuccessAction(address));
       },
       deleteAddress: (addressId) {
-        final newAddresses = addressState.list;
-        newAddresses.removeWhere((addressObj) => addressObj.id == addressId);
-        store.dispatch(ReceiveAddressListAction(newAddresses));
+        store.dispatch(DeleteAddressSuccessAction(addressId));
       },
     );
   }

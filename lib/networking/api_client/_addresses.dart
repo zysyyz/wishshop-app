@@ -19,7 +19,7 @@ class AddressesService {
     this._addressId = id;
   }
 
-  Future<Result<Address>> list({page = 1, perPage = 10}) async {
+  Future<Result<Address>> list({page = 1, perPage = 20}) async {
     final response = await _http.get(
       '/stores/$_storeId/addresses',
       queryParameters: {
