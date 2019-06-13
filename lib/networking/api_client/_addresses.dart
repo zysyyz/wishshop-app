@@ -19,7 +19,7 @@ class AddressesService {
     this._addressId = id;
   }
 
-  Future<List<Address>> list({page = 1, perPage = 20}) async {
+  Future<Result<Address>> list({page = 1, perPage = 10}) async {
     final response = await _http.get(
       '/stores/$_storeId/addresses',
       queryParameters: {
@@ -27,10 +27,12 @@ class AddressesService {
         'per_page': perPage,
       },
     );
-    Iterable l = response.data['items'] as List;
 
-    var _items = l.map((item) => Address.fromJson(item)).toList();
-    return _items;
+    Result<Address> result = Result<Address>.fromJson(
+      response.data,
+      (json) => Address.fromJson(json)
+    );
+    return result;
   }
 
   Future<Address> get() async {

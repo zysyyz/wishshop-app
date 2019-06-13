@@ -27,7 +27,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
     super.initState();
     _tabController = TabController(vsync: this, length: 4);
     _tabController.addListener(() {
-      print(_tabController.index);
       setState(() {
         if (_tabController.index == 0) {
           double n = _scrollViewController.position.pixels / 300;
@@ -46,7 +45,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
     });
     _scrollViewController = ScrollController();
     _scrollViewController.addListener(() {
-      print(_scrollViewController.position.pixels);
       setState(() {
         _opacity = 1;
         if (_selectedIndex == 0) {
@@ -59,7 +57,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
             _opacity = n;
           }
         }
-        print(_opacity);
       });
     });
   }

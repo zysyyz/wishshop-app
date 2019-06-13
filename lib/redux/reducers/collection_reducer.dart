@@ -1,5 +1,5 @@
 import 'package:redux/redux.dart' as redux;
-import '../../models/models.dart';
+import '../../exports.dart';
 import '../actions/collection_actions.dart';
 import '../states/collection_state.dart';
 
@@ -9,15 +9,25 @@ final collectionReducer = redux.combineReducers<CollectionState>([
 ]);
 
 CollectionState _receiveCollectionList(CollectionState state, ReceiveCollectionListAction action) {
-  state.listByFilter = new Map();
-  state.listByFilter.putIfAbsent("all", () => action.collections);
+  if (state.listByFilter == null) {
+    state.listByFilter = new Map();
+  }
+
+  state.listByFilter.update(
+    "all",
+    (v) => action.collections ?? [],
+    ifAbsent: () => action.collections ?? []
+  );
   return state;
 }
 
 CollectionState _receiveCollection(CollectionState state, ReceiveCollectionAction action) {
   state.mapById = new Map();
-  state.mapById.putIfAbsent('${action.collection.id}', () => action.collection);
-  state.mapById.putIfAbsent(action.collection.slug, () => action.collection);
+  state.mapById.update(
+    '${action.collection.id}',
+    (v) => action.collection,
+    ifAbsent: () => action.collection
+  );
   return state;
 }
 

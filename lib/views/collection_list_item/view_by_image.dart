@@ -24,7 +24,7 @@ class _ViewByImageState extends State<ViewByImage> {
     return Container(
       height: 200,
       child: FadeInImage(
-        placeholder: AssetImage("images/placeholder.jpg"),
+        placeholder: AssetImage("assets/images/placeholder.png"),
         image: NetworkImage(
           collectionItem.imageUrl,
         ),

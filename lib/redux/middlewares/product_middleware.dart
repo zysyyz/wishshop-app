@@ -23,7 +23,6 @@ Redux.Middleware<AppState> _createGetProductListMiddleware() {
       ));
       action.completer.complete();
     } catch (error) {
-      print(error);
       action.completer.completeError(error);
     }
   };
@@ -34,13 +33,9 @@ Redux.Middleware<AppState> _createGetProductMiddleware() {
     if (!(action is GetProductAction)) return;
 
     try {
-      print('>>>>0');
       Product product = await sharedApiClient.defaultStore.product(action.productId).get();
-      print('>>>>1');
       store.dispatch(new ReceiveProductAction(product));
-      print('>>>>2');
     } catch (error) {
-      print(error);
       action.completer.completeError(error);
     }
   };

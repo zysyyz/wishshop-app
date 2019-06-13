@@ -11,7 +11,7 @@ AppState appReducer(AppState state, action) {
     address: addressReducer(state.address, action),
     auth: authReducer(state.auth, action),
     category: categoryReducer(state.category, action),
-    collection: collectionReducer(state.collection, action),
+    collectionState: collectionReducer(state.collectionState, action),
     productState: productReducer(state.productState, action),
     // user: userReducer(state.user, action),
   );

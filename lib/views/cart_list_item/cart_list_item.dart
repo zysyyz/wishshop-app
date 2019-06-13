@@ -41,7 +41,7 @@ class CartListItem extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: new BorderRadius.all(Radius.circular(0.0)),
                   child: FadeInImage(
-                    placeholder: AssetImage("images/placeholder.jpg"),
+                    placeholder: AssetImage("assets/images/placeholder.png"),
                     image: NetworkImage(
                       product.imageUrl,
                     ),

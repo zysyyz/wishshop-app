@@ -1,8 +1,11 @@
 import 'dart:async';
-import '../../models/models.dart';
+import '../../exports.dart';
 
 class GetCollectionListAction {
-  final Completer completer = new Completer();
+  final Completer<Result<Collection>> completer = new Completer();
+  int page;
+
+  GetCollectionListAction({this.page});
 }
 class ReceiveCollectionListAction {
   final List<Collection> collections;

@@ -11,22 +11,19 @@ class TabHomepage extends StatefulWidget {
 
 class _TabHomepageState extends State<TabHomepage> {
   Widget _buildBody(BuildContext context, _ViewModel vm) {
-    List<Collection> collections = vm.listByFilter['all'] ?? [];
+    List<Collection> items = vm.items;
 
-    if (collections.length == 0) {
-      return ListEmptyIndicator();
-    }
-
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      child: new ListView.builder(
+    return PullToRefreshLayout(
+      initialCount: items.length,
+      onLoadData: vm.fetchItems,
+      child: ListView.builder(
         padding: EdgeInsets.only(
           top: 0,
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-        itemCount: collections.length,
+        itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
-          Collection collection = collections[index];
+          Collection collection = items[index];
           return CollectionListItem(collection);
         },
       ),
@@ -60,24 +57,32 @@ class _TabHomepageState extends State<TabHomepage> {
       builder: (BuildContext context, _ViewModel vm) {
         return _build(context, vm);
       },
-      onInit: (store) {
-        store.dispatch(new GetCollectionListAction());
-      },
     );
   }
 }
 
 class _ViewModel {
-  final Map<String, List<Collection>> listByFilter;
+  final List<Collection> items;
+  final Future<Result<Collection>> Function(int page) fetchItems;
 
   _ViewModel({
-    this.listByFilter,
+    this.items,
+    this.fetchItems,
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final collectionState = store.state.collection;
+    final collectionState = store.state.collectionState;
     return _ViewModel(
-      listByFilter: collectionState.listByFilter,
+      items: collectionState.listByFilter['all'] ?? [],
+      fetchItems: (page) {
+        var action = new GetCollectionListAction(
+          page: page,
+        );
+
+        store.dispatch(action);
+
+        return action.completer.future;
+      }
     );
   }
 }

@@ -27,7 +27,7 @@ class CategoryGridItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: new BorderRadius.all(Radius.circular(0.0)),
                 child: FadeInImage(
-                  placeholder: AssetImage("images/placeholder.jpg"),
+                  placeholder: AssetImage("assets/images/placeholder.png"),
                   image: NetworkImage(
                     category.imageUrl,
                   ),
@@ -36,9 +36,9 @@ class CategoryGridItem extends StatelessWidget {
               ),
             ),
             Text(
-              category.name, 
+              category.name,
               style: TextStyle(
-                fontSize: 13, 
+                fontSize: 13,
                 color: Color(0xff333333),
               )
             ),

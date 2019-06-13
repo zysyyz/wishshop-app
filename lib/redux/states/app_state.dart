@@ -9,7 +9,7 @@ class AppState {
   final AddressState address;
   final AuthState auth;
   final CategoryState category;
-  final CollectionState collection;
+  final CollectionState collectionState;
   final ProductState productState;
   // final UserState user;
 
@@ -17,7 +17,7 @@ class AppState {
     this.address,
     this.auth,
     this.category,
-    this.collection,
+    this.collectionState,
     this.productState,
     // this.user,
   });
@@ -28,7 +28,7 @@ class AppState {
         address: AddressState(),
         auth: AuthState(),
         category: CategoryState(),
-        collection: CollectionState(),
+        collectionState: CollectionState(),
         productState: ProductState(),
         // user: UserState(),
       );
@@ -37,7 +37,7 @@ class AppState {
       address: AddressState.fromJson(json['addressState']),
       auth: AuthState.fromJson(json['auth']),
       category: CategoryState.fromJson(json['category']),
-      collection: CollectionState.fromJson(json['collection']),
+      collectionState: CollectionState.fromJson(json['collection']),
       productState: ProductState.fromJson(json['productState']),
       // user: UserState.fromJson(json['user']),
     );
@@ -47,7 +47,7 @@ class AppState {
     return {
       'auth': auth.toJson(),
       'category': category.toJson(),
-      'collection': collection.toJson(),
+      'collectionState': collectionState.toJson(),
       'productState': productState.toJson(),
       'address': address.toJson(),
       // 'user': user.toJson(),

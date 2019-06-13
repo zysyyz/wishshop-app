@@ -17,12 +17,12 @@ class Pagination {
 
   factory Pagination.fromJson(Map<String, dynamic> json) {
     return Pagination(
-      currentPage   : json['current_page'],
-      from          : json['from'],
-      lastPage      : json['last_page'],
-      perPage       : json['per_page'],
-      to            : json['to'],
-      total         : json['total'],
+      currentPage   : int.parse(json['current_page'].toString()),
+      from          : int.parse(json['from'].toString()),
+      lastPage      : int.parse(json['last_page'].toString()),
+      perPage       : int.parse(json['per_page'].toString()),
+      to            : int.parse(json['to'].toString()),
+      total         : int.parse(json['total'].toString()),
     );
   }
 

@@ -1,9 +1,11 @@
 import 'dart:async';
-import '../../models/models.dart';
+import '../../exports.dart';
 
 class GetAddressListAction {
-  final Completer completer = new Completer();
-  GetAddressListAction();
+  final Completer<Result<Address>> completer = new Completer();
+  int page;
+
+  GetAddressListAction({this.page});
 }
 class ReceiveAddressListAction {
   final List<Address> addresses;
@@ -13,9 +15,9 @@ class ReceiveAddressListAction {
 
 class GetAddressAction {
   final Completer completer = new Completer();
-  final int categoryId;
+  final int addressId;
 
-  GetAddressAction(this.categoryId);
+  GetAddressAction(this.addressId);
 }
 class ReceiveAddressAction {
   final Completer completer = new Completer();

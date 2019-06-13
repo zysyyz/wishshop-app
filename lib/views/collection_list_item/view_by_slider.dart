@@ -58,7 +58,7 @@ class _ViewBySliderState extends State<ViewBySlider> {
                         child: ClipRRect(
                           borderRadius: new BorderRadius.all(Radius.circular(0.0)),
                           child: FadeInImage(
-                            placeholder: AssetImage("images/placeholder.jpg"),
+                            placeholder: AssetImage("assets/images/placeholder.png"),
                             image: NetworkImage(
                               collectionItem.imageUrl,
                             ),

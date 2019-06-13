@@ -16,9 +16,12 @@ Redux.Middleware<AppState> _createGetCollectionListMiddleware() {
     if (!(action is GetCollectionListAction)) return;
 
     try {
-      List<Collection> collections = await sharedApiClient.defaultStore.collections.list(perPage: 999);
-      store.dispatch(new ReceiveCollectionListAction(collections));
-      action.completer.complete();
+      next(action);
+      Result<Collection> result = await sharedApiClient.defaultStore.collections.list(
+        page: action.page ?? 1,
+      );
+      store.dispatch(new ReceiveCollectionListAction(result.items));
+      action.completer.complete(result);
     } catch (error) {
       action.completer.completeError(error);
     }
@@ -30,6 +33,7 @@ Redux.Middleware<AppState> _createGetCollectionMiddleware() {
     if (!(action is GetCollectionAction)) return;
 
     try {
+      next(action);
       Collection collection = await sharedApiClient.defaultStore.collection(action.collectionId).get();
       store.dispatch(new ReceiveCollectionAction(collection));
     } catch (error) {

@@ -9,17 +9,19 @@ final addressReducer = redux.combineReducers<AddressState>([
 ]);
 
 AddressState _receiveAddressList(AddressState state, ReceiveAddressListAction action) {
-  List<Address> listByFilterZeroParentId = action.addresses;
-
-  state.addresses = listByFilterZeroParentId;
+  state.list = action.addresses;
   return state;
 }
 
 AddressState _receiveAddress(AddressState state, ReceiveAddressAction action) {
-  if (state.mapById == null) {
-    state.mapById = new Map();
+  if (state.map == null) {
+    state.map = new Map();
   }
-  state.mapById.putIfAbsent("${action.address.id}", () => action.address);
+  state.map.update(
+    "${action.address.id}",
+    (v) => action.address,
+    ifAbsent: () => action.address,
+  );
   return state;
 }
 

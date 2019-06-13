@@ -22,7 +22,7 @@ class CategoryListItem extends StatelessWidget {
         padding: EdgeInsets.all(8),
         height: 100,
         child: FadeInImage(
-          placeholder: AssetImage("images/placeholder.jpg"),
+          placeholder: AssetImage("assets/images/placeholder.png"),
           image: NetworkImage(
             category.imageUrl,
           ),

@@ -20,7 +20,7 @@ class CollectionsService {
     this._categoryId = id;
   }
 
-  Future<List<Collection>> list({page = 1, perPage = 20}) async {
+  Future<Result<Collection>> list({page = 1, perPage = 20}) async {
     final response = await _http.get(
       '/stores/$_storeId/collections',
       queryParameters: {
@@ -34,7 +34,7 @@ class CollectionsService {
       response.data,
       (json) => Collection.fromJson(json)
     );
-    return result.items;
+    return result;
   }
 
   Future<Collection> get() async {

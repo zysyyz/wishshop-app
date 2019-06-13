@@ -43,7 +43,7 @@ class _ViewByCarouselState extends State<ViewByCarousel> {
               return Container(
                 height: double.infinity,
                 child: FadeInImage(
-                  placeholder: AssetImage("images/placeholder.jpg"),
+                  placeholder: AssetImage("assets/images/placeholder.png"),
                   image: NetworkImage(
                     collectionItem.imageUrl,
                   ),

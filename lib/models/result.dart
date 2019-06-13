@@ -20,11 +20,16 @@ class Result<T> {
       data = convert(json['data']);
     }
     if (json['items'] != null) {
-      Iterable l = json['items'] as List;
-      items = l.map((item) => convert(item)).toList();
+      try {
+        Iterable l = json['items'] as List;
+        items = l.map((item) => convert(item)).toList();
+      } catch (e) {
+        throw e;
+      }
     }
+
     return Result(
-      status            : json['status'],
+      status            : json['status'] != null ? json['status'] : null,
       data              : data,
       pagination        : json['pagination'] != null ? Pagination.fromJson(json['pagination']) : null,
       items             : items,

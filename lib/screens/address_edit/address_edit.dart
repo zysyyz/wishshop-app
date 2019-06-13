@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart' as redux;
-
 import '../../exports.dart';
 import './picker_city.dart';
 
@@ -66,7 +64,6 @@ class _AddressEditScreenState extends State<AddressEditScreen> {
     sharedApiClient.defaultStore.addresses.setAddressId(_addressId);
     Address address =
         await sharedApiClient.defaultStore.address(_addressId).get();
-    print(address.toJson());
     updateLocalData(address);
   }
 
@@ -436,11 +433,11 @@ class _ViewModel {
     final addressState = store.state.address;
     return _ViewModel(
       updateAddress: (Address address) {
-        var newAddresses = addressState.addresses;
+        var newAddresses = addressState.list;
         bool existing =
             newAddresses.any((addressObj) => addressObj.id == address.id);
         if (existing) {
-          newAddresses = addressState.addresses.map((addressObj) {
+          newAddresses = addressState.list.map((addressObj) {
             return addressObj.id == address.id ? address : addressObj;
           }).toList();
         } else {
@@ -449,7 +446,7 @@ class _ViewModel {
         store.dispatch(ReceiveAddressListAction(newAddresses));
       },
       deleteAddress: (addressId) {
-        final newAddresses = addressState.addresses;
+        final newAddresses = addressState.list;
         newAddresses.removeWhere((addressObj) => addressObj.id == addressId);
         store.dispatch(ReceiveAddressListAction(newAddresses));
       },

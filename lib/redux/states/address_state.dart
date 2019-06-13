@@ -1,25 +1,28 @@
 import '../../models/models.dart';
 
 class AddressState {
-  List<Address> addresses = [];
-  Map<String, Address> mapById = Map();
+  List<Address> list = [];
+  Map<String, Address> map = Map();
 
-  AddressState({ this.addresses, this.mapById });
+  AddressState({
+    this.list,
+    this.map
+  });
 
   static AddressState fromJson(dynamic json) {
     if (json == null) {
       return new AddressState();
     }
     return AddressState(
-      addresses  : [],
-      mapById  : Map(),
+      list: [],
+      map: Map(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'addresses' : addresses,
-      'mapById': mapById,
+      'list': list,
+      'map': map,
     };
   }
 }

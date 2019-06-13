@@ -54,7 +54,7 @@ class _ViewByListState extends State<ViewByList> {
                           child: FadeInImage(
                             height: 100,
                             width: 100,
-                            placeholder: AssetImage("images/placeholder.jpg"),
+                            placeholder: AssetImage("assets/images/placeholder.png"),
                             image: NetworkImage(
                               v.imageUrl,
                             ),

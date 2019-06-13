@@ -16,9 +16,11 @@ Redux.Middleware<AppState> _createGetAddressListMiddleware() {
     if (!(action is GetAddressListAction)) return;
 
     try {
-      List<Address> addresses = await sharedApiClient.defaultStore.addresses.list(perPage: 999);
-      store.dispatch(new ReceiveAddressListAction(addresses));
-      action.completer.complete();
+      Result<Address> result = await sharedApiClient.defaultStore.addresses.list(
+        page: action.page ?? 1,
+      );
+      store.dispatch(new ReceiveAddressListAction(result.items));
+      action.completer.complete(result);
     } catch (error) {
       action.completer.completeError(error);
     }

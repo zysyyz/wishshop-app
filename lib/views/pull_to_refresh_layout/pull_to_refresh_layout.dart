@@ -59,7 +59,7 @@ class _PullToRefreshLayoutState extends State<PullToRefreshLayout> {
 
           Pagination pagination = result.pagination;
 
-          if ((pagination.currentPage) >= pagination.total) {
+          if ((pagination.currentPage) >= pagination.lastPage) {
             _refreshController.loadNoData();
           }
           setState(() {

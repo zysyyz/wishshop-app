@@ -30,7 +30,7 @@ class ProductGridItem extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: new BorderRadius.all(Radius.circular(0.0)),
                 child: FadeInImage(
-                  placeholder: AssetImage("images/placeholder.jpg"),
+                  placeholder: AssetImage("assets/images/placeholder.png"),
                   image: NetworkImage(
                     product.imageUrl,
                   ),
@@ -39,9 +39,9 @@ class ProductGridItem extends StatelessWidget {
               ),
             ),
             Text(
-              product.name, 
+              product.name,
               style: TextStyle(
-                fontSize: 14, 
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: Color(0xff333333),
               ),
@@ -51,9 +51,9 @@ class ProductGridItem extends StatelessWidget {
             ),
             Padding(padding: EdgeInsets.only(top: 2),),
             Text(
-              product.summary, 
+              product.summary,
               style: TextStyle(
-                fontSize: 13, 
+                fontSize: 13,
                 color: Colors.grey,
               ),
               maxLines: 1,
@@ -65,9 +65,9 @@ class ProductGridItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Text(
-                  '￥${product.price}', 
+                  '￥${product.price}',
                   style: TextStyle(
-                    fontSize: 14, 
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: product.originalPrice == null || product.originalPrice <= 0 ? Color(0xff333333) : Colors.red,
                   ),
@@ -75,9 +75,9 @@ class ProductGridItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 4, bottom: 0),
                   child: product.originalPrice == null || product.originalPrice <= 0 ? Container() : Text(
-                    '￥${product.originalPrice}', 
+                    '￥${product.originalPrice}',
                     style: TextStyle(
-                      fontSize: 12, 
+                      fontSize: 12,
                       color: Colors.grey,
                       decoration: TextDecoration.lineThrough,
                     ),

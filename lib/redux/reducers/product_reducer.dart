@@ -12,7 +12,11 @@ ProductState _receiveProductList(ProductState state, ReceiveProductListAction ac
   if (state.listByFilter == null) {
     state.listByFilter = new Map();
   }
-  state.listByFilter.putIfAbsent("categoryId=${action.categoryId}", () => action.products);
+  state.listByFilter.update(
+    "categoryId=${action.categoryId}",
+    (v) => action.products,
+    ifAbsent: () => action.products
+  );
   return state;
 }
 
@@ -20,7 +24,11 @@ ProductState _receiveProduct(ProductState state, ReceiveProductAction action) {
   if (state.map == null) {
     state.map = new Map();
   }
-  state.map.update("${action.product.id}", (v) => action.product, ifAbsent: () => action.product);
+  state.map.update(
+    "${action.product.id}",
+    (v) => action.product,
+    ifAbsent: () => action.product
+  );
   return state;
 }
 
