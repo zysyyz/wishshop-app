@@ -333,7 +333,7 @@ class _AddressEditScreenState extends State<AddressEditScreen> {
         onInit: (store) async {},
         builder: (BuildContext context, _ViewModel vm) {
           return Scaffold(
-            appBar: DefaultAppBar(
+            appBar: CustomAppBar(
               title: Text('编辑收货地址'),
               actions: <Widget>[
                 _addressId == null

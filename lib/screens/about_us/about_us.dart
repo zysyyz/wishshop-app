@@ -66,7 +66,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom - 8.0, 0.0);
 
     return Scaffold(
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Text('关于我们'),
       ),
       body: ListView.separated(

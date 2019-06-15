@@ -53,7 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return new Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Text('注册'),
         backgroundColor: Colors.white,
         elevation: 0.0,

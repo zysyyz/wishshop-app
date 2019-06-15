@@ -93,7 +93,7 @@ class _TabCategoryState extends State<TabCategory> {
       categories.addAll(thirdLevelCategories);
     }
 
-    categories = categories.where((category) => category.imageUrl != null && category.imageUrl.isNotEmpty).toList();
+    categories = categories.where((item) => true).toList();
 
     return Row(
       children: <Widget>[
@@ -158,7 +158,7 @@ class _TabCategoryState extends State<TabCategory> {
                   padding: EdgeInsets.all(8),
                   crossAxisCount: 2,
                   itemCount: categories.length,
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (context, index) {
                     Category parentCategory;
                     Category category = categories[index];
                     if (category.level == 2) {
@@ -182,6 +182,7 @@ class _TabCategoryState extends State<TabCategory> {
                           parentCategory: parentCategory,
                         );
                     }
+                    return Container();
                   },
                   staggeredTileBuilder: (index) {
                     Category category = categories[index];
@@ -202,7 +203,7 @@ class _TabCategoryState extends State<TabCategory> {
   Widget _build(BuildContext context, _ViewModel vm) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: _SearchBar(),
         titleSpacing: 0.0,
       ),

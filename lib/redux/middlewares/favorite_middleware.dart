@@ -39,13 +39,11 @@ Redux.Middleware<AppState> _createCreateFavoriteMiddleware() {
         targetType: action.targetType,
         targetId: action.targetId,
       );
-      print(favorite);
       // 更新商品的收藏状态
       if (action.targetType == 'product') {
         Product product = store.state.productState.get(action.targetId);
         product.favoriteId = favorite.id;
         product.favoritedAt = favorite.updatedAt;
-        print(product);
         store.dispatch(new ReceiveProductAction(product));
       }
       store.dispatch(new CreateFavoriteSuccessAction(favorite));

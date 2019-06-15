@@ -86,7 +86,7 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: _SearchBar(),
         titleSpacing: 0.0,
         automaticallyImplyLeading: false,

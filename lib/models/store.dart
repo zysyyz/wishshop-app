@@ -22,7 +22,7 @@ class Store {
       id              : json['id'],
       slug            : json['slug'],
       name            : json['name'],
-      imageUrl        : json['image_url'] ?? 'https://via.placeholder.com/500',
+      imageUrl        : json['image_url'],
       createdAt       : json['created_at'],
       updatedAt       : json['updated_at'],
     );

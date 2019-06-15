@@ -47,7 +47,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen>
     return DefaultTabController(
       length: categories.length,
       child: Scaffold(
-        appBar: DefaultAppBar(
+        appBar: CustomAppBar(
           title: Text(category.name),
           elevation: 0,
           bottom: PreferredSize(

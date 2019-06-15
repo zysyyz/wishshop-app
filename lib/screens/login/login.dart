@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return new Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: () {

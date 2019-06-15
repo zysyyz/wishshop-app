@@ -37,7 +37,7 @@ class _ProfileEditGenderScreenState extends State<ProfileEditGenderScreen> {
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Text('修改性别'),
         actions: <Widget>[
           IconButton(

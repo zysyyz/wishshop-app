@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dots_indicator/dots_indicator.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 
 class ViewByImage extends StatefulWidget {
   final Collection collection;
@@ -23,11 +21,8 @@ class _ViewByImageState extends State<ViewByImage> {
 
     return Container(
       height: 200,
-      child: FadeInImage(
-        placeholder: AssetImage("assets/images/placeholder.png"),
-        image: NetworkImage(
-          collectionItem.imageUrl,
-        ),
+      child: CustomImage(
+        collectionItem.imageUrl,
         fit: BoxFit.cover,
       ),
     );

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dots_indicator/dots_indicator.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 
 class ViewByList extends StatefulWidget {
   final Collection collection;
@@ -51,13 +49,10 @@ class _ViewByListState extends State<ViewByList> {
                         width: 100,
                         child: ClipRRect(
                           borderRadius: new BorderRadius.all(Radius.circular(0.0)),
-                          child: FadeInImage(
+                          child: CustomImage(
+                            v.imageUrl,
                             height: 100,
                             width: 100,
-                            placeholder: AssetImage("assets/images/placeholder.png"),
-                            image: NetworkImage(
-                              v.imageUrl,
-                            ),
                             fit: BoxFit.cover,
                           ),
                         ),

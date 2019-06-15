@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dots_indicator/dots_indicator.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 
 class ViewBySlider extends StatefulWidget {
   final Collection collection;
@@ -57,11 +55,8 @@ class _ViewBySliderState extends State<ViewBySlider> {
                         padding: EdgeInsets.only(bottom: 6),
                         child: ClipRRect(
                           borderRadius: new BorderRadius.all(Radius.circular(0.0)),
-                          child: FadeInImage(
-                            placeholder: AssetImage("assets/images/placeholder.png"),
-                            image: NetworkImage(
-                              collectionItem.imageUrl,
-                            ),
+                          child: CustomImage(
+                            collectionItem.imageUrl,
                             fit: BoxFit.fitHeight,
                           ),
                         ),

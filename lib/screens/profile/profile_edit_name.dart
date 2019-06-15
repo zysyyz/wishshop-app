@@ -18,7 +18,7 @@ class _ProfileEditNameScreenState extends State<ProfileEditNameScreen> {
   Widget _build(BuildContext context, _ViewModel vm) {
     return new Scaffold(
       key: _scaffoldKey,
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Text('修改姓名'),
         actions: <Widget>[
           IconButton(

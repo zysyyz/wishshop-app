@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 
 class CategoryListItem extends StatelessWidget {
   final Category category;
@@ -21,11 +20,8 @@ class CategoryListItem extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(8),
         height: 100,
-        child: FadeInImage(
-          placeholder: AssetImage("assets/images/placeholder.png"),
-          image: NetworkImage(
-            category.imageUrl,
-          ),
+        child: CustomImage(
+          category.imageUrl,
           fit: BoxFit.cover,
         ),
       ),

@@ -15,9 +15,7 @@ void main() async {
   flipperClient.addPlugin(new FlipperNetworkPlugin(
     filter: (HttpClientRequest request) {
       String url = '${request.uri}';
-      if (url.startsWith('https://res.yslbeautycn.com')
-        || url.startsWith('https://via.placeholder.com')
-        || url.startsWith('https://cn.gravatar.com')
+      if (url.startsWith('https://res.yslbeautycn.com') || url.startsWith('https://cn.gravatar.com')
       ) {
         return false;
       }

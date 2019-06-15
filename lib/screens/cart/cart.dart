@@ -133,7 +133,7 @@ class _CartScreen extends State<CartScreen> {
     ThemeData theme = Theme.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         backgroundColor: theme.scaffoldBackgroundColor,
         title: Text('购物车'),
         actions: <Widget>[

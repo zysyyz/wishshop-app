@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 
 class ProductGridItem extends StatelessWidget {
   final Product product;
@@ -29,11 +28,8 @@ class ProductGridItem extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 6),
               child: ClipRRect(
                 borderRadius: new BorderRadius.all(Radius.circular(0.0)),
-                child: FadeInImage(
-                  placeholder: AssetImage("assets/images/placeholder.png"),
-                  image: NetworkImage(
-                    product.imageUrl,
-                  ),
+                child: CustomImage(
+                  product.imageUrl,
                   fit: BoxFit.fitHeight,
                 ),
               ),

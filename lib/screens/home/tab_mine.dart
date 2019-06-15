@@ -85,7 +85,7 @@ class _TabMineState extends State<TabMine> {
       },
     ];
     return Scaffold(
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Text('我的'),
         actions: <Widget>[
           IconButton(

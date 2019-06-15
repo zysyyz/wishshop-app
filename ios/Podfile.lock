@@ -73,7 +73,7 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `.symlinks/flutter/ios-release`)
   - flutter_flipperkit (from `.symlinks/plugins/flutter_flipperkit/ios`)
   - launch_review (from `.symlinks/plugins/launch_review/ios`)
   - package_info (from `.symlinks/plugins/package_info/ios`)
@@ -100,7 +100,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: ".symlinks/flutter/ios-release"
   flutter_flipperkit:
     :path: ".symlinks/plugins/flutter_flipperkit/ios"
   launch_review:

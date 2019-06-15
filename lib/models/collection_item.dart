@@ -34,7 +34,7 @@ class CollectionItem {
       targetId        : json['target_id'],
       position        : json['position'],
       title           : json['title'],
-      imageUrl        : json['image_url'] ?? 'https://via.placeholder.com/500',
+      imageUrl        : json['image_url'],
       description     : json['description'],
       createdAt       : json['created_at'],
       updatedAt       : json['updated_at'],

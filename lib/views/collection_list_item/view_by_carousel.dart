@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 
 class ViewByCarousel extends StatefulWidget {
   final Collection collection;
@@ -42,11 +41,8 @@ class _ViewByCarouselState extends State<ViewByCarousel> {
               CollectionItem collectionItem = collectionItems[index];
               return Container(
                 height: double.infinity,
-                child: FadeInImage(
-                  placeholder: AssetImage("assets/images/placeholder.png"),
-                  image: NetworkImage(
-                    collectionItem.imageUrl,
-                  ),
+                child: CustomImage(
+                  collectionItem.imageUrl,
                   fit: BoxFit.cover,
                 ),
               );

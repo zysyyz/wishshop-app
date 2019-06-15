@@ -76,11 +76,8 @@ class _TabInfoState extends State<TabInfo> {
       child: Column(
         children: product.contents.map((content) {
           return Container(
-            child: FadeInImage(
-              placeholder: AssetImage("assets/images/placeholder.png"),
-              image: NetworkImage(
-                content.content,
-              ),
+            child: CustomImage(
+              content.content,
               fit: BoxFit.cover,
             ),
           );
@@ -215,11 +212,8 @@ class _TabInfoState extends State<TabInfo> {
                       String imageUrl = imageList[index];
                       return Container(
                         height: double.infinity,
-                        child: FadeInImage(
-                          placeholder: AssetImage("assets/images/placeholder.png"),
-                          image: NetworkImage(
-                            imageUrl,
-                          ),
+                        child: CustomImage(
+                          imageUrl,
                           fit: BoxFit.contain,
                         ),
                       );

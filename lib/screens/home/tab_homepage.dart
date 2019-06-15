@@ -33,17 +33,18 @@ class _TabHomepageState extends State<TabHomepage> {
   Widget _build(BuildContext context, _ViewModel vm) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Image.asset('assets/images/ic_logo.png', height: 12),
+        leading: IconButton(
+          icon: Image.asset('assets/images/ic_menu_scan.png'),
+          onPressed: () {
+            // Navigator
+            //   .of(context)
+            //   .push(MaterialPageRoute(builder: (_) => SearchScreen()));
+          },
+        ),
         actions: <Widget>[
-          IconButton(
-            icon: Image.asset('assets/images/ic_menu_search.png'),
-            onPressed: () {
-              Navigator
-              .of(context)
-              .push(MaterialPageRoute(builder: (_) => SearchScreen()));
-            },
-          )
+
         ],
       ),
       body: _buildBody(context, vm),

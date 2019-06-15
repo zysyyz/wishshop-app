@@ -131,13 +131,18 @@ class _PullToRefreshLayoutState extends State<PullToRefreshLayout> {
           opacity: _listLoadIndicatorOpacity,
           child: ListLoadIndicator(),
         ),
-        !isDisplayLinearProgressIndicator ? Container() : AnimatedOpacity(
-          duration: Duration(milliseconds: 600),
-          opacity: _linearProgressIndicatorOpacity,
-          child: SizedBox(
-            height: 2,
-            child: LinearProgressIndicator(
-              backgroundColor: themeData.primaryColor.withOpacity(0.2),
+        Positioned(
+          right: 16,
+          top: 12,
+          child: !isDisplayLinearProgressIndicator ? Container() : AnimatedOpacity(
+            duration: Duration(milliseconds: 600),
+            opacity: _linearProgressIndicatorOpacity,
+            child: SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(
+                strokeWidth: 3,
+              ),
             ),
           ),
         ),

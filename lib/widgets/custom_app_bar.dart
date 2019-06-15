@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget leading;
   final bool automaticallyImplyLeading;
   final Widget title;
@@ -17,7 +17,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double titleSpacing;
   final double toolbarOpacity;
   final double bottomOpacity;
-  DefaultAppBar({
+  CustomAppBar({
     Key key,
     this.leading,
     this.automaticallyImplyLeading = true,

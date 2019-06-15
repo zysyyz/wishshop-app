@@ -93,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ];
 
     return Scaffold(
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Text('个人信息'),
         backgroundColor: Colors.white,
         elevation: 0.0,

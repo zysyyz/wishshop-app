@@ -38,7 +38,7 @@ class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
 
   Widget _build(BuildContext context, _ViewModel vm) {
     return Scaffold(
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Text('我的收藏夹'),
       ),
       body: _buildBody(context, vm),

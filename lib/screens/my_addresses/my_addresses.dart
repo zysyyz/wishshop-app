@@ -105,7 +105,7 @@ class _MyAddressesScreenState extends State<MyAddressesScreen> {
 
   Widget _build(BuildContext context, _ViewModel vm) {
     return Scaffold(
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Text('我的地址簿'),
       ),
       body: _buildBody(context, vm),

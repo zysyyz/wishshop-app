@@ -60,7 +60,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ];
 
     return Scaffold(
-      appBar: DefaultAppBar(
+      appBar: CustomAppBar(
         title: Text('设置'),
         backgroundColor: Colors.white,
         elevation: 0.0,

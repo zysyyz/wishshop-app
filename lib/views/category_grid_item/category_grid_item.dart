@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/models.dart';
-import '../../screens/screens.dart';
+import '../../exports.dart';
 
 class CategoryGridItem extends StatelessWidget {
   final Category category;
@@ -26,11 +25,8 @@ class CategoryGridItem extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 6),
               child: ClipRRect(
                 borderRadius: new BorderRadius.all(Radius.circular(0.0)),
-                child: FadeInImage(
-                  placeholder: AssetImage("assets/images/placeholder.png"),
-                  image: NetworkImage(
-                    category.imageUrl,
-                  ),
+                child: CustomImage(
+                  category.imageUrl ?? '',
                   fit: BoxFit.fitHeight,
                 ),
               ),
