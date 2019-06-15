@@ -24,7 +24,7 @@ class Content {
   factory Content.fromJson(Map<String, dynamic> json) {
     return Content(
       id              : json['id'],
-      storeId         : json['store_id'],
+      storeId         : int.parse(json['store_id'].toString()),
       productId       : json['product_id'],
       position        : json['position'],
       type            : json['type'],

@@ -43,7 +43,7 @@ class AccountsService {
   }
 
   Future logout() async {
-    await _http.post('/account/logout');
+    await _http.post('/accounts/logout');
 
     (await SharedPreferences.getInstance())
       .remove("access_token");

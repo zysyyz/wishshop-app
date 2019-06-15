@@ -18,7 +18,7 @@ class ProductsService {
     this._productId = id;
   }
 
-  Future<List<Product>> list({
+  Future<Result<Product>> list({
     page = 1,
     perPage = 20,
     categoryId,
@@ -31,10 +31,12 @@ class ProductsService {
         'category_id': categoryId,
       },
     );
-    Iterable l = response.data['items'] as List;
 
-    var _items = l.map((item) => Product.fromJson(item)).toList();
-    return _items;
+    Result<Product> result = Result<Product>.fromJson(
+      response.data,
+      (json) => Product.fromJson(json)
+    );
+    return result;
   }
 
   Future<Product> get() async {

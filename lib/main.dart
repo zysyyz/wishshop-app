@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
@@ -11,7 +12,18 @@ import './screens/screens.dart';
 void main() async {
   FlipperClient flipperClient = FlipperClient.getDefault();
 
-  flipperClient.addPlugin(new FlipperNetworkPlugin());
+  flipperClient.addPlugin(new FlipperNetworkPlugin(
+    filter: (HttpClientRequest request) {
+      String url = '${request.uri}';
+      if (url.startsWith('https://res.yslbeautycn.com')
+        || url.startsWith('https://via.placeholder.com')
+        || url.startsWith('https://cn.gravatar.com')
+      ) {
+        return false;
+      }
+      return true;
+    }
+  ));
   flipperClient.addPlugin(new FlipperReduxInspectorPlugin());
   flipperClient.addPlugin(new FlipperSharedPreferencesPlugin());
   flipperClient.start();

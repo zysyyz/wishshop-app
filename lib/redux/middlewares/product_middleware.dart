@@ -16,12 +16,13 @@ Redux.Middleware<AppState> _createGetProductListMiddleware() {
     if (!(action is GetProductListAction)) return;
 
     try {
-      List<Product> products = await sharedApiClient.defaultStore.products.list(categoryId: action.categoryId);
+      next(action);
+      Result<Product> result = await sharedApiClient.defaultStore.products.list(categoryId: action.categoryId);
       store.dispatch(new ReceiveProductListAction(
-        products,
         categoryId: action.categoryId,
+        result: result,
       ));
-      action.completer.complete();
+      action.completer.complete(result);
     } catch (error) {
       action.completer.completeError(error);
     }

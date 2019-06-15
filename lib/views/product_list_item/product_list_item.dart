@@ -13,7 +13,9 @@ class ProductListItem extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-
+        Navigator
+          .of(context)
+          .push(MaterialPageRoute(builder: (_) => ProductDetailScreen(product)));
       },
       child: Container(
         color: theme.scaffoldBackgroundColor,

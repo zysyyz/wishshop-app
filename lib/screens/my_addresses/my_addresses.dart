@@ -64,7 +64,7 @@ class _MyAddressesScreenState extends State<MyAddressesScreen> {
                       crossAxisAlignment:
                           CrossAxisAlignment.center,
                       children: <Widget>[
-                        Container(
+                        !address.asDefault ? Container() : Container(
                           color: Theme.of(context)
                               .primaryColor,
                           padding: EdgeInsets.only(

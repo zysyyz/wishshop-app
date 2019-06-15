@@ -28,7 +28,7 @@ class Category {
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
       id              : json['id'],
-      storeId         : json['store_id'],
+      storeId         : int.parse(json['store_id'].toString()),
       parentId        : json['parent_id'],
       level           : json['level'],
       position        : json['position'],

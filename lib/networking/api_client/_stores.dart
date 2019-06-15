@@ -4,6 +4,7 @@ import '../../models/models.dart';
 import './_addresses.dart';
 import './_categories.dart';
 import './_collections.dart';
+import './_favorites.dart';
 import './_products.dart';
 
 class StoresService {
@@ -11,15 +12,17 @@ class StoresService {
 
   var _storeId;
 
-  AddressesService  _addressesService;
+  AddressesService    _addressesService;
   CategoriesService   _categoriesService;
   CollectionsService  _collectionsService;
+  FavoritesService    _favoritesService;
   ProductsService     _productsService;
 
   StoresService(this._http) {
     this._categoriesService = new CategoriesService(_http);
     this._collectionsService = new CollectionsService(_http);
     this._productsService = new ProductsService(_http);
+    this._favoritesService = new FavoritesService(_http);
     this._addressesService  = new AddressesService(_http);
   }
 
@@ -84,6 +87,17 @@ class StoresService {
     return _collectionsService;
   }
 
+  FavoritesService get favorites {
+    _favoritesService.setStoreId(_storeId);
+    _favoritesService.setFavoriteId(0);
+    return _favoritesService;
+  }
+
+  FavoritesService favorite(id) {
+    _favoritesService.setStoreId(_storeId);
+    _favoritesService.setFavoriteId(id);
+    return _favoritesService;
+  }
 
   ProductsService get products {
     _productsService.setStoreId(_storeId);

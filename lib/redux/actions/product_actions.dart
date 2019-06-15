@@ -2,15 +2,19 @@ import 'dart:async';
 import '../../models/models.dart';
 
 class GetProductListAction {
-  final Completer completer = new Completer();
+  final Completer<Result<Product>> completer = new Completer();
+  var page;
   var categoryId;
-  GetProductListAction({this.categoryId});
+  GetProductListAction({
+    this.page,
+    this.categoryId,
+  });
 }
 class ReceiveProductListAction {
   var categoryId;
-  final List<Product> products;
+  Result<Product> result;
 
-  ReceiveProductListAction(this.products, {this.categoryId});
+  ReceiveProductListAction({this.categoryId, this.result});
 }
 
 class GetProductAction {

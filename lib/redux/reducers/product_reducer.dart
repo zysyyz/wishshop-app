@@ -9,13 +9,24 @@ final productReducer = redux.combineReducers<ProductState>([
 ]);
 
 ProductState _receiveProductList(ProductState state, ReceiveProductListAction action) {
+  String filter = "categoryId=${action.categoryId}";
   if (state.listByFilter == null) {
     state.listByFilter = new Map();
   }
+
+  List<Product> products = state.listByFilter[filter] ?? [];
+  if (action.result.pagination.currentPage == 1) {
+    products = action.result.items;
+  } else {
+    products = []
+      ..addAll(products)
+      ..addAll(action.result.items);
+  }
+
   state.listByFilter.update(
-    "categoryId=${action.categoryId}",
-    (v) => action.products,
-    ifAbsent: () => action.products
+    filter,
+    (v) => products,
+    ifAbsent: () => products
   );
   return state;
 }

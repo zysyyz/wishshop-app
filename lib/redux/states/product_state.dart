@@ -12,8 +12,8 @@ class ProductState {
     if (listByFilter == null) listByFilter = new Map();
   }
 
-  Product get(String id) {
-    return map[id];
+  Product get(id) {
+    return map['$id'];
   }
 
   List<Product> list(String filter) {

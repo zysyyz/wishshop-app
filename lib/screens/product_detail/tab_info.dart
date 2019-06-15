@@ -255,7 +255,11 @@ class _TabInfoState extends State<TabInfo> {
                         ),
                         iconSize: 38,
                         onPressed: () {
-
+                          if (_favorited) {
+                            vm.unfavorite();
+                          } else {
+                            vm.favorite();
+                          }
                         },
                       )
                     ],
@@ -340,17 +344,42 @@ class _TabInfoState extends State<TabInfo> {
 
 class _ViewModel {
   final Product product;
+  final Future<bool> Function() favorite;
+  final Future<bool> Function() unfavorite;
 
   _ViewModel({
     this.product,
+    this.favorite,
+    this.unfavorite,
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store, {
     product: Product,
   }) {
     final productState = store.state.productState;
+    Product _product = productState.get('${product.id}') ?? product;
     return _ViewModel(
       product: productState.get('${product.id}') ?? product,
+      favorite: () {
+        var action = new CreateFavoriteAction(
+          targetType: 'product',
+          targetId: _product.id,
+        );
+
+        store.dispatch(action);
+
+        return action.completer.future;
+      },
+      unfavorite: () {
+        var action = new DeleteFavoriteAction(
+          favoriteId: _product.favoriteId,
+          targetType: 'product',
+          targetId: _product.id,
+        );
+        store.dispatch(action);
+
+        return action.completer.future;
+      }
     );
   }
 }

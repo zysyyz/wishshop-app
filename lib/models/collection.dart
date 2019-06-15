@@ -32,7 +32,7 @@ class Collection {
       List<CollectionItem> items = l.map((item) => CollectionItem.fromJson(item)).toList();
     return Collection(
       id              : json['id'],
-      storeId         : json['store_id'],
+      storeId         : int.parse(json['store_id'].toString()),
       slug            : json['slug'],
       name            : json['name'],
       imageUrl        : json['image_url'] ?? 'https://via.placeholder.com/500',

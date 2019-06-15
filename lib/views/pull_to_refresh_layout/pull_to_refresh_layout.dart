@@ -20,8 +20,11 @@ class PullToRefreshLayout extends StatefulWidget {
 }
 
 class _PullToRefreshLayoutState extends State<PullToRefreshLayout> {
-  bool _firstLoading = true;
   int _currentPage = 1;
+  bool _firstLoading = true;
+
+  double _listLoadIndicatorOpacity = 0;
+  double _linearProgressIndicatorOpacity = 0;
 
   RefreshController _refreshController;
 
@@ -29,14 +32,15 @@ class _PullToRefreshLayoutState extends State<PullToRefreshLayout> {
   void initState() {
     super.initState();
 
-    _refreshController = RefreshController(
-      initialRefresh: widget.initialCount > 0,
-    );
+    _refreshController = RefreshController(initialRefresh: false);
 
-    if (widget.initialCount > 0) {
-      _firstLoading = false;
-    } else if (widget.onLoadData != null) {
-      this._handleLoadData(0);
+    _listLoadIndicatorOpacity = widget.initialCount == 0 ? 1 : 0;
+    _linearProgressIndicatorOpacity = widget.initialCount > 0 ? 1 : 0;
+
+    if (widget.onLoadData != null) {
+      Future.delayed(Duration(milliseconds: 200)).then((_) {
+        this._handleLoadData(0);
+      });
     }
   }
 
@@ -51,30 +55,40 @@ class _PullToRefreshLayoutState extends State<PullToRefreshLayout> {
       future
         .then((result) {
           if (currentPage == 1) {
-            _refreshController.resetNoData();
-            _refreshController.refreshCompleted();
+            Future.delayed(Duration(milliseconds: 300)).then((_) {
+              _refreshController.resetNoData();
+              _refreshController.refreshCompleted();
+            });
           } else {
-            _refreshController.loadComplete();
+            Future.delayed(Duration(milliseconds: 300)).then((_) {
+              _refreshController.loadComplete();
+            });
           }
 
           Pagination pagination = result.pagination;
 
           if ((pagination.currentPage) >= pagination.lastPage) {
-            _refreshController.loadNoData();
+            Future.delayed(Duration(milliseconds: 300)).then((_) {
+              _refreshController.loadNoData();
+            });
           }
           setState(() {
-            _firstLoading = false;
             _currentPage = pagination.currentPage;
+            _firstLoading = false;
+            _listLoadIndicatorOpacity = 0;
+            _linearProgressIndicatorOpacity = 0;
           });
         })
         .catchError((error) {
           if (currentPage == 1) {
             _refreshController.refreshFailed();
           } else {
-            _refreshController.loadNoData();
+            _refreshController.loadFailed();
           }
           setState(() {
             _firstLoading = false;
+            _listLoadIndicatorOpacity = 0;
+            _linearProgressIndicatorOpacity = 0;
           });
         });
     }
@@ -82,14 +96,27 @@ class _PullToRefreshLayoutState extends State<PullToRefreshLayout> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData themeData = Theme.of(context);
+    bool isDisplayLinearProgressIndicator = widget.initialCount > 0;
+
     return Stack(
       children: <Widget>[
-        !_firstLoading ? Container() : ListLoadIndicator(),
         SmartRefresher(
           enablePullDown: widget.onLoadData != null,
           enablePullUp: widget.onLoadData != null,
-          header: ClassicHeader(),
-          footer: ClassicFooter(),
+          header: ClassicHeader(
+            releaseText: '松开立即刷新',
+            refreshingText: '正在刷新数据中...',
+            completeText: '刷新完成',
+            failedText: '刷新失败',
+            idleText: '下拉可以刷新',
+          ),
+          footer: ClassicFooter(
+            textStyle: TextStyle(
+              fontSize: 12,
+            ),
+            noDataText: '-没有更多数据了-',
+          ),
           controller: _refreshController,
           onRefresh: () {
             this._handleLoadData(1);
@@ -98,7 +125,22 @@ class _PullToRefreshLayoutState extends State<PullToRefreshLayout> {
             this._handleLoadData(_currentPage + 1);
           },
           child: widget.child,
-        )
+        ),
+        AnimatedOpacity(
+          duration: Duration(milliseconds: 600),
+          opacity: _listLoadIndicatorOpacity,
+          child: ListLoadIndicator(),
+        ),
+        !isDisplayLinearProgressIndicator ? Container() : AnimatedOpacity(
+          duration: Duration(milliseconds: 600),
+          opacity: _linearProgressIndicatorOpacity,
+          child: SizedBox(
+            height: 2,
+            child: LinearProgressIndicator(
+              backgroundColor: themeData.primaryColor.withOpacity(0.2),
+            ),
+          ),
+        ),
       ],
     );
   }

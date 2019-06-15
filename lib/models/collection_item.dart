@@ -28,7 +28,7 @@ class CollectionItem {
   factory CollectionItem.fromJson(Map<String, dynamic> json) {
     return CollectionItem(
       id              : json['id'],
-      storeId         : json['store_id'],
+      storeId         : int.parse(json['store_id'].toString()),
       collectionId    : json['collection_id'],
       targetType      : json['target_type'],
       targetId        : json['target_id'],

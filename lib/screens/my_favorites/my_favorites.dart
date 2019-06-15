@@ -10,30 +10,23 @@ class MyFavoritesScreen extends StatefulWidget {
 }
 
 class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
-  bool _loading = true;
-
   Widget _buildBody(BuildContext context, _ViewModel vm) {
-    List<Product> products = vm.listByFilter['categoryId=2'] ?? [];
+    List<Favorite> items = vm.items;
 
-    if (_loading) {
-      return ListLoadIndicator();
-    }
-
-    if (products.length == 0) {
-      return ListEmptyIndicator();
-    }
-
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      child: new StaggeredGridView.countBuilder(
+    return PullToRefreshLayout(
+      initialCount: items.length,
+      onLoadData: (page) async {
+        return vm.fetchItems(page);
+      },
+      child: StaggeredGridView.countBuilder(
         padding: EdgeInsets.zero,
         crossAxisCount: 2,
-        itemCount: products.length,
+        itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
-          Product product = products[index];
+          Favorite favorite = items[index];
 
           return ProductListItem(
-            product: product,
+            product: favorite.product,
           );
         },
         staggeredTileBuilder: (index) {
@@ -59,31 +52,32 @@ class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
       builder: (BuildContext context, _ViewModel vm) {
         return _build(context, vm);
       },
-      onInit: (store) async {
-        var action = new GetProductListAction(categoryId: 2);
-        action.completer.future.then((_){
-          setState(() {
-            _loading = false;
-          });
-        });
-
-        store.dispatch(action);
-      },
     );
   }
 }
 
 class _ViewModel {
-  final Map<String, List<Product>> listByFilter;
+  final List<Favorite> items;
+  final Future<Result<Favorite>> Function(int page) fetchItems;
 
   _ViewModel({
-    this.listByFilter,
+    this.items,
+    this.fetchItems,
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final productState = store.state.productState;
+    final favoriteState = store.state.favoriteState;
     return _ViewModel(
-      listByFilter:productState.listByFilter,
+      items: favoriteState.list ?? [],
+      fetchItems: (page) {
+        var action = new GetFavoriteListAction(
+          page: page,
+        );
+
+        store.dispatch(action);
+
+        return action.completer.future;
+      }
     );
   }
 }

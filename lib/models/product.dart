@@ -15,6 +15,7 @@ class Product {
   num price;
   num originalPrice;
   List<Content> contents;
+  int favoriteId;
   String favoritedAt;
   String createdAt;
   String updatedAt;
@@ -33,6 +34,7 @@ class Product {
     this.price,
     this.originalPrice,
     this.contents,
+    this.favoriteId,
     this.favoritedAt,
     this.createdAt,
     this.updatedAt,
@@ -47,7 +49,7 @@ class Product {
 
     return Product(
       id                : json['id'],
-      storeId           : json['store_id'],
+      storeId         : int.parse(json['store_id'].toString()),
       brandId           : json['brand_id'],
       brandName         : json['brand_name'],
       slug              : json['slug'],
@@ -59,6 +61,7 @@ class Product {
       price             : json['price'],
       originalPrice     : json['original_price'],
       contents          : contents,
+      favoriteId        : json['favorite_id'],
       favoritedAt       : json['favorited_at'],
       createdAt         : json['created_at'],
       updatedAt         : json['updated_at'],
@@ -80,6 +83,7 @@ class Product {
       'price'           : price,
       'original_price'  : originalPrice,
       'contents'        : contents,
+      'favorite_id'     : favoriteId,
       'favorited_at'    : favoritedAt,
       'created_at'      : createdAt,
       'updated_at'      : updatedAt,

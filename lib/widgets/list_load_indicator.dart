@@ -14,8 +14,10 @@ class ListLoadIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.fromLTRB(16, 130, 16, 80),
+      height: double.infinity,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SpinKitFadingCube(
             color: theme.primaryColor,

@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import '../../models/models.dart';
-import '../../redux/redux.dart';
-import '../../views/views.dart';
-import '../../widgets/widgets.dart';
+import '../../exports.dart';
 
 class ProductGridView extends StatefulWidget {
   final Category category;
@@ -17,36 +14,26 @@ class ProductGridView extends StatefulWidget {
 }
 
 class _ProductGridViewState extends State<ProductGridView> {
-  bool _loading = true;
-
   Widget _build(BuildContext context, _ViewModel vm) {
-    Category category = this.widget.category;
+    List<Product> items = vm.items;
 
-    List<Product> products = vm.listByFilter['categoryId=${category.id}'] ?? [];
-
-    if (_loading) {
-      return ListLoadIndicator();
-    }
-
-    if (products.length == 0) {
-      return ListEmptyIndicator();
-    }
-
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      child: new StaggeredGridView.countBuilder(
-        padding: EdgeInsets.only(top: 6, bottom: MediaQuery.of(context).padding.bottom),
+    return PullToRefreshLayout(
+      initialCount: items.length,
+      onLoadData: (page) async {
+        return await vm.fetchItems(page);
+      },
+      child: StaggeredGridView.countBuilder(
+        padding: EdgeInsets.zero,
         crossAxisCount: 2,
-        itemCount: products.length,
+        itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
-          Product product = products[index];
-
+          Product product = items[index];
           return ProductGridItem(
             product: product,
           );
         },
         staggeredTileBuilder: (index) {
-          return new StaggeredTile.fit(1);
+          return StaggeredTile.fit(1);
         },
       ),
     );
@@ -54,36 +41,40 @@ class _ProductGridViewState extends State<ProductGridView> {
 
   @override
   Widget build(BuildContext context) {
-    Category category = this.widget.category;
     return StoreConnector<AppState, _ViewModel>(
-      converter: _ViewModel.fromStore,
+      converter: (store) => _ViewModel.fromStore(store, categoryId: widget.category.id),
       builder: (BuildContext context, _ViewModel vm) {
         return _build(context, vm);
-      },
-      onInit: (store) async {
-        var action = new GetProductListAction(categoryId: category.id);
-        action.completer.future.then((_){
-          setState(() {
-            _loading = false;
-          });
-        });
-        store.dispatch(action);
       },
     );
   }
 }
 
 class _ViewModel {
-  final Map<String, List<Product>> listByFilter;
+  final List<Product> items;
+  final Future<Result<Product>> Function(int page) fetchItems;
 
   _ViewModel({
-    this.listByFilter,
+    this.items,
+    this.fetchItems,
   });
 
-  static _ViewModel fromStore(redux.Store<AppState> store) {
+  static _ViewModel fromStore(redux.Store<AppState> store, {
+    categoryId: String,
+  }) {
     final productState = store.state.productState;
     return _ViewModel(
-      listByFilter:productState.listByFilter,
+      items: productState.listByFilter['categoryId=$categoryId'] ?? [],
+      fetchItems: (page) {
+        var action = new GetProductListAction(
+          page: page,
+          categoryId: categoryId,
+        );
+
+        store.dispatch(action);
+
+        return action.completer.future;
+      }
     );
   }
 }

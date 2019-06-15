@@ -20,12 +20,8 @@ class Result<T> {
       data = convert(json['data']);
     }
     if (json['items'] != null) {
-      try {
-        Iterable l = json['items'] as List;
-        items = l.map((item) => convert(item)).toList();
-      } catch (e) {
-        throw e;
-      }
+      Iterable l = json['items'] as List;
+      items = l.map((item) => convert(item)).toList();
     }
 
     return Result(
