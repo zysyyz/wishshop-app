@@ -91,7 +91,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                   child: TabSpecification(),
                 ),
                 Container(
-                  child: TabReviews(),
+                  margin: EdgeInsets.only(top: kToolbarHeight + MediaQuery.of(context).padding.top + 36),
+                  child: TabReviews(
+                    this.widget.product,
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: kToolbarHeight + MediaQuery.of(context).padding.top + 36),

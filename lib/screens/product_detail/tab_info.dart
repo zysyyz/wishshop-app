@@ -59,11 +59,11 @@ class TabInfo extends StatefulWidget {
 class _TabInfoState extends State<TabInfo> {
   bool _loading = false;
 
-  void _handlePressAddToCart(BuildContext context) {
+  void _handlePressAddToCart(BuildContext context, _ViewModel vm) {
     showModalBottomSheet(
       context: context,
       builder: (builder) {
-        return ProductModifierActionSheet(product: this.widget.product,);
+        return ProductModifierActionSheet(product: vm.product,);
       },
       isScrollControlled: true,
     );
@@ -86,7 +86,7 @@ class _TabInfoState extends State<TabInfo> {
     );
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context) {
+  Widget _buildBottomNavigationBar(BuildContext context, _ViewModel vm) {
     final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom - 8.0, 0.0);
     return Container(
       color: Colors.white,
@@ -109,7 +109,7 @@ class _TabInfoState extends State<TabInfo> {
         child: Row(
           children: <Widget>[
             _BadgeContainer(
-              badgeNumber: 8,
+              badgeNumber: vm.cartOrder.numberOfItems ?? 0,
               child: SizedBox(
                 width: 64,
                 height: kBottomNavigationBarHeight,
@@ -145,7 +145,7 @@ class _TabInfoState extends State<TabInfo> {
                     // style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    this._handlePressAddToCart(context);
+                    this._handlePressAddToCart(context, vm);
                   },
                 ),
               ),
@@ -163,7 +163,7 @@ class _TabInfoState extends State<TabInfo> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    this._handlePressAddToCart(context);
+                    this._handlePressAddToCart(context, vm);
                   },
                 ),
               ),
@@ -250,9 +250,9 @@ class _TabInfoState extends State<TabInfo> {
                         iconSize: 38,
                         onPressed: () {
                           if (_favorited) {
-                            vm.unfavorite();
+                            vm.unfavoriteProduct();
                           } else {
-                            vm.favorite();
+                            vm.favoriteProduct();
                           }
                         },
                       )
@@ -303,12 +303,12 @@ class _TabInfoState extends State<TabInfo> {
                 ),
               ),
             ),
-            // 构建端口内容详情
+            // 构建商品内容详情
             _buildContents(context, vm),
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(context),
+      bottomNavigationBar: _buildBottomNavigationBar(context, vm),
     );
   }
 
@@ -337,24 +337,33 @@ class _TabInfoState extends State<TabInfo> {
 }
 
 class _ViewModel {
+  final User currentUser;
+  final Order cartOrder;
+
   final Product product;
-  final Future<bool> Function() favorite;
-  final Future<bool> Function() unfavorite;
+  final Future<bool> Function() favoriteProduct;
+  final Future<bool> Function() unfavoriteProduct;
 
   _ViewModel({
+    this.currentUser,
+    this.cartOrder,
     this.product,
-    this.favorite,
-    this.unfavorite,
+    this.favoriteProduct,
+    this.unfavoriteProduct,
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store, {
     product: Product,
   }) {
+    final authState = store.state.auth;
+    final orderState = store.state.orderState;
     final productState = store.state.productState;
     Product _product = productState.get('${product.id}') ?? product;
     return _ViewModel(
+      currentUser: authState.user,
+      cartOrder: orderState.cartOrder,
       product: productState.get('${product.id}') ?? product,
-      favorite: () {
+      favoriteProduct: () {
         var action = new CreateFavoriteAction(
           targetType: 'product',
           targetId: _product.id,
@@ -364,7 +373,7 @@ class _ViewModel {
 
         return action.completer.future;
       },
-      unfavorite: () {
+      unfavoriteProduct: () {
         var action = new DeleteFavoriteAction(
           favoriteId: _product.favoriteId,
           targetType: 'product',

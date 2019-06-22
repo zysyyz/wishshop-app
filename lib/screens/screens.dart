@@ -3,6 +3,7 @@ export './about_us/about_us.dart';
 export './address_edit/address_edit.dart';
 export './bootstrap/bootstrap.dart';
 export './cart/cart.dart';
+export './cart_checkout/cart_checkout.dart';
 export './category_detail/category_detail.dart';
 export './home/home.dart';
 export './login/login.dart';

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
@@ -25,6 +26,8 @@ void main() async {
   flipperClient.addPlugin(new FlipperReduxInspectorPlugin());
   flipperClient.addPlugin(new FlipperSharedPreferencesPlugin());
   flipperClient.start();
+
+  await initializeDateFormatting("zh_CN", null);
 
   // Create Persistor
   final persistor = Persistor<AppState>(

@@ -14,16 +14,16 @@ class CategoryListSection extends StatelessWidget {
       onTap: () {
         Navigator
           .of(context)
-          .push(MaterialPageRoute(builder: (_) => CategoryDetailScreen(category: parentCategory ?? category)));
+          .push(MaterialPageRoute(builder: (_) => CategoryDetailScreen(parentCategory ?? category)));
       },
       child: Container(
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.all(8),
         height: 40,
         child: Text(
-          category.name, 
+          category.name,
           style: TextStyle(
-            fontSize: 14, 
+            fontSize: 14,
             fontWeight: FontWeight.bold,
             color: Color(0xff333333),
           )

@@ -34,7 +34,7 @@ class _ProfileEditNameScreenState extends State<ProfileEditNameScreen> {
               _formKey.currentState.save();
 
               try {
-                ProgressHUD.show(context, '正在保存...');
+                SVProgressHUD.show('正在保存...');
                 await vm.doUpdateName(_newName);
                 Navigator.of(context).pop();
               } catch (e) {
@@ -42,7 +42,7 @@ class _ProfileEditNameScreenState extends State<ProfileEditNameScreen> {
                 final snackBar = SnackBar(content: Text(e.message));
                 _scaffoldKey.currentState.showSnackBar(snackBar);
               } finally {
-                ProgressHUD.dismiss();
+                SVProgressHUD.dismiss();
               }
             },
           ),

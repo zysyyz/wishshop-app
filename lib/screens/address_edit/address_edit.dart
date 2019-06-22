@@ -83,7 +83,7 @@ class _AddressEditScreenState extends State<AddressEditScreen> {
   }
 
   saveAddress(_ViewModel vm) async {
-    ProgressHUD.show(context, '正在保存...');
+    SVProgressHUD.show('正在保存...');
     Address address;
     if (_addressId == null) {
       address = await sharedApiClient.defaultStore.addresses.create(
@@ -98,7 +98,7 @@ class _AddressEditScreenState extends State<AddressEditScreen> {
         _addressId = address.id;
       });
     } else {
-      address = await sharedApiClient.defaultStore.address(_addressId).patch(
+      address = await sharedApiClient.defaultStore.address(_addressId).update(
             fullName: _nameEditingController.text,
             phoneNumber: _contactEditingController.text,
             province: _province,
@@ -109,20 +109,20 @@ class _AddressEditScreenState extends State<AddressEditScreen> {
     }
 
     vm.updateAddress(address);
-    ProgressHUD.showSuccess(context, '保存成功');
+    SVProgressHUD.showSuccess('保存成功');
   }
 
   deleteAddress(_ViewModel vm) async {
-    ProgressHUD.show(context, '正在删除...');
+    SVProgressHUD.show('正在删除...');
     bool deleted =
         await sharedApiClient.defaultStore.address(_addressId).delete();
     if (deleted) {
       vm.deleteAddress(_addressId);
-      ProgressHUD.showSuccess(context, '删除成功');
-      ProgressHUD.dismiss();
+      SVProgressHUD.showSuccess('删除成功');
+      SVProgressHUD.dismissWithDelay(1500);
       Navigator.pop(context);
     } else {
-      ProgressHUD.showError(context, '删除失败');
+      SVProgressHUD.showError('删除失败');
     }
   }
 

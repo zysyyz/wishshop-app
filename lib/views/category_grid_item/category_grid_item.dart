@@ -13,7 +13,7 @@ class CategoryGridItem extends StatelessWidget {
       onTap: () {
         Navigator
           .of(context)
-          .push(MaterialPageRoute(builder: (_) => CategoryDetailScreen(category: parentCategory ?? category)));
+          .push(MaterialPageRoute(builder: (_) => CategoryDetailScreen(parentCategory ?? category)));
       },
       child: Container(
         color: Colors.white,

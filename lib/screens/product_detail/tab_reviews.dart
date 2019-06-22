@@ -5,12 +5,33 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../exports.dart';
 
 class TabReviews extends StatefulWidget {
+  final Product product;
+
+  TabReviews(this.product);
+
   @override
   State<StatefulWidget> createState() => _TabReviewsState();
 }
 
 class _TabReviewsState extends State<TabReviews> {
-  bool _loading = false;
+  bool _loading = true;
+  List<Review> _items = [];
+
+
+  void _reloadData() async {
+    Result<Review> result = await sharedApiClient.defaultStore.product(widget.product.id).reviews.list();
+    setState(() {
+      _items = result.items;
+      _loading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    this._reloadData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +42,19 @@ class _TabReviewsState extends State<TabReviews> {
 
     return Container(
       color: Colors.white,
-      height: MediaQuery.of(context).size.height,
-      child: new StaggeredGridView.countBuilder(
-        padding: EdgeInsets.zero,
-        crossAxisCount: 2,
-        itemCount: 0,
-        itemBuilder: (BuildContext context, int index) {
-          return Container();
+      child: ListView.separated(
+        separatorBuilder: (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+            ),
+            child: Divider(indent: 52, height: 1));
         },
-        staggeredTileBuilder: (index) {
-          return new StaggeredTile.fit(1);
+        padding: EdgeInsets.zero,
+        itemCount: _items.length,
+        itemBuilder: (BuildContext context, int index) {
+          Review item = _items[index];
+          return ReviewListItem(item);
         },
       ),
     );

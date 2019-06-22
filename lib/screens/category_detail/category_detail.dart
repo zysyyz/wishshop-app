@@ -6,10 +6,10 @@ import '../../exports.dart';
 class CategoryDetailScreen extends StatefulWidget {
   final Category category;
 
-  const CategoryDetailScreen({Key key, this.category}) : super(key: key);
+  const CategoryDetailScreen(this.category);
 
   @override
-  State<StatefulWidget> createState() => _CategoryDetailScreenState(category);
+  State<StatefulWidget> createState() => _CategoryDetailScreenState();
 }
 
 class _CategoryDetailScreenState extends State<CategoryDetailScreen>
@@ -17,10 +17,6 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen>
 
   ScrollController _scrollViewController;
   TabController _tabController;
-
-  final Category category;
-
-  _CategoryDetailScreenState(this.category);
 
   @override
   void initState() {
@@ -39,6 +35,7 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen>
   Widget _build(BuildContext context, _ViewModel vm) {
     ThemeData theme = Theme.of(context);
 
+    Category category = widget.category;
     List<Category> categories = [];
 
     categories.add(category);

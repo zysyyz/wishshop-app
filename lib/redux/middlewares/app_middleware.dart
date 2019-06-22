@@ -5,6 +5,7 @@ import './auth_middleware.dart';
 import './category_middleware.dart';
 import './collection_middleware.dart';
 import './favorite_middleware.dart';
+import './order_middleware.dart';
 import './product_middleware.dart';
 import './user_middleware.dart';
 
@@ -14,5 +15,6 @@ final List<redux.Middleware<AppState>> appMiddlewares = []
   ..addAll(createCategoryMiddleware())
   ..addAll(createCollectionMiddleware())
   ..addAll(createFavoriteMiddleware())
+  ..addAll(createOrderMiddleware())
   ..addAll(createProductMiddleware())
   ..addAll(createUserMiddleware());

@@ -42,7 +42,7 @@ class AddressesService {
     return d;
   }
 
-  Future<Address> patch({ fullName, phoneNumber, province, city, district, line1 }) async {
+  Future<Address> update({ fullName, phoneNumber, province, city, district, line1 }) async {
     final response = await _http.patch('/stores/$_storeId/addresses/$_addressId', data: {
       'full_name': fullName,
       'phone_number': phoneNumber,

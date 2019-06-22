@@ -3,6 +3,7 @@ import './auth_state.dart';
 import './category_state.dart';
 import './collection_state.dart';
 import './favorite_state.dart';
+import './order_state.dart';
 import './product_state.dart';
 // import './user_state.dart';
 
@@ -12,6 +13,7 @@ class AppState {
   final CategoryState category;
   final CollectionState collectionState;
   final FavoriteState favoriteState;
+  final OrderState orderState;
   final ProductState productState;
   // final UserState user;
 
@@ -21,6 +23,7 @@ class AppState {
     this.category,
     this.collectionState,
     this.favoriteState,
+    this.orderState,
     this.productState,
     // this.user,
   });
@@ -33,6 +36,7 @@ class AppState {
         category: CategoryState(),
         collectionState: CollectionState(),
         favoriteState: FavoriteState(),
+        orderState: OrderState(),
         productState: ProductState(),
         // user: UserState(),
       );
@@ -43,6 +47,7 @@ class AppState {
       category: CategoryState.fromJson(json['category']),
       collectionState: CollectionState.fromJson(json['collection']),
       favoriteState: FavoriteState.fromJson(json['favoriteState']),
+      orderState: OrderState.fromJson(json['orderState']),
       productState: ProductState.fromJson(json['productState']),
       // user: UserState.fromJson(json['user']),
     );
@@ -54,6 +59,7 @@ class AppState {
       'category': category.toJson(),
       'collectionState': collectionState.toJson(),
       'productState': productState.toJson(),
+      'orderState': orderState.toJson(),
       'address': address.toJson(),
       // 'user': user.toJson(),
     };

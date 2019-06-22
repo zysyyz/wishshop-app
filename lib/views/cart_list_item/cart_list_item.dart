@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../../exports.dart';
 
 class CartListItem extends StatelessWidget {
-  final Product product;
+  final OrderLineItem lineItem;
 
-  CartListItem({Key key, this.product}) : super(key: key);
+  CartListItem(this.lineItem);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,8 @@ class CartListItem extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: new BorderRadius.all(Radius.circular(0.0)),
                   child: CustomImage(
-                    product.imageUrl,
+                    // lineItem.imageUrl,
+                    '',
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -55,7 +56,7 @@ class CartListItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        product.name,
+                        lineItem.label,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -69,7 +70,7 @@ class CartListItem extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           Text(
-                            '￥${product.price}',
+                            '￥${lineItem.price}',
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.bold,
@@ -77,8 +78,8 @@ class CartListItem extends StatelessWidget {
                             ),
                           ),
                           Padding(padding: EdgeInsets.only(left: 4),),
-                          product.originalPrice == null || product.originalPrice <= 0 ? Container() : Text(
-                            '￥${product.originalPrice}',
+                          lineItem.originalPrice == null || lineItem.originalPrice <= 0 ? Container() : Text(
+                            '￥${lineItem.originalPrice}',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -89,7 +90,7 @@ class CartListItem extends StatelessWidget {
                             child: Container(
                               alignment: Alignment.centerRight,
                               child: Text(
-                                'x10',
+                                'x${lineItem.quantity}',
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: Color(0xff333333),

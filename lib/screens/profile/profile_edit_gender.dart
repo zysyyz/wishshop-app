@@ -44,7 +44,7 @@ class _ProfileEditGenderScreenState extends State<ProfileEditGenderScreen> {
             icon: Text("确定"),
             onPressed: () async {
               try {
-                ProgressHUD.show(context, '正在保存...');
+                SVProgressHUD.show('正在保存...');
                 await vm.doUpdateGender(_newGender);
                 Navigator.of(context).pop();
               } catch (e) {
@@ -52,7 +52,7 @@ class _ProfileEditGenderScreenState extends State<ProfileEditGenderScreen> {
                 final snackBar = SnackBar(content: Text(e.message));
                 _scaffoldKey.currentState.showSnackBar(snackBar);
               } finally {
-                ProgressHUD.dismiss();
+                SVProgressHUD.dismissWithDelay(1500);
               }
             },
           ),

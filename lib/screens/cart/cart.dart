@@ -15,9 +15,9 @@ class _CartScreen extends State<CartScreen> {
   bool _isSelectAll = false;
 
   Widget _buildBody(BuildContext context, _ViewModel vm) {
-    List<Product> products = vm.listByFilter['categoryId=2'] ?? [];
+    List<OrderLineItem> lineItems = vm.cartOrder.items ?? [];
 
-    if (products.length == 0) {
+    if (lineItems.length == 0) {
       return ListEmptyIndicator();
       // return ListLoadIndicator();
     }
@@ -27,13 +27,11 @@ class _CartScreen extends State<CartScreen> {
       child: new StaggeredGridView.countBuilder(
         padding: EdgeInsets.only(top: 6, bottom: MediaQuery.of(context).viewInsets.bottom),
         crossAxisCount: 2,
-        itemCount: products.length,
+        itemCount: lineItems.length,
         itemBuilder: (BuildContext context, int index) {
-          Product product = products[index];
+          OrderLineItem orderLineItem = lineItems[index];
 
-          return CartListItem(
-            product: product,
-          );
+          return CartListItem(orderLineItem);
         },
         staggeredTileBuilder: (index) {
           return new StaggeredTile.fit(2);
@@ -42,7 +40,7 @@ class _CartScreen extends State<CartScreen> {
     );
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context) {
+  Widget _buildBottomNavigationBar(BuildContext context, _ViewModel vm) {
     final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom - 8.0, 0.0);
     return Container(
       color: Colors.white,
@@ -97,7 +95,7 @@ class _CartScreen extends State<CartScreen> {
                 padding: EdgeInsets.only(right: 12),
                 alignment: Alignment.centerRight,
                 child: Text(
-                  '¥0',
+                  '¥${vm.cartOrder.total}',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold
@@ -118,7 +116,9 @@ class _CartScreen extends State<CartScreen> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-
+                    Navigator
+                      .of(context)
+                      .push(MaterialPageRoute(builder: (_) => CartCheckoutScreen()));
                   },
                 ),
               ),
@@ -131,6 +131,9 @@ class _CartScreen extends State<CartScreen> {
 
   Widget _build(BuildContext context, _ViewModel vm) {
     ThemeData theme = Theme.of(context);
+
+    Order cartOrder = vm.cartOrder;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
@@ -150,7 +153,7 @@ class _CartScreen extends State<CartScreen> {
         ),
       ),
       body: _buildBody(context, vm),
-      bottomNavigationBar: _buildBottomNavigationBar(context),
+      bottomNavigationBar: (cartOrder?.items?.length ?? 0) == 0 ? Container() : _buildBottomNavigationBar(context, vm),
     );
   }
 
@@ -161,24 +164,21 @@ class _CartScreen extends State<CartScreen> {
       builder: (BuildContext context, _ViewModel vm) {
         return _build(context, vm);
       },
-      onInit: (store) {
-        store.dispatch(new GetProductListAction(categoryId: 2));
-      },
     );
   }
 }
 
 class _ViewModel {
-  final Map<String, List<Product>> listByFilter;
+  final Order cartOrder;
 
   _ViewModel({
-    this.listByFilter,
+    this.cartOrder,
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final productState = store.state.productState;
+    final orderState = store.state.orderState;
     return _ViewModel(
-      listByFilter:productState.listByFilter,
+      cartOrder: orderState.cartOrder ?? new Order(),
     );
   }
 }

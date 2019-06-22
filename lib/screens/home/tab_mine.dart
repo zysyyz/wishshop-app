@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
@@ -127,25 +126,14 @@ class _TabMineState extends State<TabMine> {
           var accessoryType = item['accessoryType'];
 
           if (key == 'profile') {
-            bool isLoggedIn = vm.user != null;
-
             var user = vm.user;
 
             return Material(
               color: Colors.white,
               child: ListTile(
-                leading: CircleAvatar(
-                  child: !isLoggedIn ? Text("") :
-                  ClipOval(
-                    child: FadeInImage.memoryNetwork(
-                      placeholder: Uint8List.fromList(<int>[]),
-                      image: user.avatarUrl,
-                      // height: 32,
-                      // width: 32,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  radius: 32,
+                leading: Container(
+                  height: 64,
+                  child: CustomAvatar(user.avatarUrl, size: 64),
                 ),
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

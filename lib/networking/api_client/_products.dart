@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import '../../models/models.dart';
+import '../../exports.dart';
+import './_reviews.dart';
 
 class ProductsService {
   final Dio _http;
@@ -8,7 +9,11 @@ class ProductsService {
   var _storeId;
   var _productId;
 
-  ProductsService(this._http);
+  ReviewsService     _reviewsService;
+
+  ProductsService(this._http) {
+    this._reviewsService = new ReviewsService(_http);
+  }
 
   void setStoreId(id) {
     this._storeId = id;
@@ -43,11 +48,25 @@ class ProductsService {
     final response = await _http.get(
       '/stores/$_storeId/products/$_productId',
       queryParameters: {
-        'include': ['contents'],
+        'include': ['contents', 'modifiers.options'],
       },
     );
 
     var d = Product.fromJson(response.data['data']);
     return d;
+  }
+
+  ReviewsService get reviews {
+    _reviewsService.setStoreId(_storeId);
+    _reviewsService.setProductId(_productId);
+    _reviewsService.setReviewId(0);
+    return _reviewsService;
+  }
+
+  ReviewsService review(id) {
+    _reviewsService.setStoreId(_storeId);
+    _reviewsService.setProductId(_productId);
+    _reviewsService.setReviewId(id);
+    return _reviewsService;
   }
 }

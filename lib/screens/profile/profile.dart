@@ -32,18 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         {
           'key': 'avatar',
           'title': '头像',
-          'detailTextView': CircleAvatar(
-            child: ClipOval(
-              child: FadeInImage.memoryNetwork(
-                placeholder: Uint8List.fromList(<int>[]),
-                image: vm.user.avatarUrl,
-                height: 48,
-                width: 48,
-                fit: BoxFit.cover,
-              ),
-            ),
-            radius: 24,
-          ),
+          'detailTextView': CustomAvatar(vm.user.avatarUrl, size: 48),
           'accessoryType': 'none',
           // 'onTap': () {
           // },

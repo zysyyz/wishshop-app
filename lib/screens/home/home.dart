@@ -61,40 +61,41 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _items = [
-    {
-      'title': '首页',
-      'icon': 'assets/images/ic_tab_homepage.png',
-      'badgeNumber': 0,
-      'screen': TabHomepage(),
-    },
-    {
-      'title': '分类',
-      'icon': 'assets/images/ic_tab_category.png',
-      'badgeNumber': 0,
-      'screen': TabCategory(),
-    },
-    {
-      'title': '购物车',
-      'icon': 'assets/images/ic_tab_shopping_cart.png',
-      'badgeNumber': 8,
-      'screen': TabCart(),
-    },
-    {
-      'title': '我的',
-      'badgeNumber': 0,
-      'icon': 'assets/images/ic_tab_mine.png',
-      'screen': TabMine(),
-    }
-  ];
   int _selectedIndex = 0;
 
   Widget _build(BuildContext context, _ViewModel vm) {
+    final tabBarItems = [
+      {
+        'title': '首页',
+        'icon': 'assets/images/ic_tab_homepage.png',
+        'badgeNumber': 0,
+        'screen': TabHomepage(),
+      },
+      {
+        'title': '分类',
+        'icon': 'assets/images/ic_tab_category.png',
+        'badgeNumber': 0,
+        'screen': TabCategory(),
+      },
+      {
+        'title': '购物车',
+        'icon': 'assets/images/ic_tab_shopping_cart.png',
+        'badgeNumber': vm.cartOrder?.numberOfItems ?? 0,
+        'screen': TabCart(),
+      },
+      {
+        'title': '我的',
+        'badgeNumber': 0,
+        'icon': 'assets/images/ic_tab_mine.png',
+        'screen': TabMine(),
+      }
+    ];
+
     List<Widget> stackItems = [];
     List<BottomNavigationBarItem> bottomNavigationBarItems = [];
-    for (var i = 0; i < _items.length; i++) {
+    for (var i = 0; i < tabBarItems.length; i++) {
       bool isSelected = _selectedIndex == i;
-      var item = _items[i];
+      var item = tabBarItems[i];
       final title = item['title'];
       final icon = item['icon'];
       final badgeNumber = item['badgeNumber'] ?? 0;
@@ -168,15 +169,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class _ViewModel {
   final User currentUser;
+  final Order cartOrder;
 
   _ViewModel({
     this.currentUser,
+    this.cartOrder,
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
     final authState = store.state.auth;
+    final orderState = store.state.orderState;
     return _ViewModel(
       currentUser: authState.user,
+      cartOrder: orderState.cartOrder,
     );
   }
 }
