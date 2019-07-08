@@ -1,19 +1,19 @@
-import 'package:redux/redux.dart' as Redux;
+import 'package:redux/redux.dart' as redux;
 import '../../models/models.dart';
 import '../../networking/networking.dart';
 import '../actions/app_actions.dart';
 import '../states/app_state.dart';
 
-List<Redux.Middleware<AppState>> createFavoriteMiddleware() {
+List<redux.Middleware<AppState>> createFavoriteMiddleware() {
   return [
-    new Redux.TypedMiddleware<AppState, GetFavoriteListAction>(_createGetFavoriteListMiddleware()),
-    new Redux.TypedMiddleware<AppState, CreateFavoriteAction>(_createCreateFavoriteMiddleware()),
-    new Redux.TypedMiddleware<AppState, DeleteFavoriteAction>(_createDeleteFavoriteMiddleware()),
+    new redux.TypedMiddleware<AppState, GetFavoriteListAction>(_createGetFavoriteListMiddleware()),
+    new redux.TypedMiddleware<AppState, CreateFavoriteAction>(_createCreateFavoriteMiddleware()),
+    new redux.TypedMiddleware<AppState, DeleteFavoriteAction>(_createDeleteFavoriteMiddleware()),
   ];
 }
 
-Redux.Middleware<AppState> _createGetFavoriteListMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetFavoriteListMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetFavoriteListAction)) return;
 
     try {
@@ -29,8 +29,8 @@ Redux.Middleware<AppState> _createGetFavoriteListMiddleware() {
   };
 }
 
-Redux.Middleware<AppState> _createCreateFavoriteMiddleware() {
-  return (Redux.Store<AppState> store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createCreateFavoriteMiddleware() {
+  return (redux.Store<AppState> store, action, redux.NextDispatcher next) async {
     if (!(action is CreateFavoriteAction)) return;
 
     try {
@@ -54,8 +54,8 @@ Redux.Middleware<AppState> _createCreateFavoriteMiddleware() {
   };
 }
 
-Redux.Middleware<AppState> _createDeleteFavoriteMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createDeleteFavoriteMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is DeleteFavoriteAction)) return;
 
     try {

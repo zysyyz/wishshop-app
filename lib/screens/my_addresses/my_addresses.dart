@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:wishshop_app/redux/actions/address_actions.dart';
+
 import '../../exports.dart';
 
 class MyAddressesScreen extends StatefulWidget {

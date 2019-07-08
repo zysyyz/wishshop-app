@@ -72,6 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 maxLengthEnforced: false,
                 decoration: new InputDecoration(
                   labelText: '姓名',
+                  counterText: '',
                 ),
                 // validator: Validator.name,
                 onSaved: (value) {
@@ -93,6 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 maxLength: 32,
                 decoration: new InputDecoration(
                   labelText: '密码',
+                  counterText: '',
                 ),
                 // validator: Validator.password,
                 onSaved: (value) {

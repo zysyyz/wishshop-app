@@ -4,6 +4,8 @@ export './category_grid_item/category_grid_item.dart';
 export './category_list_item/category_list_item.dart';
 export './category_list_section/category_list_section.dart';
 export './collection_list_item/collection_list_item.dart';
+export './order_list_item/order_list_item.dart';
+export './order_list_view/order_list_view.dart';
 export './product_grid_item/product_grid_item.dart';
 export './product_grid_view/product_grid_view.dart';
 export './product_list_item/product_list_item.dart';

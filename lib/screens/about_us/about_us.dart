@@ -39,7 +39,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
         {
           'title': '功能介绍',
           'onTap': () async {
-            const url = 'https://wordtag.thecode.me';
+            const url = 'https://wishshop.org';
             if (await canLaunch(url)) {
               await launch(url);
             }

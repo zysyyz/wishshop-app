@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import '../../exports.dart';
 
 class CartScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _CartScreen extends State<CartScreen> {
   bool _isSelectAll = false;
 
   Widget _buildBody(BuildContext context, _ViewModel vm) {
-    List<OrderLineItem> lineItems = vm.cartOrder.items ?? [];
+    List<OrderLineItem> lineItems = vm.cartOrder?.items ?? [];
 
     if (lineItems.length == 0) {
       return ListEmptyIndicator();
@@ -41,6 +42,9 @@ class _CartScreen extends State<CartScreen> {
   }
 
   Widget _buildBottomNavigationBar(BuildContext context, _ViewModel vm) {
+    if ((vm.cartOrder?.items?.length ?? 0) == 0) {
+      return Container();
+    }
     final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom - 8.0, 0.0);
     return Container(
       color: Colors.white,
@@ -132,8 +136,6 @@ class _CartScreen extends State<CartScreen> {
   Widget _build(BuildContext context, _ViewModel vm) {
     ThemeData theme = Theme.of(context);
 
-    Order cartOrder = vm.cartOrder;
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
@@ -153,7 +155,7 @@ class _CartScreen extends State<CartScreen> {
         ),
       ),
       body: _buildBody(context, vm),
-      bottomNavigationBar: (cartOrder?.items?.length ?? 0) == 0 ? Container() : _buildBottomNavigationBar(context, vm),
+      bottomNavigationBar: _buildBottomNavigationBar(context, vm),
     );
   }
 

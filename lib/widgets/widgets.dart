@@ -1,4 +1,5 @@
 // 请按文件名排序放置
+export './badge/badge.dart';
 export './custom_app_bar.dart';
 export './custom_avatar.dart';
 export './custom_image.dart';

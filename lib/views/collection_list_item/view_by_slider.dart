@@ -7,7 +7,7 @@ class ViewBySlider extends StatefulWidget {
   ViewBySlider(this.collection);
 
   @override
-  _ViewBySliderState createState() => _ViewBySliderState();
+  State<StatefulWidget> createState() => _ViewBySliderState();
 }
 
 class _ViewBySliderState extends State<ViewBySlider> {

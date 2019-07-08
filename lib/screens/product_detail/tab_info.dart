@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
+
 import '../../exports.dart';
 
 class _BadgeContainer extends StatelessWidget {
@@ -19,28 +20,7 @@ class _BadgeContainer extends StatelessWidget {
         Positioned(
           top: 8,
           right: 8,
-          child: badgeNumber <= 0 ? Container() : Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(left: 3, right: 3, bottom: 1),
-            decoration: new BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            constraints: BoxConstraints(
-              minWidth: 16,
-              minHeight: 16,
-            ),
-            child: Text(
-              '${badgeNumber > 99 ? '99+' : badgeNumber}',
-              style: new TextStyle(
-                color: Colors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.2,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
+          child: badgeNumber <= 0 ? Container() : Badge(number: badgeNumber,),
         )
       ],
     );
@@ -59,30 +39,75 @@ class TabInfo extends StatefulWidget {
 class _TabInfoState extends State<TabInfo> {
   bool _loading = false;
 
-  void _handlePressAddToCart(BuildContext context, _ViewModel vm) {
+  void _handlePressBuyNow(BuildContext context, _ViewModel vm) {
     showModalBottomSheet(
       context: context,
       builder: (builder) {
-        return ProductModifierActionSheet(product: vm.product,);
+        return ProductModifierActionSheet(
+          mode: 'buyNow',
+          product: vm.product,
+        );
       },
       isScrollControlled: true,
     );
   }
 
-  Widget _buildContents(BuildContext context, _ViewModel vm) {
+  void _handlePressAddToCart(BuildContext context, _ViewModel vm) {
+    showModalBottomSheet(
+      context: context,
+      builder: (builder) {
+        return ProductModifierActionSheet(
+          mode: 'addToCart',
+          product: vm.product,
+        );
+      },
+      isScrollControlled: true,
+    );
+  }
+
+  Widget _buildDescription(BuildContext context, _ViewModel vm) {
+    ThemeData themeData = Theme.of(context);
     Product product = vm.product;
-    if (product.contents == null) return Container();
-    return Container(
-      child: Column(
-        children: product.contents.map((content) {
-          return Container(
-            child: CustomImage(
-              content.content,
-              fit: BoxFit.cover,
+    if (product.description == null || product.description.isEmpty) return Container();
+
+    return Column(
+      children: <Widget>[
+        Container(height: 6, color: themeData.scaffoldBackgroundColor,),
+        Container(
+          width: double.infinity,
+          alignment: Alignment.centerLeft,
+          padding: EdgeInsets.all(16),
+          child: Text(
+            product.description,
+            style: TextStyle(
+              fontSize: 14,
             ),
-          );
-        }).toList(),
-      ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildContents(BuildContext context, _ViewModel vm) {
+    ThemeData themeData = Theme.of(context);
+    Product product = vm.product;
+
+    if (product.contents == null || product.contents.length == 0) return Container();
+    return Column(
+      children: <Widget>[
+        Container(height: 6, color: themeData.scaffoldBackgroundColor,),
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          children: product.contents.map((content) {
+            return Container(
+              child: CustomImage(
+                content.content,
+                fit: BoxFit.cover,
+              ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 
@@ -145,7 +170,7 @@ class _TabInfoState extends State<TabInfo> {
                     // style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    this._handlePressAddToCart(context, vm);
+                    this._handlePressBuyNow(context, vm);
                   },
                 ),
               ),
@@ -293,17 +318,10 @@ class _TabInfoState extends State<TabInfo> {
                 ],
               ),
             ),
-            Container(height: 6, color: themeData.scaffoldBackgroundColor,),
-            Container(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                product.description,
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-            ),
-            // 构建商品内容详情
+            // 构建商品已选附加选项
+            // 构建商品描述
+            _buildDescription(context, vm),
+            // 构建商品内容
             _buildContents(context, vm),
           ],
         ),

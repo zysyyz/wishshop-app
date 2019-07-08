@@ -1,22 +1,22 @@
 class Address {
   final int id;
-  int storeId = 1;
-  int userId = 0;
-  String fullName = '';
-  String firstName = '';
-  String lastName = '';
-  String email = '';
-  String phoneNumber = '';
-  String country = '';
-  String province = '';
-  String city = '';
-  String district = '';
-  String line1 = '';
-  String line2 = '';
-  String postalCode = '';
+  int storeId;
+  int userId;
+  String fullName;
+  String firstName;
+  String lastName;
+  String email;
+  String phoneNumber;
+  String country;
+  String province;
+  String city;
+  String district;
+  String line1;
+  String line2;
+  String postalCode;
   bool asDefault;
-  String createdAt = '';
-  String updatedAt = '';
+  String createdAt;
+  String updatedAt;
 
   Address({
     this.id,
@@ -42,44 +42,44 @@ class Address {
   factory Address.fromJson(Map<String, dynamic> json) {
     return Address(
       id              : json['id'],
-      storeId         : int.parse(json['store_id'].toString()),
-      userId          : json['user_id'],
-      fullName        : json['full_name'] ?? '',
-      firstName       : json['first_name'] ?? '',
-      lastName        : json['last_name'] ?? '',
+      storeId         : int.parse(json['storeId'].toString()),
+      userId          : json['userId'],
+      fullName        : json['fullName'] ?? '',
+      firstName       : json['firstName'] ?? '',
+      lastName        : json['lastName'] ?? '',
       email           : json['email'] ?? '',
-      phoneNumber     : json['phone_number'] ?? '',
+      phoneNumber     : json['phoneNumber'] ?? '',
       country         : json['country'] ?? '',
       province        : json['province'] ?? '',
       city            : json['city'] ?? '',
       district        : json['district'] ?? '',
       line1           : json['line1'] ?? '',
       line2           : json['line2'] ?? '',
-      postalCode      : json['postal_code'] ?? '',
-      asDefault       : json['as_default'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      postalCode      : json['postalCode'] ?? '',
+      asDefault       : json['asDefault'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
     );
   }
 
   Map<String, dynamic> toJson() =>
     {
       'id'            : id,
-      'store_id'      : storeId,
-      'full_name'     : fullName,
-      'first_name'    : firstName,
-      'last_name'     : lastName,
+      'storeId'      : storeId,
+      'fullName'     : fullName,
+      'firstName'    : firstName,
+      'lastName'     : lastName,
       'email'         : email,
-      'phone_number'  : phoneNumber,
+      'phoneNumber'  : phoneNumber,
       'country'       : country,
       'province'      : province,
       'city'          : city,
       'district'      : district,
       'line1'         : line1,
       'line2'         : line2,
-      'postal_code'   : postalCode,
-      'as_default'    : asDefault,
-      'created_at'    : createdAt,
-      'updated_at'    : updatedAt,
+      'postalCode'   : postalCode,
+      'asDefault'    : asDefault,
+      'createdAt'    : createdAt,
+      'updatedAt'    : updatedAt,
     };
 }

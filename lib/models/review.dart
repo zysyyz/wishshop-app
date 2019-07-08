@@ -34,8 +34,8 @@ class Review {
       content         : json['content'],
       rate            : json['rate'],
       tags            : tags,
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
       product         : json['product'] != null ? Product.fromJson(json['product']) : null,
       user            : json['user'] != null ? User.fromJson(json['user']) : null,
     );

@@ -1,21 +1,21 @@
-import 'package:redux/redux.dart' as Redux;
+import 'package:redux/redux.dart' as redux;
 import '../../models/models.dart';
 import '../../networking/networking.dart';
 import '../actions/app_actions.dart';
 import '../states/app_state.dart';
 
-List<Redux.Middleware<AppState>> createOrderMiddleware() {
+List<redux.Middleware<AppState>> createOrderMiddleware() {
   return [
-    new Redux.TypedMiddleware<AppState, GetOrderListAction>(_createGetOrderListMiddleware()),
-    new Redux.TypedMiddleware<AppState, GetOrderAction>(_createGetOrderMiddleware()),
-    new Redux.TypedMiddleware<AppState, CreateOrderLineItemAction>(_createCreateOrderLineItemMiddleware()),
-    new Redux.TypedMiddleware<AppState, UpdateOrderLineItemAction>(_createUpdateOrderLineItemMiddleware()),
-    new Redux.TypedMiddleware<AppState, DeleteOrderLineItemAction>(_createDeleteOrderLineItemMiddleware()),
+    new redux.TypedMiddleware<AppState, GetOrderListAction>(_createGetOrderListMiddleware()),
+    new redux.TypedMiddleware<AppState, GetOrderAction>(_createGetOrderMiddleware()),
+    new redux.TypedMiddleware<AppState, CreateOrderLineItemAction>(_createCreateOrderLineItemMiddleware()),
+    new redux.TypedMiddleware<AppState, UpdateOrderLineItemAction>(_createUpdateOrderLineItemMiddleware()),
+    new redux.TypedMiddleware<AppState, DeleteOrderLineItemAction>(_createDeleteOrderLineItemMiddleware()),
   ];
 }
 
-Redux.Middleware<AppState> _createGetOrderListMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetOrderListMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetOrderListAction)) return;
 
     try {
@@ -30,8 +30,8 @@ Redux.Middleware<AppState> _createGetOrderListMiddleware() {
   };
 }
 
-Redux.Middleware<AppState> _createGetOrderMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetOrderMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetOrderAction)) return;
 
     try {
@@ -43,16 +43,13 @@ Redux.Middleware<AppState> _createGetOrderMiddleware() {
   };
 }
 
-Redux.Middleware<AppState> _createCreateOrderLineItemMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createCreateOrderLineItemMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is CreateOrderLineItemAction)) return;
 
     try {
       Product product = action.product;
       num quantity = action.quantity ?? 1;
-
-      print(product);
-      print(quantity);
 
       OrderLineItem lineItem = new OrderLineItem(
         storeId: 1,
@@ -64,7 +61,6 @@ Redux.Middleware<AppState> _createCreateOrderLineItemMiddleware() {
         total: product.price * quantity,
       );
 
-      print(lineItem.toJson());
       store.dispatch(new CreateOrderLineItemSuccessAction(lineItem));
     } catch (error) {
       action.completer.completeError(error);
@@ -72,17 +68,14 @@ Redux.Middleware<AppState> _createCreateOrderLineItemMiddleware() {
   };
 }
 
-Redux.Middleware<AppState> _createUpdateOrderLineItemMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createUpdateOrderLineItemMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is UpdateOrderLineItemAction)) return;
 
     try {
 
       Product product = action.product;
       num quantity = action.quantity ?? 1;
-
-      print(product);
-      print(quantity);
 
       OrderLineItem lineItem = new OrderLineItem(
         storeId: 1,
@@ -94,19 +87,15 @@ Redux.Middleware<AppState> _createUpdateOrderLineItemMiddleware() {
         total: product.price * quantity,
       );
 
-      print(lineItem.toJson());
-
       store.dispatch(new UpdateOrderLineItemSuccessAction(lineItem));
     } catch (error) {
-      print('>>>>>>>');
-      print(error);
       action.completer.completeError(error);
     }
   };
 }
 
-Redux.Middleware<AppState> _createDeleteOrderLineItemMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createDeleteOrderLineItemMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is DeleteOrderLineItemAction)) return;
 
     try {

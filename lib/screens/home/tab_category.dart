@@ -42,31 +42,16 @@ class _SearchBar extends StatelessWidget {
   }
 }
 
-class TabCategory extends StatefulWidget {
+class TabCategoryScene extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TabCategoryState();
+  State<StatefulWidget> createState() => _TabCategorySceneState();
 }
 
-class _TabCategoryState extends State<TabCategory> {
-  PageController _pageController;
-  ScrollController _scrollController;
-
+class _TabCategorySceneState extends State<TabCategoryScene> {
   int _selectedIndex = 0;
-
-  _pageListener() {
-  }
-
-  _scrollListener() {
-  }
 
   @override
   void initState() {
-    _pageController = PageController();
-    _scrollController = ScrollController();
-
-    _pageController.addListener(this._pageListener);
-    _scrollController.addListener(this._scrollListener);
-
     super.initState();
   }
 
@@ -109,12 +94,6 @@ class _TabCategoryState extends State<TabCategory> {
                   setState(() {
                     _selectedIndex = index;
                   });
-
-                  // _pageController.animateToPage(
-                  //   index,
-                  //   duration: Duration(milliseconds: 1),
-                  //   curve: Curves.linear
-                  // );
                 },
                 child: Container(
                   height: 58,
@@ -143,7 +122,6 @@ class _TabCategoryState extends State<TabCategory> {
         VerticalDivider(width: 1),
         Expanded(
           child: PageView.builder(
-            controller: _pageController,
             scrollDirection: Axis.vertical,
             onPageChanged: (index) {
               setState(() {

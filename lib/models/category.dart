@@ -28,29 +28,29 @@ class Category {
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
       id              : json['id'],
-      storeId         : int.parse(json['store_id'].toString()),
-      parentId        : json['parent_id'],
+      storeId         : int.parse(json['storeId'].toString()),
+      parentId        : json['parentId'],
       level           : json['level'],
       position        : json['position'],
       slug            : json['slug'],
       name            : json['name'],
-      imageUrl        : json['image_url'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      imageUrl        : json['imageUrl'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
     );
   }
 
   Map<String, dynamic> toJson() =>
     {
       'id'            : id,
-      'store_id'      : storeId,
-      'parent_id'     : parentId,
+      'storeId'      : storeId,
+      'parentId'     : parentId,
       'level'         : level,
       'position'      : position,
       'slug'          : slug,
       'name'          : name,
-      'image_url'     : imageUrl,
-      'created_at'    : createdAt,
-      'updated_at'    : updatedAt,
+      'imageUrl'     : imageUrl,
+      'createdAt'    : createdAt,
+      'updatedAt'    : updatedAt,
     };
 }

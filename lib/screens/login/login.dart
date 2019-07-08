@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
+
 import '../../exports.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -90,6 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textInputAction: TextInputAction.go,
                 decoration: new InputDecoration(
                   labelText: '密码',
+                  counterText: '',
                 ),
                 // validator: Validator.password,
                 onSaved: (value) {
@@ -98,27 +100,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   });
                 },
               ),
-              // Padding(
-              //   padding: EdgeInsets.only(top: 10),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.end,
-              //     children: <Widget>[
-              //       GestureDetector(
-              //         child: Text(
-              //           '忘记密码？',
-              //           style: TextStyle(
-              //             fontWeight: FontWeight.bold,
-              //           ),
-              //         ),
-              //         onTap: () {
-              //           Navigator
-              //             .of(context)
-              //             .push(MaterialPageRoute(builder: (_) => ResetPasswordScreen()));
-              //         },
-              //       )
-              //     ],
-              //   ),
-              // ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    GestureDetector(
+                      child: Text(
+                        '忘记密码？',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator
+                          .of(context)
+                          .push(MaterialPageRoute(builder: (_) => ResetPasswordScreen()));
+                      },
+                    )
+                  ],
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.only(top: 20, bottom: 20),
                 child: SizedBox(

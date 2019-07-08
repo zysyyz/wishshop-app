@@ -1,18 +1,18 @@
-import 'package:redux/redux.dart' as Redux;
+import 'package:redux/redux.dart' as redux;
 import '../../models/models.dart';
 import '../../networking/networking.dart';
 import '../actions/app_actions.dart';
 import '../states/app_state.dart';
 
-List<Redux.Middleware<AppState>> createProductMiddleware() {
+List<redux.Middleware<AppState>> createProductMiddleware() {
   return [
-    new Redux.TypedMiddleware<AppState, GetProductListAction>(_createGetProductListMiddleware()),
-    new Redux.TypedMiddleware<AppState, GetProductAction>(_createGetProductMiddleware()),
+    new redux.TypedMiddleware<AppState, GetProductListAction>(_createGetProductListMiddleware()),
+    new redux.TypedMiddleware<AppState, GetProductAction>(_createGetProductMiddleware()),
   ];
 }
 
-Redux.Middleware<AppState> _createGetProductListMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetProductListMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetProductListAction)) return;
 
     try {
@@ -32,8 +32,8 @@ Redux.Middleware<AppState> _createGetProductListMiddleware() {
   };
 }
 
-Redux.Middleware<AppState> _createGetProductMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetProductMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetProductAction)) return;
 
     try {

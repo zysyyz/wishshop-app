@@ -1,18 +1,18 @@
-import 'package:redux/redux.dart' as Redux;
+import 'package:redux/redux.dart' as redux;
 import '../../models/models.dart';
 import '../../networking/networking.dart';
 import '../actions/app_actions.dart';
 import '../states/app_state.dart';
 
-List<Redux.Middleware<AppState>> createCollectionMiddleware() {
+List<redux.Middleware<AppState>> createCollectionMiddleware() {
   return [
-    new Redux.TypedMiddleware<AppState, GetCollectionListAction>(_createGetCollectionListMiddleware()),
-    new Redux.TypedMiddleware<AppState, GetCollectionAction>(_createGetCollectionMiddleware()),
+    new redux.TypedMiddleware<AppState, GetCollectionListAction>(_createGetCollectionListMiddleware()),
+    new redux.TypedMiddleware<AppState, GetCollectionAction>(_createGetCollectionMiddleware()),
   ];
 }
 
-Redux.Middleware<AppState> _createGetCollectionListMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetCollectionListMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetCollectionListAction)) return;
 
     try {
@@ -28,8 +28,8 @@ Redux.Middleware<AppState> _createGetCollectionListMiddleware() {
   };
 }
 
-Redux.Middleware<AppState> _createGetCollectionMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetCollectionMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetCollectionAction)) return;
 
     try {

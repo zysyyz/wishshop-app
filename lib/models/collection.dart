@@ -32,15 +32,15 @@ class Collection {
       List<CollectionItem> items = l.map((item) => CollectionItem.fromJson(item)).toList();
     return Collection(
       id              : json['id'],
-      storeId         : int.parse(json['store_id'].toString()),
+      storeId         : int.parse(json['storeId'].toString()),
       slug            : json['slug'],
       name            : json['name'],
-      imageUrl        : json['image_url'],
+      imageUrl        : json['imageUrl'],
       description     : json['description'],
-      viewBy          : json['view_by'],
+      viewBy          : json['viewBy'],
       status          : json['status'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
       items           : items,
     );
   }
@@ -48,15 +48,15 @@ class Collection {
   Map<String, dynamic> toJson() =>
     {
       'id'            : id,
-      'store_id'      : storeId,
+      'storeId'      : storeId,
       'slug'          : slug,
       'name'          : name,
-      'image_url'     : imageUrl,
+      'imageUrl'     : imageUrl,
       'description'   : description,
-      'view_by'       : viewBy,
+      'viewBy'       : viewBy,
       'status'        : status,
-      'created_at'    : createdAt,
-      'updated_at'    : updatedAt,
+      'createdAt'    : createdAt,
+      'updatedAt'    : updatedAt,
       'items'         : items,
     };
 }

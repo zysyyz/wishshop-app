@@ -86,10 +86,19 @@ class ProductInfo extends StatelessWidget {
   }
 }
 
-class ProductModifierActionSheet extends StatelessWidget {
+class ProductModifierActionSheet extends StatefulWidget {
+  final String mode;
   final Product product;
+  final OrderLineItem lineItem;
 
-  const ProductModifierActionSheet({Key key, this.product}) : super(key: key);
+  const ProductModifierActionSheet({Key key, this.mode, this.product, this.lineItem}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _ProductModifierActionSheetState();
+}
+
+class _ProductModifierActionSheetState extends State<ProductModifierActionSheet> {
+  int _quantity = 1;
 
   Widget _buildModifierItem(BuildContext context, Modifier modifier) {
     var optionViews = modifier.options
@@ -126,11 +135,12 @@ class ProductModifierActionSheet extends StatelessWidget {
   }
 
   Widget _buildModifierPart(BuildContext context) {
+    List<Modifier> modifiers = widget.product.modifiers;
     return Container(
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: product.modifiers.map((modifier) {
+        children: modifiers.map((modifier) {
           return Container(
             child: _buildModifierItem(context, modifier),
           );
@@ -141,6 +151,95 @@ class ProductModifierActionSheet extends StatelessWidget {
 
   Widget _buildBottomNavigationBar(BuildContext context, _ViewModel vm) {
     final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom - 8.0, 0.0);
+
+    List<Widget> buttons = [];
+
+    if (widget.mode == 'buyNow') {
+      buttons.add(
+        Expanded(
+          flex: 1,
+          child: SizedBox(
+            width: double.infinity,
+            height: kBottomNavigationBarHeight,
+            child: RaisedButton(
+              elevation: 0,
+              highlightElevation: 0,
+              child: Text(
+                '立即下单',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        ),
+      );
+    } else if (widget.mode == 'addToCart') {
+      buttons.add(
+        Expanded(
+          flex: 1,
+          child: SizedBox(
+            width: 110,
+            height: kBottomNavigationBarHeight,
+            child: RaisedButton(
+              elevation: 0,
+              highlightElevation: 0,
+              child: Text(
+                '确定加入',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+                vm.createOrderLineItem(_quantity);
+              },
+            ),
+          ),
+        )
+      );
+    } else {
+      buttons.addAll(
+        [
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              width: double.infinity,
+              height: kBottomNavigationBarHeight,
+              child: RaisedButton(
+                color: Colors.white,
+                elevation: 0,
+                highlightElevation: 0,
+                child: Text(
+                  '立即购买',
+                ),
+                onPressed: () {
+                },
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              width: 110,
+              height: kBottomNavigationBarHeight,
+              child: RaisedButton(
+                elevation: 0,
+                highlightElevation: 0,
+                child: Text(
+                  '加入购物车',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  vm.createOrderLineItem(_quantity);
+                },
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     return Container(
       color: Colors.white,
       padding: EdgeInsets.only(bottom: additionalBottomPadding),
@@ -160,44 +259,7 @@ class ProductModifierActionSheet extends StatelessWidget {
           )
         ),
         child: Row(
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                width: double.infinity,
-                height: kBottomNavigationBarHeight,
-                child: RaisedButton(
-                  color: Colors.white,
-                  elevation: 0,
-                  highlightElevation: 0,
-                  child: Text(
-                    '立即购买',
-                  ),
-                  onPressed: () {
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                width: 110,
-                height: kBottomNavigationBarHeight,
-                child: RaisedButton(
-                  elevation: 0,
-                  highlightElevation: 0,
-                  child: Text(
-                    '加入购物车',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    vm.createOrderLineItem();
-                  },
-                ),
-              ),
-            ),
-          ],
+          children: buttons,
         ),
       ),
     );
@@ -229,7 +291,7 @@ class ProductModifierActionSheet extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Container(
-                        child: ProductInfo(product),
+                        child: ProductInfo(widget.product),
                       ),
                     ),
                     Padding(
@@ -271,7 +333,10 @@ class ProductModifierActionSheet extends StatelessWidget {
                             ),
                             color: Theme.of(context).buttonColor,
                             onPressed: () {
-
+                              if (_quantity <= 1) return;
+                              setState(() {
+                                _quantity -= 1;
+                              });
                             },
                           ),
                         ),
@@ -294,7 +359,7 @@ class ProductModifierActionSheet extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            '1',
+                            '$_quantity',
                             style: TextStyle(
                               fontSize: 14,
                             ),
@@ -312,7 +377,9 @@ class ProductModifierActionSheet extends StatelessWidget {
                             ),
                             color: Theme.of(context).buttonColor,
                             onPressed: () {
-
+                              setState(() {
+                                _quantity += 1;
+                              });
                             },
                           ),
                         ),
@@ -334,7 +401,7 @@ class ProductModifierActionSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ViewModel>(
       converter: (store) {
-        return _ViewModel.fromStore(store, product: product);
+        return _ViewModel.fromStore(store, product: widget.product);
       },
       builder: (BuildContext context, _ViewModel vm) {
         return _build(context, vm);
@@ -345,8 +412,8 @@ class ProductModifierActionSheet extends StatelessWidget {
 
 class _ViewModel {
   final Product product;
-  final Future<OrderLineItem> Function() createOrderLineItem;
-  final Future<OrderLineItem> Function() updateOrderLineItem;
+  final Future<OrderLineItem> Function(int quantity) createOrderLineItem;
+  final Future<OrderLineItem> Function(int quantity) updateOrderLineItem;
 
   _ViewModel({
     this.product,
@@ -361,10 +428,10 @@ class _ViewModel {
     Product _product = productState.get('${product.id}') ?? product;
     return _ViewModel(
       product: _product,
-      createOrderLineItem: () {
+      createOrderLineItem: (quantity) {
         var action = new CreateOrderLineItemAction(
           number: 'cart',
-          quantity: 1,
+          quantity: quantity,
           product: _product,
         );
 
@@ -372,9 +439,10 @@ class _ViewModel {
 
         return action.completer.future;
       },
-      updateOrderLineItem: () {
+      updateOrderLineItem: (quantity) {
         var action = new UpdateOrderLineItemAction(
           number: 'cart',
+          quantity: quantity,
         );
         store.dispatch(action);
 

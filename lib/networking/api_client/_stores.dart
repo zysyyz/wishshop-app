@@ -33,7 +33,7 @@ class StoresService {
     this._storeId = id;
   }
 
-  Future<List<Store>> list({page = 1, perPage = 20}) async {
+  Future<Result<Store>> list({page = 1, perPage = 20}) async {
     final response = await _http.get(
       '/stores',
       queryParameters: {
@@ -41,10 +41,12 @@ class StoresService {
         'per_page': perPage,
       },
     );
-    Iterable l = response.data['items'] as List;
 
-    var _items = l.map((item) => Store.fromJson(item)).toList();
-    return _items;
+    Result<Store> result = Result<Store>.fromJson(
+      response.data,
+      (json) => Store.fromJson(json)
+    );
+    return result;
   }
 
   Future<Store> get() async {

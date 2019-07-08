@@ -22,9 +22,9 @@ class Store {
       id              : json['id'],
       slug            : json['slug'],
       name            : json['name'],
-      imageUrl        : json['image_url'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      imageUrl        : json['imageUrl'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
     );
   }
 
@@ -33,8 +33,8 @@ class Store {
       'id'            : id,
       'slug'          : slug,
       'name'          : name,
-      'image_url'     : imageUrl,
-      'created_at'    : createdAt,
-      'updated_at'    : updatedAt,
+      'imageUrl'     : imageUrl,
+      'createdAt'    : createdAt,
+      'updatedAt'    : updatedAt,
     };
 }

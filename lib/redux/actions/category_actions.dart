@@ -2,12 +2,12 @@ import 'dart:async';
 import '../../models/models.dart';
 
 class GetCategoryListAction {
-  final Completer completer = new Completer();
+  final Completer<Result<Category>> completer = new Completer();
 }
 class ReceiveCategoryListAction {
-  final List<Category> categories;
+  final Result<Category> result;
 
-  ReceiveCategoryListAction(this.categories);
+  ReceiveCategoryListAction(this.result);
 }
 
 class GetCategoryAction {

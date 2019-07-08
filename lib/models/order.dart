@@ -35,29 +35,29 @@ class Order {
 
     return Order(
       id              : json['id'],
-      storeId         : int.parse(json['store_id'].toString()),
+      storeId         : int.parse(json['storeId'].toString()),
       number          : json['number'],
-      referenceNumber : json['reference_number'],
+      referenceNumber : json['referenceNumber'],
       items           : items,
       subtotal        : json['subtotal'],
       total           : json['total'],
-      numberOfItems   : json['number_of_items'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      numberOfItems   : json['numberOfItems'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
     );
   }
 
   Map<String, dynamic> toJson() =>
     {
       'id'                : id,
-      'store_id'          : storeId,
+      'storeId'          : storeId,
       'number'            : number,
-      'reference_number'  : referenceNumber,
+      'referenceNumber'  : referenceNumber,
       'items'             : items,
       'subtotal'          : subtotal,
       'total'             : total,
-      'number_of_items'   : numberOfItems,
-      'created_at'        : createdAt,
-      'updated_at'        : updatedAt,
+      'numberOfItems'   : numberOfItems,
+      'createdAt'        : createdAt,
+      'updatedAt'        : updatedAt,
     };
 }

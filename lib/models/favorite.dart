@@ -24,12 +24,12 @@ class Favorite {
   factory Favorite.fromJson(Map<String, dynamic> json) {
     return Favorite(
       id              : json['id'],
-      storeId         : int.parse(json['store_id'].toString()),
-      userId          : json['user_id'],
-      targetType      : json['target_type'],
-      targetId        : int.parse(json['target_id'].toString()),
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      storeId         : int.parse(json['storeId'].toString()),
+      userId          : json['userId'],
+      targetType      : json['targetType'],
+      targetId        : int.parse(json['targetId'].toString()),
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
       product         : json['product'] != null ? Product.fromJson(json['product']) : null,
     );
   }
@@ -37,12 +37,12 @@ class Favorite {
   Map<String, dynamic> toJson() =>
     {
       'id'            : id,
-      'store_id'      : storeId,
-      'user_id'       : userId,
-      'target_type'   : targetType,
-      'target_id'     : targetId,
-      'created_at'    : createdAt,
-      'updated_at'    : updatedAt,
+      'storeId'      : storeId,
+      'userId'       : userId,
+      'targetType'   : targetType,
+      'targetId'     : targetId,
+      'createdAt'    : createdAt,
+      'updatedAt'    : updatedAt,
       'product'       : product != null ? product.toJson() : null,
     };
 }

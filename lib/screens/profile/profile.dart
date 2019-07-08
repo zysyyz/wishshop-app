@@ -6,6 +6,16 @@ import '../../exports.dart';
 import './profile_edit_gender.dart';
 import './profile_edit_name.dart';
 
+
+String _toFriendlyGender(gender) {
+  final _friendlyGenders = {
+    'secrecy': '保密',
+    'male'   : '男',
+    'female' : '女',
+  };
+  return _friendlyGenders[gender];
+}
+
 class ProfileScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _ProfileScreenState();
@@ -16,13 +26,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String name;
     String username;
     String email;
-    String gender = toFriendlyGender(Gender.secrecy);
+    String gender = _toFriendlyGender('secrecy');
 
     if (vm.user != null) {
       name     = vm.user.name;
       username = vm.user.username;
       email    = vm.user.email;
-      gender   = toFriendlyGender(vm.user.gender);
+      gender   = _toFriendlyGender(vm.user.gender);
     }
     List<Map<String, dynamic>> items = [
         {

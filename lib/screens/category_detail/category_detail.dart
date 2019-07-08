@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
+
 import '../../exports.dart';
 
 class CategoryDetailScreen extends StatefulWidget {

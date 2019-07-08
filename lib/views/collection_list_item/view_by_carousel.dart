@@ -8,7 +8,7 @@ class ViewByCarousel extends StatefulWidget {
   ViewByCarousel(this.collection);
 
   @override
-  _ViewByCarouselState createState() => _ViewByCarouselState();
+  State<StatefulWidget> createState() => _ViewByCarouselState();
 }
 
 class _ViewByCarouselState extends State<ViewByCarousel> {

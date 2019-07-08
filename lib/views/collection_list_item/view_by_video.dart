@@ -9,7 +9,7 @@ class ViewByVideo extends StatefulWidget {
   ViewByVideo(this.collection);
 
   @override
-  _ViewByVideoState createState() => _ViewByVideoState();
+  State<StatefulWidget> createState() => _ViewByVideoState();
 }
 
 class _ViewByVideoState extends State<ViewByVideo> {

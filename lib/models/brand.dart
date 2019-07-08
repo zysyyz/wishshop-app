@@ -24,10 +24,10 @@ class Brand {
       id              : json['id'],
       slug            : json['slug'],
       name            : json['name'],
-      logoUrl         : json['logo_url'],
-      imageUrl        : json['image_url'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      logoUrl         : json['logoUrl'],
+      imageUrl        : json['imageUrl'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
     );
   }
 }

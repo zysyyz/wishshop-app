@@ -4,12 +4,12 @@ import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import '../../exports.dart';
 
-class TabHomepage extends StatefulWidget {
+class TabHomepageScene extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TabHomepageState();
+  State<StatefulWidget> createState() => _TabHomepageSceneState();
 }
 
-class _TabHomepageState extends State<TabHomepage> {
+class _TabHomepageSceneState extends State<TabHomepageScene> {
   Widget _buildBody(BuildContext context, _ViewModel vm) {
     List<Collection> items = vm.items;
 

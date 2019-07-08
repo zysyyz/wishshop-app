@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redux/redux.dart' as redux;
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import '../../exports.dart';
 
 class TabReviews extends StatefulWidget {

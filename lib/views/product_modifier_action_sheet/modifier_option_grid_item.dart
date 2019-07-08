@@ -9,7 +9,6 @@ class ModifierOptionGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(modifier.optionType);
     return Container(
       // height: 46,
       // alignment: Alignment.center,

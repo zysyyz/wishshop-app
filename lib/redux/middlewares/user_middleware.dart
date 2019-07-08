@@ -1,18 +1,18 @@
-import 'package:redux/redux.dart' as Redux;
+import 'package:redux/redux.dart' as redux;
 import '../../models/models.dart';
 import '../../networking/networking.dart';
 import '../actions/app_actions.dart';
 import '../states/app_state.dart';
 
-List<Redux.Middleware<AppState>> createUserMiddleware() {
+List<redux.Middleware<AppState>> createUserMiddleware() {
   final getUser  = _createGetUserMiddleware();
   return [
-    new Redux.TypedMiddleware<AppState, GetUserAction>(getUser),
+    new redux.TypedMiddleware<AppState, GetUserAction>(getUser),
   ];
 }
 
-Redux.Middleware<AppState> _createGetUserMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetUserMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetUserAction)) return;
 
     try {

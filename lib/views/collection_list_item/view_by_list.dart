@@ -7,7 +7,7 @@ class ViewByList extends StatefulWidget {
   ViewByList(this.collection);
 
   @override
-  _ViewByListState createState() => _ViewByListState();
+  State<StatefulWidget> createState() => _ViewByListState();
 }
 
 class _ViewByListState extends State<ViewByList> {

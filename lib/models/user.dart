@@ -2,7 +2,6 @@ import './jwt_token.dart';
 
 class User {
   final int id;
-  String uniqueId;
   String email;
   String username;
   String name;
@@ -22,7 +21,6 @@ class User {
 
   User({
     this.id,
-    this.uniqueId,
     this.email,
     this.username,
     this.name,
@@ -43,50 +41,46 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     JwtToken jwtToken;
-    if (json['jwt_token'] != null) {
-      jwtToken = JwtToken.fromJson(json['jwt_token']);
+    if (json['jwtToken'] != null) {
+      jwtToken = JwtToken.fromJson(json['jwtToken']);
     }
     return User(
       id              : json['id'],
-      uniqueId        : json['unique_id'],
       email           : json['email'],
       username        : json['username'],
       name            : json['name'],
-      useGravatar     : json['use_gravatar'],
-      avatarUrl       : json['avatar_url'],
+      useGravatar     : json['useGravatar'],
+      avatarUrl       : json['avatarUrl'],
       age             : json['age'],
       gender          : json['gender'],
       birthday        : json['birthday'],
       company         : json['company'],
       website         : json['website'],
       bio             : json['bio'],
-      siteAdmin       : json['site_admin'],
       jwtToken        : jwtToken,
-      deletedAt       : json['deleted_at'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      deletedAt       : json['deletedAt'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
     );
   }
 
   Map<String, dynamic> toJson() =>
     {
       'id'            : id,
-      'unique_id'     : uniqueId,
       'email'         : email,
       'username'      : username,
       'name'          : name,
-      'use_gravatar'  : useGravatar,
-      'avatar_url'    : avatarUrl,
+      'useGravatar'  : useGravatar,
+      'avatarUrl'    : avatarUrl,
       'age'           : age,
       'gender'        : gender,
       'birthday'      : birthday,
       'company'       : company,
       'website'       : website,
       'bio'           : bio,
-      'site_admin'    : siteAdmin,
-      'jwt_token'     : jwtToken != null ? jwtToken.toJson() : null,
-      'deleted_at'    : deletedAt,
-      'created_at'    : createdAt,
-      'updated_at'    : updatedAt,
+      'jwtToken'     : jwtToken != null ? jwtToken.toJson() : null,
+      'deletedAt'    : deletedAt,
+      'createdAt'    : createdAt,
+      'updatedAt'    : updatedAt,
     };
 }

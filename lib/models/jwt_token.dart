@@ -9,14 +9,14 @@ class JwtToken {
 
   factory JwtToken.fromJson(Map<String, dynamic> json) {
     return JwtToken(
-      accessToken: json['access_token'],
-      expiresIn  : json['expires_in'],
+      accessToken: json['accessToken'],
+      expiresIn  : json['expiresIn'],
     );
   }
 
   Map<String, dynamic> toJson() =>
     {
-      'access_token': accessToken,
-      'expires_in'  : expiresIn
+      'accessToken': accessToken,
+      'expiresIn'  : expiresIn
     };
 }

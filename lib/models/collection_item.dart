@@ -28,31 +28,31 @@ class CollectionItem {
   factory CollectionItem.fromJson(Map<String, dynamic> json) {
     return CollectionItem(
       id              : json['id'],
-      storeId         : int.parse(json['store_id'].toString()),
-      collectionId    : json['collection_id'],
-      targetType      : json['target_type'],
-      targetId        : json['target_id'],
+      storeId         : int.parse(json['storeId'].toString()),
+      collectionId    : json['collectionId'],
+      targetType      : json['targetType'],
+      targetId        : json['targetId'],
       position        : json['position'],
       title           : json['title'],
-      imageUrl        : json['image_url'],
+      imageUrl        : json['imageUrl'],
       description     : json['description'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
     );
   }
 
   Map<String, dynamic> toJson() =>
     {
       'id'            : id,
-      'store_id'      : storeId,
-      'collection_id' : collectionId,
-      'target_type'   : targetType,
-      'target_id'     : targetId,
+      'storeId'      : storeId,
+      'collectionId' : collectionId,
+      'targetType'   : targetType,
+      'targetId'     : targetId,
       'position'      : position,
       'title'         : title,
-      'image_url'     : imageUrl,
+      'imageUrl'     : imageUrl,
       'description'   : description,
-      'created_at'    : createdAt,
-      'updated_at'    : updatedAt,
+      'createdAt'    : createdAt,
+      'updatedAt'    : updatedAt,
     };
 }

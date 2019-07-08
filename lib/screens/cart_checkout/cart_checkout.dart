@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import '../../exports.dart';
 
 class CartCheckoutScreen extends StatefulWidget {
@@ -11,9 +12,6 @@ class CartCheckoutScreen extends StatefulWidget {
 }
 
 class _CartCheckoutScreenState extends State<CartCheckoutScreen> {
-
-  bool _isSelectAll = false;
-
   Widget _buildBody(BuildContext context, _ViewModel vm) {
     List<OrderLineItem> lineItems = vm.cartOrder.items ?? [];
 

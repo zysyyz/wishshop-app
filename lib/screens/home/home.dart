@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
+
 import '../../exports.dart';
 import './tab_homepage.dart';
 import './tab_category.dart';
@@ -10,10 +11,15 @@ import './tab_mine.dart';
 
 class _IconWithBadge extends StatelessWidget {
   final String icon;
-  final Color color;
-  final int badgeNumber;
+  Color color;
+  int badgeNumber;
 
-  const _IconWithBadge({Key key, this.icon, this.color, this.badgeNumber}) : super(key: key);
+  _IconWithBadge(
+    this.icon, {
+    Key key,
+    this.color = Colors.grey,
+    this.badgeNumber = 0,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,28 +33,7 @@ class _IconWithBadge extends StatelessWidget {
         Positioned(
           top: 0,
           right: 0,
-          child: badgeNumber <= 0 ? Container() : Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(left: 3, right: 3, bottom: 1),
-            decoration: new BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            constraints: BoxConstraints(
-              minWidth: 16,
-              minHeight: 16,
-            ),
-            child: Text(
-              '${badgeNumber > 99 ? '99+' : badgeNumber}',
-              style: new TextStyle(
-                color: Colors.white,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.2,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
+          child: badgeNumber <= 0 ? Container() : Badge(number: this.badgeNumber),
         )
       ],
     );
@@ -69,25 +54,25 @@ class _HomeScreenState extends State<HomeScreen> {
         'title': '首页',
         'icon': 'assets/images/ic_tab_homepage.png',
         'badgeNumber': 0,
-        'screen': TabHomepage(),
+        'scene': TabHomepageScene(),
       },
       {
         'title': '分类',
         'icon': 'assets/images/ic_tab_category.png',
         'badgeNumber': 0,
-        'screen': TabCategory(),
+        'scene': TabCategoryScene(),
       },
       {
         'title': '购物车',
         'icon': 'assets/images/ic_tab_shopping_cart.png',
         'badgeNumber': vm.cartOrder?.numberOfItems ?? 0,
-        'screen': TabCart(),
+        'scene': TabCartScene(),
       },
       {
         'title': '我的',
         'badgeNumber': 0,
         'icon': 'assets/images/ic_tab_mine.png',
-        'screen': TabMine(),
+        'scene': TabMineScene(),
       }
     ];
 
@@ -99,21 +84,21 @@ class _HomeScreenState extends State<HomeScreen> {
       final title = item['title'];
       final icon = item['icon'];
       final badgeNumber = item['badgeNumber'] ?? 0;
-      final screen = item['screen'];
+      final scene = item['scene'];
 
       Offstage offstage = Offstage(
         offstage: !isSelected,
         child: TickerMode(
           enabled: isSelected,
-          child: screen,
+          child: scene,
         ),
       );
 
       stackItems.add(offstage);
 
       BottomNavigationBarItem bottomNavigationBarItem = BottomNavigationBarItem(
-        icon: _IconWithBadge(icon: icon, color: Colors.grey, badgeNumber: badgeNumber),
-        activeIcon: _IconWithBadge(icon: icon, color: Colors.black, badgeNumber: badgeNumber),
+        icon: _IconWithBadge(icon, color: Colors.grey, badgeNumber: badgeNumber),
+        activeIcon: _IconWithBadge(icon, color: Colors.black, badgeNumber: badgeNumber),
         title: Text(title, style: TextStyle(fontSize: 10)),
       );
       bottomNavigationBarItems.add(bottomNavigationBarItem);
@@ -135,12 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
         inactiveColor: Colors.grey,
         activeColor: Colors.black,
         onTap: (int index) {
-          if (index == 3 && vm.currentUser == null) {
-            Navigator
-              .of(context)
-              .push(MaterialPageRoute(builder: (_) => LoginScreen(), fullscreenDialog: true));
-            return;
-          }
           setState(() {
             _selectedIndex = index;
           });

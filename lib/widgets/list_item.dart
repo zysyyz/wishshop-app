@@ -13,7 +13,7 @@ class ListItem extends StatelessWidget {
   String accessoryType = "disclosureIndicator";
   EdgeInsetsGeometry contentPadding;
 
-  TextStyle _defaultTitleStyle = TextStyle(fontSize: 15, color: Color(0xff000000), fontWeight: FontWeight.w600);
+  TextStyle _defaultTitleStyle = TextStyle(fontSize: 16, color: Color(0xff000000).withOpacity(0.9));
   TextStyle _defaultSubtitleStyle = TextStyle();
   TextStyle _defaultDetailTextStyle = TextStyle(fontSize: 14, color: Color(0xff999999));
 

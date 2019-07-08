@@ -1,18 +1,18 @@
-import 'package:redux/redux.dart' as Redux;
+import 'package:redux/redux.dart' as redux;
 import '../../models/models.dart';
 import '../../networking/networking.dart';
 import '../actions/app_actions.dart';
 import '../states/app_state.dart';
 
-List<Redux.Middleware<AppState>> createAddressMiddleware() {
+List<redux.Middleware<AppState>> createAddressMiddleware() {
   return [
-    new Redux.TypedMiddleware<AppState, GetAddressListAction>(_createGetAddressListMiddleware()),
-    new Redux.TypedMiddleware<AppState, GetAddressAction>(_createGetAddressMiddleware()),
+    new redux.TypedMiddleware<AppState, GetAddressListAction>(_createGetAddressListMiddleware()),
+    new redux.TypedMiddleware<AppState, GetAddressAction>(_createGetAddressMiddleware()),
   ];
 }
 
-Redux.Middleware<AppState> _createGetAddressListMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetAddressListMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetAddressListAction)) return;
 
     try {
@@ -27,8 +27,8 @@ Redux.Middleware<AppState> _createGetAddressListMiddleware() {
   };
 }
 
-Redux.Middleware<AppState> _createGetAddressMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetAddressMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetAddressAction)) return;
 
     try {

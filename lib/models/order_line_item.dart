@@ -26,28 +26,28 @@ class OrderLineItem {
   factory OrderLineItem.fromJson(Map<String, dynamic> json) {
     return OrderLineItem(
       id                  : json['id'],
-      storeId             : int.parse(json['store_id'].toString()),
+      storeId             : int.parse(json['storeId'].toString()),
       label               : json['label'],
       price               : json['price'],
-      originalPrice       : json['original_price'],
+      originalPrice       : json['originalPrice'],
       quantity            : json['quantity'],
       subtotal            : json['subtotal'],
       total               : json['total'],
-      createdAt           : json['created_at'],
-      updatedAt           : json['updated_at'],
+      createdAt           : json['createdAt'],
+      updatedAt           : json['updatedAt'],
     );
   }
 
   Map<String, dynamic> toJson() =>
     {
       'id'                : id,
-      'store_id'          : storeId,
+      'storeId'          : storeId,
       'price'             : price,
-      'original_price'    : originalPrice,
+      'originalPrice'    : originalPrice,
       'quantity'          : quantity,
       'subtotal'          : subtotal,
       'total'             : total,
-      'created_at'        : createdAt,
-      'updated_at'        : updatedAt,
+      'createdAt'        : createdAt,
+      'updatedAt'        : updatedAt,
     };
 }

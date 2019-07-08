@@ -7,7 +7,7 @@ class ViewByImage extends StatefulWidget {
   ViewByImage(this.collection);
 
   @override
-  _ViewByImageState createState() => _ViewByImageState();
+  State<StatefulWidget> createState() => _ViewByImageState();
 }
 
 class _ViewByImageState extends State<ViewByImage> {

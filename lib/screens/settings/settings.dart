@@ -3,6 +3,7 @@ import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
+
 import '../../exports.dart';
 
 class SettingsScreen extends StatefulWidget {

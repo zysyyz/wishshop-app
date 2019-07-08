@@ -18,7 +18,7 @@ class CategoriesService {
     this._categoryId = id;
   }
 
-  Future<List<Category>> list({page = 1, perPage = 20, parentId = ''}) async {
+  Future<Result<Category>> list({page = 1, perPage = 20, parentId = ''}) async {
     final response = await _http.get(
       '/stores/$_storeId/categories',
       queryParameters: {
@@ -27,10 +27,12 @@ class CategoriesService {
         'parent_id': parentId,
       },
     );
-    Iterable l = response.data['items'] as List;
 
-    var _items = l.map((item) => Category.fromJson(item)).toList();
-    return _items;
+    Result<Category> result = Result<Category>.fromJson(
+      response.data,
+      (json) => Category.fromJson(json)
+    );
+    return result;
   }
 
   Future<Category> get() async {

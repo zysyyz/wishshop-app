@@ -11,7 +11,7 @@ class ProductDetailScreen extends StatefulWidget {
   ProductDetailScreen(this.product);
 
   @override
-  _ProductDetailScreenState createState() => _ProductDetailScreenState();
+  State<StatefulWidget> createState() => _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen>

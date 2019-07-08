@@ -28,31 +28,31 @@ class ModifierOption {
   factory ModifierOption.fromJson(Map<String, dynamic> json) {
     return ModifierOption(
       id              : json['id'],
-      storeId         : int.parse(json['store_id'].toString()),
-      productId       : json['product_id'],
-      modifierId      : json['modifier_id'],
+      storeId         : int.parse(json['storeId'].toString()),
+      productId       : json['productId'],
+      modifierId      : json['modifierId'],
       code            : json['code'],
-      imageUrl        : json['image_url'],
-      optionName      : json['option_name'],
-      optionValue     : json['option_value'],
-      changeInPrice   : json['change_in_price'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      imageUrl        : json['imageUrl'],
+      optionName      : json['optionName'],
+      optionValue     : json['optionValue'],
+      changeInPrice   : json['changeInPrice'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
     );
   }
 
   Map<String, dynamic> toJson() =>
     {
       'id'              : id,
-      'store_id'        : storeId,
-      'product_id'      : productId,
-      'modifier_id'     : modifierId,
-      'code'            : code,
-      'image_url'       : imageUrl,
-      'option_name'     : optionName,
-      'option_value'    : optionValue,
-      'change_in_price' : changeInPrice,
-      'created_at'      : createdAt,
-      'updated_at'      : updatedAt,
+      'productId'        : storeId,
+      'modifierId'      : productId,
+      'code'     : modifierId,
+      'imageUrl'            : code,
+      'optionName'       : imageUrl,
+      'optionValue'     : optionName,
+      'changeInPrice'    : optionValue,
+      'createdAt' : changeInPrice,
+      'updatedAt'      : createdAt,
+      'updatedAt'      : updatedAt,
     };
 }

@@ -4,23 +4,39 @@ import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import '../../exports.dart';
 
-class TabMine extends StatefulWidget {
+class TabMineScene extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TabMineState();
+  State<StatefulWidget> createState() => _TabMineSceneState();
 }
 
-class _TabMineState extends State<TabMine> {
+class _TabMineSceneState extends State<TabMineScene> {
   Widget _build(BuildContext context, _ViewModel vm) {
-    if (vm.user == null) return Container();
-
     List<Map<String, dynamic>> items = [
       {
         'key': 'profile',
         'title': '登录',
         'onTap': () {
+          if (vm.currentUser == null) {
+            Navigator
+              .of(context)
+              .push(MaterialPageRoute(builder: (_) => LoginScreen(), fullscreenDialog: true));
+            return;
+          }
+
           Navigator
             .of(context)
             .push(MaterialPageRoute(builder: (_) => ProfileScreen()));
+        },
+      },
+      {
+        'type': 'section',
+      },
+      {
+        'title': '我的订单',
+        'onTap': () {
+          Navigator
+            .of(context)
+            .push(MaterialPageRoute(builder: (_) => MyOrdersScreen()));
         },
       },
       {
@@ -126,20 +142,20 @@ class _TabMineState extends State<TabMine> {
           var accessoryType = item['accessoryType'];
 
           if (key == 'profile') {
-            var user = vm.user;
+            var user = vm.currentUser ?? new User();
 
             return Material(
               color: Colors.white,
               child: ListTile(
                 leading: Container(
                   height: 64,
-                  child: CustomAvatar(user.avatarUrl, size: 64),
+                  child: CustomAvatar(user.avatarUrl ?? '', size: 64),
                 ),
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      user.name,
+                      user.name ?? 'n/a',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold
@@ -147,7 +163,7 @@ class _TabMineState extends State<TabMine> {
                     ),
                     Padding(padding: EdgeInsets.only(bottom: 2)),
                     Text(
-                      user.email,
+                      user.email ?? 'n/a',
                       style: TextStyle(
                         fontSize: 13,
                       )
@@ -186,18 +202,18 @@ class _TabMineState extends State<TabMine> {
 }
 
 class _ViewModel {
-  final User user;
+  final User currentUser;
   final Function doLogout;
 
   _ViewModel({
-    this.user,
+    this.currentUser,
     this.doLogout
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
     final auth = store.state.auth;
     return _ViewModel(
-      user: auth.user,
+      currentUser: auth.user,
       doLogout: () {
         LogoutAction action = new LogoutAction();
         store.dispatch(action);

@@ -24,27 +24,27 @@ class Content {
   factory Content.fromJson(Map<String, dynamic> json) {
     return Content(
       id              : json['id'],
-      storeId         : int.parse(json['store_id'].toString()),
-      productId       : json['product_id'],
+      storeId         : int.parse(json['storeId'].toString()),
+      productId       : json['productId'],
       position        : json['position'],
       type            : json['type'],
       content         : json['content'],
       meta            : json['meta'],
-      createdAt       : json['created_at'],
-      updatedAt       : json['updated_at'],
+      createdAt       : json['createdAt'],
+      updatedAt       : json['updatedAt'],
     );
   }
 
   Map<String, dynamic> toJson() =>
     {
       'id'            : id,
-      'store_id'      : storeId,
-      'product_id'    : productId,
+      'storeId'      : storeId,
+      'productId'    : productId,
       'position'      : position,
       'type'          : type,
       'content'       : content,
       'meta'          : meta,
-      'created_at'    : createdAt,
-      'updated_at'    : updatedAt,
+      'createdAt'    : createdAt,
+      'updatedAt'    : updatedAt,
     };
 }

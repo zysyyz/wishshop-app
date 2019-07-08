@@ -1,23 +1,23 @@
-import 'package:redux/redux.dart' as Redux;
+import 'package:redux/redux.dart' as redux;
 import '../../models/models.dart';
 import '../../networking/networking.dart';
 import '../actions/app_actions.dart';
 import '../states/app_state.dart';
 
-List<Redux.Middleware<AppState>> createCategoryMiddleware() {
+List<redux.Middleware<AppState>> createCategoryMiddleware() {
   return [
-    new Redux.TypedMiddleware<AppState, GetCategoryListAction>(_createGetCategoryListMiddleware()),
-    new Redux.TypedMiddleware<AppState, GetCategoryAction>(_createGetCategoryMiddleware()),
+    new redux.TypedMiddleware<AppState, GetCategoryListAction>(_createGetCategoryListMiddleware()),
+    new redux.TypedMiddleware<AppState, GetCategoryAction>(_createGetCategoryMiddleware()),
   ];
 }
 
-Redux.Middleware<AppState> _createGetCategoryListMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetCategoryListMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetCategoryListAction)) return;
 
     try {
-      List<Category> categories = await sharedApiClient.defaultStore.categories.list(perPage: 999);
-      store.dispatch(new ReceiveCategoryListAction(categories));
+      Result<Category> result= await sharedApiClient.defaultStore.categories.list(perPage: 999);
+      store.dispatch(new ReceiveCategoryListAction(result));
       action.completer.complete();
     } catch (error) {
       action.completer.completeError(error);
@@ -25,8 +25,8 @@ Redux.Middleware<AppState> _createGetCategoryListMiddleware() {
   };
 }
 
-Redux.Middleware<AppState> _createGetCategoryMiddleware() {
-  return (Redux.Store store, action, Redux.NextDispatcher next) async {
+redux.Middleware<AppState> _createGetCategoryMiddleware() {
+  return (redux.Store store, action, redux.NextDispatcher next) async {
     if (!(action is GetCategoryAction)) return;
 
     try {
