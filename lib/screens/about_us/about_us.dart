@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
-import 'package:launch_review/launch_review.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../exports.dart';
 
@@ -13,7 +12,14 @@ class AboutUsScreen extends StatefulWidget {
 class _AboutUsScreenState extends State<AboutUsScreen> {
   var _appVersion = 'Unknown';
 
-  void _reloadData() async {
+  @override
+  void initState() {
+    super.initState();
+
+    this._initPlatformState();
+  }
+
+  void _initPlatformState() async {
     final PackageInfo info = await PackageInfo.fromPlatform();
 
     String version = info.version;
@@ -22,13 +28,6 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     setState(() {
       _appVersion = "v$version ($buildNumber)";
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    this._reloadData();
   }
 
   Widget _buildListHeader(BuildContext context) {
@@ -58,12 +57,12 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
           'type': 'header',
         },
         {
-          'title': '去评分',
-          'onTap': () {
-            LaunchReview.launch(
-              androidAppId: "org.wishshop.mobileapp",
-              iOSAppId: "-"
-            );
+          'title': '获取源码',
+          'onTap': () async {
+            const url = 'https://github.com/wishshop/wishshop_app';
+            if (await canLaunch(url)) {
+              await launch(url);
+            }
           },
         },
         {

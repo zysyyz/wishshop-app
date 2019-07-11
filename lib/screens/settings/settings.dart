@@ -38,18 +38,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
           'type': 'section',
           'title': '其他',
         },
-        {
-          'title': '用户反馈',
-          'onTap': () async {
-            String subject = "WishShop Feedback - $_appVersion".replaceAll(" ", "%20");
-            String urlString = 'mailto:wishshop@thecode.me?subject=$subject';
-            if (await canLaunch(urlString)) {
-              await launch(urlString);
-            } else {
-              throw 'Could not launch $urlString';
-            }
-          },
-        },
+        // {
+        //   'title': '意见反馈',
+        //   'onTap': () async {
+        //     String subject = "WishShop Feedback - $_appVersion".replaceAll(" ", "%20");
+        //     String urlString = 'mailto:wishshop@thecode.me?subject=$subject';
+        //     if (await canLaunch(urlString)) {
+        //       await launch(urlString);
+        //     } else {
+        //       throw 'Could not launch $urlString';
+        //     }
+        //   },
+        // },
         {
           'title': '关于我们',
           'onTap': () {
@@ -57,6 +57,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               .of(context)
               .push(MaterialPageRoute(builder: (_) => AboutUsScreen()));
           },
+        },
+        {
+          'type': 'section',
         },
         {
           'type': 'section',

@@ -60,12 +60,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
               ),
               child: TabBar(
                 labelPadding: EdgeInsets.only(left: 16, right: 16),
-                isScrollable: false,
+                isScrollable: true,
                 tabs: _tabItems.map((item) => Tab(icon: Text(item['title']))).toList(),
-                // indicatorSize: TabBarIndicatorSize.label,
+                indicatorSize: TabBarIndicatorSize.label,
                 indicator: UnderlineTabIndicator(
                   borderSide: BorderSide(color: theme.primaryColor, width: 3.0),
-                  insets: EdgeInsets.fromLTRB(32.0, 0, 32.0, 2.0),
+                  // insets: EdgeInsets.fromLTRB(32.0, 0, 32.0, 2.0),
                 ),
               ),
             ),

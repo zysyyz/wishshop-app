@@ -35,23 +35,6 @@ class OrderListItem extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.only(right: 2),
-                      child: Text('百年名校探访'),
-                    ),
-                    Icon(Icons.keyboard_arrow_right, size: 18,),
-                    Expanded(flex: 1, child: Container(),),
-                    Text(
-                      '待付款',
-                      style: TextStyle(
-                        color: Color(0xffE64B23),
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
@@ -81,13 +64,6 @@ class OrderListItem extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            '2人 |  总价 ￥120',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xff4a4a4a),
-                            )
-                          ),
                           Text(
                             '2019年6月12日',
                             style: TextStyle(

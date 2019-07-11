@@ -22,9 +22,6 @@ class _OrderListViewState extends State<OrderListView> {
       items.add(new Order());
       items.add(new Order());
       items.add(new Order());
-      items.add(new Order());
-      items.add(new Order());
-      items.add(new Order());
     }
 
     return PullToRefreshLayout(
