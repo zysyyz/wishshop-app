@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 import 'package:redux/redux.dart' as redux;
 import 'package:flutter_redux/flutter_redux.dart';
 import '../../exports.dart';
@@ -10,6 +11,26 @@ class TabMineScene extends StatefulWidget {
 }
 
 class _TabMineSceneState extends State<TabMineScene> {
+  var _appVersion = 'Unknown';
+
+  @override
+  void initState() {
+    super.initState();
+
+    this._initPlatformState();
+  }
+
+  void _initPlatformState() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+
+    String version = info.version;
+    String buildNumber = info.buildNumber;
+
+    setState(() {
+      _appVersion = "版本$version BUILD $buildNumber";
+    });
+  }
+
   Widget _buildListHeader(BuildContext context, _ViewModel vm) {
     User currentUser = vm.currentUser;
 
@@ -53,7 +74,7 @@ class _TabMineSceneState extends State<TabMineScene> {
                     children: <Widget>[
                       CustomAvatar(
                         currentUser?.avatarUrl,
-                        size: 56,
+                        size: 46,
                       ),
                       Expanded(
                         flex: 1,
@@ -65,7 +86,7 @@ class _TabMineSceneState extends State<TabMineScene> {
                               Text(
                                 currentUser?.name ?? '登录/注册',
                                 style: TextStyle(
-                                  fontSize: 22,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w500
                                 )
                               ),
@@ -120,12 +141,26 @@ class _TabMineSceneState extends State<TabMineScene> {
                       child: GestureDetector(
                         child: Column(
                           children: <Widget>[
-                            Text(
-                              '340',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w500,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Text(
+                                  '￥',
+                                  style: TextStyle(
+                                    height: 1.3,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Text(
+                                  '340',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              ],
                             ),
                             Text('钱包', style: TextStyle(height: 1.2, fontSize: 13),),
                           ],
@@ -153,7 +188,7 @@ class _TabMineSceneState extends State<TabMineScene> {
         ),
         Container(
           alignment: Alignment.center,
-          height: 100,
+          height: 96,
           child: Material(
             color: Colors.white,
             child: Row(
@@ -164,10 +199,10 @@ class _TabMineSceneState extends State<TabMineScene> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(bottom: 4),
+                          margin: EdgeInsets.only(bottom: 6),
                           child: Image.asset('assets/images/ic_order_paying.png', width: 32, fit: BoxFit.fitHeight,),
                         ),
-                        Text('待付款')
+                        Text('待付款', style: TextStyle(fontSize: 13),)
                       ],
                     ),
                     onTap: () {
@@ -183,10 +218,10 @@ class _TabMineSceneState extends State<TabMineScene> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(bottom: 4),
+                          margin: EdgeInsets.only(bottom: 6),
                           child: Image.asset('assets/images/ic_order_shipping.png', width: 32, fit: BoxFit.fitHeight,),
                         ),
-                        Text('待收货')
+                        Text('待收货', style: TextStyle(fontSize: 13),)
                       ],
                     ),
                     onTap: () {
@@ -202,10 +237,10 @@ class _TabMineSceneState extends State<TabMineScene> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(bottom: 4),
+                          margin: EdgeInsets.only(bottom: 6),
                           child: Image.asset('assets/images/ic_order_reviewing.png', width: 32, fit: BoxFit.fitHeight,),
                         ),
-                        Text('待评价')
+                        Text('待评价', style: TextStyle(fontSize: 13),)
                       ],
                     ),
                     onTap: () {
@@ -221,10 +256,10 @@ class _TabMineSceneState extends State<TabMineScene> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(bottom: 4),
+                          margin: EdgeInsets.only(bottom: 6),
                           child: Image.asset('assets/images/ic_order_aftersale.png', width: 32, fit: BoxFit.fitHeight,),
                         ),
-                        Text('退换/售后')
+                        Text('退换/售后', style: TextStyle(fontSize: 13),)
                       ],
                     ),
                     onTap: () {
@@ -243,7 +278,19 @@ class _TabMineSceneState extends State<TabMineScene> {
   }
 
   Widget _buildListFooter(BuildContext context, _ViewModel vm) {
-    return Container();
+    return Container(
+      width: double.infinity,
+      alignment: Alignment.center,
+      padding: EdgeInsets.all(12),
+      child: Text(
+        _appVersion,
+        style: TextStyle(
+          color: Color(0xff666666),
+          fontSize: 13,
+          fontWeight: FontWeight.w500
+        ),
+      ),
+    );
   }
 
   Widget _buildBody(BuildContext context, _ViewModel vm) {
@@ -274,12 +321,28 @@ class _TabMineSceneState extends State<TabMineScene> {
         'type': 'section',
       },
       {
+        'title': '帮助中心',
+        'onTap': () {
+        },
+      },
+      {
+        'title': '意见反馈',
+        'onTap': () {
+        },
+      },
+      {
+        'type': 'section',
+      },
+      {
         'title': '设置',
         'onTap': () {
           Navigator
             .of(context)
             .push(MaterialPageRoute(builder: (_) => SettingsScreen()));
         },
+      },
+      {
+        'type': 'footer',
       },
     ];
     return ListView.separated(
