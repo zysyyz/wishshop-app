@@ -8,24 +8,6 @@ English | [简体中文](./README.zh_CN.md)
 
 ***A e-commerce app.***
 
-### Get the app
-
-<div style="display: flex;flexDirection: row;">
-  <a href="https://itunes.apple.com/cn/app/id1448128907">
-    <img
-      src="./screenshots/download-badge-appstore.svg"
-      height="46.8px"
-      style="margin-top: 12px;margin-right: 12px;"
-    />
-  </a>
-  <a href='https://play.google.com/store/apps/details?id=me.thecode.wordtagapp'>
-    <img
-      src="./screenshots/download-badge-googleplay.png"
-      height="70px"
-    />
-  </a>
-</div>
-
 ## Features
 
 - Quick scaffolding
