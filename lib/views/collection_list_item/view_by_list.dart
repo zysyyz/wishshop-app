@@ -30,7 +30,7 @@ class _ViewByListState extends State<ViewByList> {
               collection.name,
               style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.w500
               ),
             ),
           ),

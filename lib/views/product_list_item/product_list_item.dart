@@ -51,7 +51,7 @@ class ProductListItem extends StatelessWidget {
                         product.name,
                         style: TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           color: Color(0xff333333),
                         ),
                         maxLines: 1,
@@ -65,7 +65,7 @@ class ProductListItem extends StatelessWidget {
                             '￥${product.price}',
                             style: TextStyle(
                               fontSize: 13,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               color: Color(0xff333333),
                             ),
                           ),

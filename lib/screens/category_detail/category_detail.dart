@@ -102,7 +102,7 @@ class _ViewModel {
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final categoryState = store.state.category;
+    final categoryState = store.state.categoryState;
     return _ViewModel(
       listByFilter:categoryState.listByFilter,
     );

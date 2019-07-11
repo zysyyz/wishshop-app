@@ -22,10 +22,10 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
       'title': '待收货',
     },
     {
-      'title': '已完成',
+      'title': '待评价',
     },
     {
-      'title': '已取消',
+      'title': '退换/售后',
     },
   ];
 
@@ -96,7 +96,7 @@ class _ViewModel {
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final authState = store.state.auth;
+    final authState = store.state.authState;
 
     return _ViewModel(
       currentUser: authState.user,

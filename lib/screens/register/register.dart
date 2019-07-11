@@ -110,7 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Text(
                         '服务条款',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       onTap: () async {
@@ -125,7 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: Text(
                         '隐私声明',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       onTap: () async {
@@ -173,18 +173,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
 }
 
 class _ViewModel {
-  final User user;
   final Function doRegister;
 
   _ViewModel({
-    this.user,
     this.doRegister
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final auth = store.state.auth;
     return _ViewModel(
-      user: auth.user,
       doRegister: (String name, String email, String password) {
         RegisterAction action = new RegisterAction(name, email, password);
         store.dispatch(action);

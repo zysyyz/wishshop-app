@@ -42,7 +42,7 @@ class ProductGridItem extends StatelessWidget {
                   product.name,
                   style: TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     color: Color(0xff333333),
                   ),
                   maxLines: 2,
@@ -68,7 +68,7 @@ class ProductGridItem extends StatelessWidget {
                       '￥${product.price}',
                       style: TextStyle(
                         fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                         color: product.originalPrice == null || product.originalPrice <= 0 ? Color(0xff333333) : Colors.red,
                       ),
                     ),

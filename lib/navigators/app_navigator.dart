@@ -18,7 +18,7 @@ class AppNavigator extends StatelessWidget {
           primaryColorBrightness: Brightness.light,
           accentColor: Colors.black,
           primaryTextTheme: TextTheme(title: TextStyle(fontSize: 17)),
-          scaffoldBackgroundColor: Color(0xfff5f6f7),
+          scaffoldBackgroundColor: Color(0xfff6f6f6),
           // hintColor: Colors.black,
           buttonTheme: ButtonThemeData(
             height: 48,

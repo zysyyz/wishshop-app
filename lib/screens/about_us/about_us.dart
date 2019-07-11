@@ -12,7 +12,6 @@ class AboutUsScreen extends StatefulWidget {
 
 class _AboutUsScreenState extends State<AboutUsScreen> {
   var _appVersion = 'Unknown';
-  List<Map<String, dynamic>> _items = [];
 
   void _reloadData() async {
     final PackageInfo info = await PackageInfo.fromPlatform();
@@ -22,17 +21,48 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
 
     setState(() {
       _appVersion = "v$version ($buildNumber)";
-      _items = [
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    this._reloadData();
+  }
+
+  Widget _buildListHeader(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(24),
+      child: Column(
+        children: <Widget>[
+          FlutterLogo(
+            size: 64,
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 12),
+            child: Text("wish", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 12),
+            child: Text(_appVersion),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    List<Map<String, dynamic>> items = [
         {
-          'key': 'appIcon',
-          'type': 'section',
+          'type': 'header',
         },
         {
           'title': '去评分',
           'onTap': () {
             LaunchReview.launch(
-              androidAppId: "me.thecode.wordtagapp",
-              iOSAppId: "1448128907"
+              androidAppId: "org.wishshop.mobileapp",
+              iOSAppId: "-"
             );
           },
         },
@@ -45,20 +75,38 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             }
           },
         },
-        // {
-        //   'title': '检查更新',
-        //   'onTap': () {
-        //   },
-        // },
       ];
-    });
-  }
+    return ListView.separated(
+      itemCount: items.length,
+      separatorBuilder: (context, index) {
+        if (items[index]['type'] == 'section' ||
+          (index < items.length && items[index + 1]['type'] == 'section')) {
+          return Container();
+        }
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Divider(indent: 16, height: 1));
+      },
+      itemBuilder: (context, index) {
+        var item = items[index];
 
-  @override
-  void initState() {
-    super.initState();
-
-    this._reloadData();
+        switch (item['type']) {
+          case 'header':
+            return _buildListHeader(context);
+          case 'section':
+            return ListSection(
+              item['title'],
+            );
+          default:
+            return ListItem(
+              item['title'],
+              onTap: item['onTap'],
+            );
+        }
+      },
+    );
   }
 
   @override
@@ -69,62 +117,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       appBar: CustomAppBar(
         title: Text('关于我们'),
       ),
-      body: ListView.separated(
-        itemCount: _items.length,
-        separatorBuilder: (context, index) {
-          if (_items[index]['type'] == 'section' || (index < _items.length && _items[index + 1]['type'] == 'section')) {
-            return Padding(padding: EdgeInsets.all(0));
-          }
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Divider(indent: 16, height: 1));
-        },
-        itemBuilder: (context, index) {
-          var item = _items[index];
-
-          var key = item['key'];
-          var title = item['title'];
-
-          if (key == 'appIcon') {
-            return Container(
-              margin: EdgeInsets.all(24),
-              child: Column(
-                children: <Widget>[
-                  FlutterLogo(
-                    size: 64,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 12),
-                    child: Text("wish", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 12),
-                    child: Text(_appVersion),
-                  ),
-                ],
-              ),
-            );
-          }
-
-          if (item['type'] == 'section') {
-            return ListSection(title);
-          }
-          var titleStyle = item['titleStyle'];
-          var detailText = item['detailText'];
-          var onTap = item['onTap'];
-          var accessoryType = item['accessoryType'];
-
-          return ListItem(
-            title,
-            titleStyle: titleStyle,
-            detailText: detailText,
-            onTap: onTap,
-            accessoryType: accessoryType,
-          );
-        },
-      ),
+      body: _buildBody(context),
       bottomNavigationBar: Semantics(
         container: true,
         explicitChildNodes: true,

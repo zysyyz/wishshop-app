@@ -102,7 +102,7 @@ class _CartScreen extends State<CartScreen> {
                   '¥${vm.cartOrder.total}',
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.w500
                   ),
                 ),
               ),

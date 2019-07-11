@@ -110,7 +110,7 @@ class _TabCategorySceneState extends State<TabCategoryScene> {
                       category.name,
                       style: TextStyle(
                         fontSize: 15,
-                        fontWeight: FontWeight.bold
+                        fontWeight: FontWeight.w500
                       ),
                     ),
                   ),
@@ -211,7 +211,7 @@ class _ViewModel {
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final categoryState = store.state.category;
+    final categoryState = store.state.categoryState;
     return _ViewModel(
       listByFilter:categoryState.listByFilter,
     );

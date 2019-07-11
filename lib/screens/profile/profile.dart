@@ -23,16 +23,18 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   Widget _build(BuildContext context, _ViewModel vm) {
+    User currentUser = vm.currentUser;
+
     String name;
     String username;
     String email;
     String gender = _toFriendlyGender('secrecy');
 
-    if (vm.user != null) {
-      name     = vm.user.name;
-      username = vm.user.username;
-      email    = vm.user.email;
-      gender   = _toFriendlyGender(vm.user.gender);
+    if (currentUser != null) {
+      name     = currentUser.name;
+      username = currentUser.username;
+      email    = currentUser.email;
+      gender   = _toFriendlyGender(currentUser.gender);
     }
     List<Map<String, dynamic>> items = [
         {
@@ -42,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         {
           'key': 'avatar',
           'title': '头像',
-          'detailTextView': CustomAvatar(vm.user.avatarUrl, size: 48),
+          'detailTextView': CustomAvatar(currentUser.avatarUrl, size: 48),
           'accessoryType': 'none',
           // 'onTap': () {
           // },
@@ -156,16 +158,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class _ViewModel {
-  final User user;
+  final User currentUser;
 
   _ViewModel({
-    this.user,
+    this.currentUser,
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final auth = store.state.auth;
+    final authState = store.state.authState;
     return _ViewModel(
-      user: auth.user,
+      currentUser: authState.user,
     );
   }
 }

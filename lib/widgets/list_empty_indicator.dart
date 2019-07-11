@@ -20,7 +20,7 @@ class ListEmptyIndicator extends StatelessWidget {
               message,
               style: TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
                 color: Colors.grey
               ),
             ),

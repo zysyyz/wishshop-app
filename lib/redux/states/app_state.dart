@@ -8,9 +8,9 @@ import './product_state.dart';
 // import './user_state.dart';
 
 class AppState {
-  final AddressState address;
-  final AuthState auth;
-  final CategoryState category;
+  final AddressState addressState;
+  final AuthState authState;
+  final CategoryState categoryState;
   final CollectionState collectionState;
   final FavoriteState favoriteState;
   final OrderState orderState;
@@ -18,9 +18,9 @@ class AppState {
   // final UserState user;
 
   AppState({
-    this.address,
-    this.auth,
-    this.category,
+    this.addressState,
+    this.authState,
+    this.categoryState,
     this.collectionState,
     this.favoriteState,
     this.orderState,
@@ -31,9 +31,9 @@ class AppState {
   static AppState fromJson(dynamic json) {
     if (json == null) {
       return AppState(
-        address: AddressState(),
-        auth: AuthState(),
-        category: CategoryState(),
+        addressState: AddressState(),
+        authState: AuthState(),
+        categoryState: CategoryState(),
         collectionState: CollectionState(),
         favoriteState: FavoriteState(),
         orderState: OrderState(),
@@ -42,9 +42,9 @@ class AppState {
       );
     }
     return AppState(
-      address: AddressState.fromJson(json['addressState']),
-      auth: AuthState.fromJson(json['auth']),
-      category: CategoryState.fromJson(json['category']),
+      addressState: AddressState.fromJson(json['addressState']),
+      authState: AuthState.fromJson(json['authState']),
+      categoryState: CategoryState.fromJson(json['categoryState']),
       collectionState: CollectionState.fromJson(json['collection']),
       favoriteState: FavoriteState.fromJson(json['favoriteState']),
       orderState: OrderState.fromJson(json['orderState']),
@@ -55,12 +55,13 @@ class AppState {
 
   Map<String, dynamic> toJson() {
     return {
-      'auth': auth.toJson(),
-      'category': category.toJson(),
+      'addressState': addressState.toJson(),
+      'authState': authState.toJson(),
+      'categoryState': categoryState.toJson(),
       'collectionState': collectionState.toJson(),
+      'favoriteState': favoriteState.toJson(),
       'productState': productState.toJson(),
       'orderState': orderState.toJson(),
-      'address': address.toJson(),
       // 'user': user.toJson(),
     };
   }

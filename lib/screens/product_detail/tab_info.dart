@@ -259,7 +259,7 @@ class _TabInfoState extends State<TabInfo> {
                           product.name,
                           style: TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                             color: Color(0xff333333),
                           ),
                         ),
@@ -298,7 +298,7 @@ class _TabInfoState extends State<TabInfo> {
                         '￥${product.price}',
                         style: TextStyle(
                           fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           color: product.originalPrice == null || product.originalPrice <= 0 ? Color(0xff333333) : Colors.red,
                         ),
                       ),
@@ -373,7 +373,7 @@ class _ViewModel {
   static _ViewModel fromStore(redux.Store<AppState> store, {
     product: Product,
   }) {
-    final authState = store.state.auth;
+    final authState = store.state.authState;
     final orderState = store.state.orderState;
     final productState = store.state.productState;
     Product _product = productState.get('${product.id}') ?? product;

@@ -10,34 +10,246 @@ class TabMineScene extends StatefulWidget {
 }
 
 class _TabMineSceneState extends State<TabMineScene> {
-  Widget _build(BuildContext context, _ViewModel vm) {
-    List<Map<String, dynamic>> items = [
-      {
-        'key': 'profile',
-        'title': '登录',
-        'onTap': () {
-          if (vm.currentUser == null) {
+  Widget _buildListHeader(BuildContext context, _ViewModel vm) {
+    User currentUser = vm.currentUser;
+
+    return Column(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/bg.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top,
+                ),
+                height: MediaQuery.of(context).padding.top,
+              ),
+              GestureDetector(
+                onTap: () {
+                  if (currentUser == null) {
+                    Navigator
+                      .of(context)
+                      .push(MaterialPageRoute(builder: (_) => LoginScreen(), fullscreenDialog: true));
+                    return;
+                  }
+                  Navigator
+                    .of(context)
+                    .push(MaterialPageRoute(builder: (_) => ProfileScreen()));
+                },
+                child: Container(
+                  padding: EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    top: 20,
+                    bottom: 20,
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      CustomAvatar(
+                        currentUser?.avatarUrl,
+                        size: 56,
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                currentUser?.name ?? '登录/注册',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w500
+                                )
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 10, bottom: 30),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              '99',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text('积分', style: TextStyle(height: 1.2, fontSize: 13),),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              '0',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text('优惠券', style: TextStyle(height: 1.2, fontSize: 13),),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: GestureDetector(
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              '340',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text('钱包', style: TextStyle(height: 1.2, fontSize: 13),),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        ListItem(
+          '我的订单',
+          onTap: () {
             Navigator
               .of(context)
-              .push(MaterialPageRoute(builder: (_) => LoginScreen(), fullscreenDialog: true));
-            return;
-          }
+              .push(MaterialPageRoute(builder: (_) => MyOrdersScreen()));
+          },
+        ),
+        Container(
+          color: Colors.white,
+          padding: EdgeInsets.only(left: 16, right: 16),
+          child: Divider(height: 1,),
+        ),
+        Container(
+          alignment: Alignment.center,
+          height: 100,
+          child: Material(
+            color: Colors.white,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: InkWell(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(bottom: 4),
+                          child: Image.asset('assets/images/ic_order_paying.png', width: 32, fit: BoxFit.fitHeight,),
+                        ),
+                        Text('待付款')
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator
+                        .of(context)
+                        .push(MaterialPageRoute(builder: (_) => MyOrdersScreen()));
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(bottom: 4),
+                          child: Image.asset('assets/images/ic_order_shipping.png', width: 32, fit: BoxFit.fitHeight,),
+                        ),
+                        Text('待收货')
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator
+                        .of(context)
+                        .push(MaterialPageRoute(builder: (_) => MyOrdersScreen()));
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(bottom: 4),
+                          child: Image.asset('assets/images/ic_order_reviewing.png', width: 32, fit: BoxFit.fitHeight,),
+                        ),
+                        Text('待评价')
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator
+                        .of(context)
+                        .push(MaterialPageRoute(builder: (_) => MyOrdersScreen()));
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(bottom: 4),
+                          child: Image.asset('assets/images/ic_order_aftersale.png', width: 32, fit: BoxFit.fitHeight,),
+                        ),
+                        Text('退换/售后')
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator
+                        .of(context)
+                        .push(MaterialPageRoute(builder: (_) => MyOrdersScreen()));
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
 
-          Navigator
-            .of(context)
-            .push(MaterialPageRoute(builder: (_) => ProfileScreen()));
-        },
-      },
+  Widget _buildListFooter(BuildContext context, _ViewModel vm) {
+    return Container();
+  }
+
+  Widget _buildBody(BuildContext context, _ViewModel vm) {
+    List<Map<String, dynamic>> items = [
       {
-        'type': 'section',
-      },
-      {
-        'title': '我的订单',
-        'onTap': () {
-          Navigator
-            .of(context)
-            .push(MaterialPageRoute(builder: (_) => MyOrdersScreen()));
-        },
+        'type': 'header',
       },
       {
         'type': 'section',
@@ -62,131 +274,55 @@ class _TabMineSceneState extends State<TabMineScene> {
         'type': 'section',
       },
       {
-        'type': 'section',
-      },
-      {
-        'key': 'logout',
-        'title': '退出登录',
-        'titleAlign': TextAlign.center,
-        'titleStyle': TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        'title': '设置',
         'onTap': () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              // return object of type Dialog
-              return CupertinoAlertDialog(
-                title: new Text("确定要退出登录吗？"),
-                actions: <Widget>[
-                  new CupertinoDialogAction(
-                    child: new Text("取消"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  new CupertinoDialogAction(
-                    child: new Text("确定"),
-                    onPressed: () async {
-                      Navigator.of(context).pop();
-                      // 最后执行退出登录（使页面切换到登录时更顺畅）
-                      vm.doLogout();
-                    },
-                  ),
-                ],
-              );
-            },
-          );
+          Navigator
+            .of(context)
+            .push(MaterialPageRoute(builder: (_) => SettingsScreen()));
         },
-        'accessoryType': "none"
       },
     ];
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: Text('我的'),
-        actions: <Widget>[
-          IconButton(
-            icon: Image.asset('assets/images/ic_menu_settings.png'),
-            onPressed: () {
-              Navigator
-                .of(context)
-                .push(MaterialPageRoute(builder: (_) => SettingsScreen()));
-            },
-          )
-        ],
-      ),
-      body: ListView.separated(
-        separatorBuilder: (context, index) {
-          if (items[index]['type'] == 'section' || (index < items.length && items[index + 1]['type'] == 'section')) {
-            return Padding(padding: EdgeInsets.all(0));
-          }
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Divider(indent: 16, height: 1));
-        },
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          var item = items[index];
+    return ListView.separated(
+      padding: EdgeInsets.zero,
+      itemCount: items.length,
+      separatorBuilder: (context, index) {
+        if (items[index]['type'] == 'section'
+          || (index < items.length && items[index + 1]['type'] == 'section')
+          || items[index]['type'] == 'header') {
+          return Container();
+        }
+        return Container(
+          height: 1,
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Divider(indent: 16, height: 1));
+      },
+      itemBuilder: (context, index) {
+        var item = items[index];
 
-          var key = item['key'];
-          var title = item['title'];
-
-          if (item['type'] == 'section') {
-            return ListSection(title);
-          }
-
-          var titleAlign = item['titleAlign'];
-          var titleStyle = item['titleStyle'];
-          var detailText = item['detailText'];
-          var onTap = item['onTap'];
-          var accessoryType = item['accessoryType'];
-
-          if (key == 'profile') {
-            var user = vm.currentUser ?? new User();
-
-            return Material(
-              color: Colors.white,
-              child: ListTile(
-                leading: Container(
-                  height: 64,
-                  child: CustomAvatar(user.avatarUrl ?? '', size: 64),
-                ),
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      user.name ?? 'n/a',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold
-                      )
-                    ),
-                    Padding(padding: EdgeInsets.only(bottom: 2)),
-                    Text(
-                      user.email ?? 'n/a',
-                      style: TextStyle(
-                        fontSize: 13,
-                      )
-                    )
-                  ],
-                ),
-                trailing: Icon(Icons.chevron_right, size: 18),
-                onTap: onTap,
-                contentPadding: EdgeInsets.only(top: 16, bottom: 16, left: 16, right: 16)
-              ),
+        switch (item['type']) {
+          case 'header':
+            return _buildListHeader(context, vm);
+          case 'footer':
+            return _buildListFooter(context, vm);
+          case 'section':
+            return ListSection(
+              item['title'],
             );
-          }
+          default:
+            return ListItem(
+              item['title'],
+              onTap: item['onTap'],
+            );
+        }
+      },
+    );
+  }
 
-          return ListItem(
-            title,
-            titleAlign: titleAlign,
-            titleStyle: titleStyle,
-            detailText: detailText,
-            onTap: onTap,
-            accessoryType: accessoryType,
-          );
-        },
-      ),
+  Widget _build(BuildContext context, _ViewModel vm) {
+    return Scaffold(
+      body: _buildBody(context, vm),
     );
   }
 
@@ -211,9 +347,9 @@ class _ViewModel {
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final auth = store.state.auth;
+    final authState = store.state.authState;
     return _ViewModel(
-      currentUser: auth.user,
+      currentUser: authState.user,
       doLogout: () {
         LogoutAction action = new LogoutAction();
         store.dispatch(action);

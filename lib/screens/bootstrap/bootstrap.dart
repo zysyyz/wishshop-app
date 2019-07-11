@@ -1,40 +1,33 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
+
 import '../../exports.dart';
 
-checkIfAuthenticated(User user) async {
-  await Future.delayed(Duration(microseconds: 0));
-  if (user == null) {
-    return false;
-  }
-  return true;
+class BootstrapScreen extends StatefulWidget {
+  @override
+  _BootstrapScreenState createState() => _BootstrapScreenState();
 }
 
-class BootstrapScreen extends StatelessWidget {
-  Widget _build(BuildContext context) {
-    return Scaffold(
-      body: Center(),
+class _BootstrapScreenState extends State<BootstrapScreen> {
+  @override
+  void initState() {
+    sharedApiClient.setDefaultStoreId(1);
+
+    Future
+      .delayed(new Duration(seconds: 0))
+      .then((_) {
+        Navigator
+          .of(context)
+          .pushReplacement(FadeInPageRoute(builder: (_) => HomeScreen()));
+      }
     );
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, int>(
-      builder: (BuildContext context, _) {
-        return _build(context);
-      },
-      converter: (store) => 0,
-      onInit: (store) {
-        sharedApiClient.setDefaultStoreId(1);
-        var auth = store.state.auth;
-        checkIfAuthenticated(auth.user)
-          .then((isLoggedIn) {
-            Navigator
-              .of(context)
-              .pushReplacement(FadeInPageRoute(builder: (_) => HomeScreen()));
-          });
-      },
+    return Scaffold(
+      body: Container()
     );
   }
 }

@@ -106,9 +106,9 @@ class _ViewModel {
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final auth = store.state.auth;
+    final authState = store.state.authState;
     return _ViewModel(
-      user: auth.user,
+      user: authState.user,
       doUpdateName: (String name) {
         // UpdateProfileAction action = new UpdateProfileAction(
         //   name: name,

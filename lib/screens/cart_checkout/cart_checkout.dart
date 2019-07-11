@@ -65,7 +65,7 @@ class _CartCheckoutScreenState extends State<CartCheckoutScreen> {
                   '¥${vm.cartOrder.total}',
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.w500
                   ),
                 ),
               ),

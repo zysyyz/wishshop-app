@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       {
         'title': '购物车',
-        'icon': 'assets/images/ic_tab_shopping_cart.png',
+        'icon': 'assets/images/ic_tab_cart.png',
         'badgeNumber': vm.cartOrder?.numberOfItems ?? 0,
         'scene': TabCartScene(),
       },
@@ -156,7 +156,7 @@ class _ViewModel {
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final authState = store.state.auth;
+    final authState = store.state.authState;
     final orderState = store.state.orderState;
     return _ViewModel(
       currentUser: authState.user,

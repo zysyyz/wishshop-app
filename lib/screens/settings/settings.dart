@@ -58,6 +58,44 @@ class _SettingsScreenState extends State<SettingsScreen> {
               .push(MaterialPageRoute(builder: (_) => AboutUsScreen()));
           },
         },
+        {
+          'type': 'section',
+        },
+        {
+          'key': 'logout',
+          'title': '退出登录',
+          'titleAlign': TextAlign.center,
+          'titleStyle': TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+          'onTap': () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                // return object of type Dialog
+                return AlertDialog(
+                  title: new Text("确定要退出登录吗？"),
+                  actions: <Widget>[
+                    new FlatButton(
+                      child: new Text("取消"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    new FlatButton(
+                      child: new Text("确定"),
+                      onPressed: () async {
+                        Navigator.of(context).pop();
+                        // 最后执行退出登录（使页面切换到登录时更顺畅）
+                        vm.doLogout();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          'accessoryType': "none"
+        },
       ];
 
     return Scaffold(
@@ -118,18 +156,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
 }
 
 class _ViewModel {
-  final User user;
+  final User currentUser;
+  final Function doLogout;
 
   _ViewModel({
-    this.user,
+    this.currentUser,
+    this.doLogout
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final auth = store.state.auth;
+    final authState = store.state.authState;
+    return _ViewModel(
+      currentUser: authState.user,
+      doLogout: () {
+        LogoutAction action = new LogoutAction();
+        store.dispatch(action);
 
-    _ViewModel vm = _ViewModel(
-      user: auth.user,
+        return action.completer.future;
+      }
     );
-    return vm;
   }
 }

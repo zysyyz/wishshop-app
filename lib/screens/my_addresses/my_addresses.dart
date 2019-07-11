@@ -149,7 +149,7 @@ class _ViewModel {
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final addressState = store.state.address;
+    final addressState = store.state.addressState;
     return _ViewModel(
       items: addressState.list ?? [],
       fetchItems: (page) {

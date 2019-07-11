@@ -4,10 +4,63 @@
 
 [English](./README.md) | 简体中文
 
-### 特性
+Table of Contents
+=================
+
+  * [介绍](#介绍)
+      * [获取应用](#获取应用)
+  * [特性](#特性)
+  * [屏幕快照](#屏幕快照)
+  * [快速开始](#快速开始)
+      * [必备条件](#必备条件)
+      * [安装](#安装)
+      * [开始开发](#开始开发)
+      * [运行应用](#运行应用)
+  * [相关链接](#相关链接)
+  * [探讨](#探讨)
+  * [许可证](#许可证)
+
+Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+
+## 介绍
+
+***A e-commerce app.***
+
+### 获取应用
+
+<div style="display: flex;flexDirection: row;">
+  <a href="https://itunes.apple.com/cn/app/id1448128907">
+    <img
+      src="./screenshots/download-badge-appstore.svg"
+      height="46.8px"
+      style="margin-top: 12px;margin-right: 12px;"
+    />
+  </a>
+  <a href='https://play.google.com/store/apps/details?id=me.thecode.wordtagapp'>
+    <img
+      src="./screenshots/download-badge-googleplay.png"
+      height="70px"
+    />
+  </a>
+</div>
+
+## 特性
 
 - Quick scaffolding
 - ...
+
+## 屏幕快照
+
+<div>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.20.40.png' width=280>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.20.43.png' width=280>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.20.51.png' width=280>
+</div>
+<div>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.21.00.png' width=280>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.21.05.png' width=280>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.21.21.png' width=280>
+</div>
 
 ## 快速开始
 
@@ -16,6 +69,7 @@
 开始之前确保你已安装：
 
 - 已安装 [Flutter](https://github.com/flutter/flutter)
+- 已安装 [CocoaPods](https://cocoapods.org)
 
 ### 安装
 
@@ -31,11 +85,17 @@ $ git clone --depth=1 https://github.com/blankapp/wishshop_app.git
 
 ```
 
-### Packaging for Production
+### 运行应用
 
 ```
-
+$ flutter run
 ```
+
+## 相关链接
+
+- https://github.com/blankapp/flutter_starterkit
+- https://github.com/blankapp/flutter_flipperkit
+- https://github.com/blankapp/flutter_flipperkit_plugins
 
 ## 探讨
 

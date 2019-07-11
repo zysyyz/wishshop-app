@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         '忘记密码？',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       onTap: () {
@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         '注册',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       onTap: () {
@@ -176,18 +176,14 @@ class _LoginScreenState extends State<LoginScreen> {
 }
 
 class _ViewModel {
-  final User user;
   final Function doLogin;
 
   _ViewModel({
-    this.user,
     this.doLogin
   });
 
   static _ViewModel fromStore(redux.Store<AppState> store) {
-    final auth = store.state.auth;
     return _ViewModel(
-      user: auth.user,
       doLogin: (String email, String password) {
         LoginAction action = new LoginAction(email, password);
         store.dispatch(action);

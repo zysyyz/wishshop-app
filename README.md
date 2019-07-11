@@ -4,10 +4,45 @@
 
 English | [简体中文](./README.zh_CN.md)
 
+## Introduction
+
+***A e-commerce app.***
+
+### Get the app
+
+<div style="display: flex;flexDirection: row;">
+  <a href="https://itunes.apple.com/cn/app/id1448128907">
+    <img
+      src="./screenshots/download-badge-appstore.svg"
+      height="46.8px"
+      style="margin-top: 12px;margin-right: 12px;"
+    />
+  </a>
+  <a href='https://play.google.com/store/apps/details?id=me.thecode.wordtagapp'>
+    <img
+      src="./screenshots/download-badge-googleplay.png"
+      height="70px"
+    />
+  </a>
+</div>
+
 ## Features
 
 - Quick scaffolding
 - ...
+
+## Screenshots
+
+<div>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.20.40.png' width=280>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.20.43.png' width=280>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.20.51.png' width=280>
+</div>
+<div>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.21.00.png' width=280>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.21.05.png' width=280>
+  <img src='./screenshots/Simulator Screen Shot - iPhone 8 - 2019-07-11 at 09.21.21.png' width=280>
+</div>
 
 ## Quick Start
 
@@ -16,6 +51,7 @@ English | [简体中文](./README.zh_CN.md)
 Before starting make sure you have:
 
 - Installed [Flutter](https://github.com/flutter/flutter)
+- Installed [CocoaPods](https://cocoapods.org)
 
 ### Installation
 
@@ -31,11 +67,17 @@ $ git clone --depth=1 https://github.com/blankapp/wishshop_app.git
 
 ```
 
-### Packaging for Production
+### Run the app
 
 ```
-
+$ flutter run
 ```
+
+## Related Links
+
+- https://github.com/blankapp/flutter_starterkit
+- https://github.com/blankapp/flutter_flipperkit
+- https://github.com/blankapp/flutter_flipperkit_plugins
 
 ## Discussion
 

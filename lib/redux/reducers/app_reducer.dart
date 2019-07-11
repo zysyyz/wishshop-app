@@ -10,9 +10,9 @@ import './user_reducer.dart';
 
 AppState appReducer(AppState state, action) {
   return AppState(
-    address: addressReducer(state.address, action),
-    auth: authReducer(state.auth, action),
-    category: categoryReducer(state.category, action),
+    addressState: addressReducer(state.addressState, action),
+    authState: authReducer(state.authState, action),
+    categoryState: categoryReducer(state.categoryState, action),
     collectionState: collectionReducer(state.collectionState, action),
     favoriteState: favoriteReducer(state.favoriteState, action),
     orderState: orderReducer(state.orderState, action),

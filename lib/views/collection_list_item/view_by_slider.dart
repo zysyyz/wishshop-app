@@ -27,7 +27,7 @@ class _ViewBySliderState extends State<ViewBySlider> {
               collection.name,
               style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.w500
               ),
             ),
           ),
@@ -65,7 +65,7 @@ class _ViewBySliderState extends State<ViewBySlider> {
                         collectionItem.title ?? '',
                         style: TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           color: Color(0xff333333),
                         ),
                         maxLines: 2,
